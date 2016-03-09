@@ -48,7 +48,6 @@ public class AppAlterarBanco {
 			case 1: {
 				System.out.println("Razão Social atual: " + banco.getRazaoSocial());
 				System.out.println("\nDigite a nova Razão Social:\n\nPara cancelar a operação, digite 'cancelar'.");
-				ler.nextLine();
 				novosDados = ler.nextLine();
 				if (novosDados.equals("cancelar")) {
 					// voltar
@@ -61,7 +60,6 @@ public class AppAlterarBanco {
 			case 2: {
 				System.out.println("Nome Fantasia atual: " + banco.getNomeFantasia());
 				System.out.println("\nDigite o novo Nome Fantasia:\n\nPara cancelar a operação, digite 'cancelar'.");
-				ler.nextLine();
 				novosDados = ler.nextLine();
 				if (novosDados.equals("cancelar")) {
 					// voltar
@@ -74,7 +72,6 @@ public class AppAlterarBanco {
 			case 3: {
 				System.out.println("Endereço atual: " + banco.getEndereco());
 				System.out.println("\nDigite o novo Endereço:\n\nPara cancelar a operação, digite 'cancelar'.");
-				//ler.nextLine();
 				novosDados = ler.nextLine();
 				if (novosDados.equals("cancelar")) {
 					// voltar
