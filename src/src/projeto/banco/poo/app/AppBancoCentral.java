@@ -3,10 +3,10 @@
  */
 package projeto.banco.poo.app;
 
-import projeto.banco.poo.aux.AppAlterarBanco;
-import projeto.banco.poo.aux.AppExcluirBanco;
-import projeto.banco.poo.aux.AppInserirBanco;
-import projeto.banco.poo.aux.AppInserirPrimeiroBanco;
+import projeto.banco.poo.appaux.AppAlterarBanco;
+import projeto.banco.poo.appaux.AppExcluirBanco;
+import projeto.banco.poo.appaux.AppInserirBanco;
+import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
 import projeto.banco.poo.db.DbBanco;
 import projeto.banco.poo.db.DbPrimeiraConexao;
 import java.sql.*;

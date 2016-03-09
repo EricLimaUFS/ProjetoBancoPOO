@@ -1,7 +1,7 @@
 /**
  * 
  */
-package projeto.banco.poo.aux;
+package projeto.banco.poo.appaux;
 
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.MetodosAuxiliares;

@@ -5,7 +5,7 @@ package projeto.banco.poo.db;
 
 import java.sql.*;
 
-import projeto.banco.poo.aux.AppInserirPrimeiroBanco;
+import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
 import projeto.banco.poo.core.Banco;
 
 /**

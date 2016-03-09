@@ -1,7 +1,7 @@
 /**
  * 
  */
-package projeto.banco.poo.aux;
+package projeto.banco.poo.appaux;
 
 import java.sql.*;
 import java.util.*;
@@ -73,8 +73,8 @@ public class AppAlterarBanco {
 				break;
 			case 3: {
 				System.out.println("Endereço atual: " + banco.getEndereco());
-				ler.nextLine();
 				System.out.println("\nDigite o novo Endereço:\n\nPara cancelar a operação, digite 'cancelar'.");
+				//ler.nextLine();
 				novosDados = ler.nextLine();
 				if (novosDados.equals("cancelar")) {
 					// voltar

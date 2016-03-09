@@ -1,7 +1,7 @@
 /**
  * 
  */
-package projeto.banco.poo.aux;
+package projeto.banco.poo.appaux;
 
 import java.util.Scanner;
 
