@@ -6,6 +6,7 @@ package projeto.banco.poo.app;
 import java.util.Scanner;
 
 import projeto.banco.poo.appaux.AppAlterarAgencia;
+import projeto.banco.poo.appaux.AppGerirAgencia;
 import projeto.banco.poo.appaux.AppInserirAgencia;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.db.DbGetCodigoBanco;
@@ -76,11 +77,11 @@ public class AppBanco {
 			}
 				break;
 			case 2: {
-				// perguntar qual agência e chamar app Db correspondente
+				// chamar app correspondente
 			}
 				break;
 			case 3: {
-				// chamar app correspondente
+				AppGerirAgencia.main(banco.getCodigo());
 			}
 				break;
 			case 4: {

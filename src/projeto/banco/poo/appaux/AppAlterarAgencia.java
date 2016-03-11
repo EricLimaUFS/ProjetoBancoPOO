@@ -31,7 +31,7 @@ public class AppAlterarAgencia {
 		agencia.setCodigo(ler.nextInt());
 		ler.nextLine();
 
-		if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getEndereco() != null) {
+		if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
 			agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 
 			System.out.println("Escolha o que deseja alterar:");
