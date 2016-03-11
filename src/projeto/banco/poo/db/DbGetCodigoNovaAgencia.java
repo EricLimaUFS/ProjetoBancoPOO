@@ -39,7 +39,6 @@ public class DbGetCodigoNovaAgencia {
 			resultSet.close();
 		} catch (Exception ex) {
 			ex.getMessage();
-			retorno = 0;
 		}
 
 		return retorno;

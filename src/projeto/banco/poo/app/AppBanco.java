@@ -5,11 +5,11 @@ package projeto.banco.poo.app;
 
 import java.util.Scanner;
 
+import projeto.banco.poo.appaux.AppAlterarAgencia;
 import projeto.banco.poo.appaux.AppInserirAgencia;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetDadosBancos;
-import projeto.banco.poo.db.DbPrimeiraConexao;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
@@ -57,7 +57,7 @@ public class AppBanco {
 				}
 					break;
 				case 2: {
-					// AppAlterarAgencia.main();
+					 AppAlterarAgencia.main(banco.getCodigo());
 				}
 					break;
 				/*

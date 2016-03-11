@@ -7,30 +7,29 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-import projeto.banco.poo.core.Banco;
+import projeto.banco.poo.core.Agencia;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 8 de mar de 2016
+ * @since 11 de mar de 2016
  */
-public class DbSetDadosBancos {
+public class DbSetDadosAgencias {
 
 	/**
 	 * @param args
 	 */
-	public static boolean main(Banco novoObjetoBanco) {
+	public static boolean main(Agencia novoObjetoAgencia, int codBanco) {
 
 		boolean retorno = true;
-		Banco banco = new Banco(0, null, null, null, null, null);
-		banco = novoObjetoBanco;
+		Agencia agencia = new Agencia(0, codBanco, null, null);
+		agencia = novoObjetoAgencia;
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + banco.getCodigo() + ".db");
+			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			Statement statement = conexao.createStatement();
 
-			String query = "UPDATE banco SET razao_social='" + banco.getRazaoSocial() + "', nome_fantasia='"
-					+ banco.getNomeFantasia() + "', endereco='" + banco.getEndereco() + "' WHERE codigo=" + banco.getCodigo();
+			String query = "UPDATE agencias SET endereco='" + agencia.getEndereco() + "' WHERE codigo=" + agencia.getCodigo();
 
 			statement.executeUpdate(query);
 

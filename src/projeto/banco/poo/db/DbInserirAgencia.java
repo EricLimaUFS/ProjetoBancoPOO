@@ -38,7 +38,7 @@ public class DbInserirAgencia {
 			statement.close();
 			conexao.close();
 		} catch (Exception e) {
-			System.err.println("Got an exception! ");
+			System.err.println("Erro no banco de dados! ");
 			System.err.println(e.getMessage());
 		}
 		return true;
