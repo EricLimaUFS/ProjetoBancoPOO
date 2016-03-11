@@ -31,10 +31,12 @@ public class DbGetCodigoNovaAgencia {
 			String query = "SELECT codigo FROM agencias ORDER BY codigo DESC LIMIT 1";
 
 			ResultSet resultSet = statement.executeQuery(query);
-			retorno = (resultSet.getInt(0) + 1);
+			
+			retorno = resultSet.getInt("codigo");
 
 			statement.close();
 			conexao.close();
+			resultSet.close();
 		} catch (Exception ex) {
 			ex.getMessage();
 			retorno = 0;
