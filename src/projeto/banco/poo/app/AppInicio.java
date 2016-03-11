@@ -50,7 +50,7 @@ public class AppInicio {
 			}
 				break;
 			case 2: {
-				if (AppBanco.main(args) == true)
+				if (AppBanco.main() == true)
 					retorno = true;
 			}
 				break;

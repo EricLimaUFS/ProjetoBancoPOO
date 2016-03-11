@@ -1,3 +1,6 @@
+/*
+			Classe não implementada
+			*/
 /**
  * 
  */
@@ -45,7 +48,7 @@ public class AppExcluirBanco {
 			System.out.println("Data de cadastro: " + banco.getDataCadastro());
 			System.out.println();
 			System.out.println("Tem certeza que deseja excluir este banco?\nDigite S para SIM ou N para NÃO:");
-			
+
 			simOuNao = ler.next();
 
 			if (simOuNao.equals("S") || simOuNao.equals("s")) {

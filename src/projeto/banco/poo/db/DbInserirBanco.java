@@ -26,7 +26,7 @@ public class DbInserirBanco {
 			conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			statement = conexao.createStatement();
 			
-			System.out.println("Banco de dados 'banco" + codBanco + "' criado com sucesso!");
+			//System.out.println("Banco de dados 'banco" + codBanco + "' criado com sucesso!");
 
 			// Criação das tabelas para o novo banco de dados criado
 			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj VARCHAR(20), "
@@ -51,7 +51,7 @@ public class DbInserirBanco {
 			statement.executeUpdate(criarTableClientes);
 			statement.executeUpdate(criarTableContas);
 			statement.executeUpdate(criarTableOperacoes);
-			System.out.println("Tabelas criadas com sucesso!");
+			//System.out.println("Tabelas criadas com sucesso!");
 		} catch (Exception e)
 	    {
 		      System.err.println("Got an exception! ");

@@ -1,4 +1,5 @@
 /**
+			Classe não implementada
  * 
  */
 package projeto.banco.poo.db;

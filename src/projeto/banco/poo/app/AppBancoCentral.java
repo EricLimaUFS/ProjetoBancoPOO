@@ -7,8 +7,13 @@ import projeto.banco.poo.appaux.AppAlterarBanco;
 import projeto.banco.poo.appaux.AppExcluirBanco;
 import projeto.banco.poo.appaux.AppInserirBanco;
 import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
+import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.db.DbBanco;
+import projeto.banco.poo.db.DbGetCodigoBanco;
+import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbPrimeiraConexao;
+import projeto.banco.poo.db.DbSetDadosBancos;
+
 import java.sql.*;
 import java.util.Scanner;
 
@@ -37,7 +42,7 @@ public class AppBancoCentral {
 
 			do {
 				volta = false;
-				System.out.println("ERRO: Não há banco cadastrado! Deseja cadastrar o banco?");
+				System.out.println("ATENÇÃO - Não há banco cadastrado! Deseja cadastrar o banco?");
 				System.out.println();
 				System.out.println("1 - Sim");
 				System.out.println("2 - Não");
@@ -71,7 +76,8 @@ public class AppBancoCentral {
 				menu = ler.nextByte();
 				switch (menu) {
 				case 1: {
-					menuCadastroDeBancos();
+					if (menuCadastroDeBancos() == true);
+					volta = true;
 				}
 					break;
 				case 2: {
@@ -87,19 +93,19 @@ public class AppBancoCentral {
 					volta = true;
 				}
 				}
-			} while (volta = true);
+			} while (volta == true);
 		}
 		return retorno;
 
 	}
 
-	public static void menuCadastroDeBancos() {
-
+	public static boolean menuCadastroDeBancos() {
+		
 		Scanner ler = new Scanner(System.in);
 		System.out.println("1 - Inserir cadastro de banco");
 		System.out.println("2 - Alterar cadastro de banco");
-		System.out.println("3 - Excluir cadastro de banco");
-		System.out.println("4 - Voltar");
+	//	System.out.println("3 - Excluir cadastro de banco"); -- não implementado
+		System.out.println("3 - Voltar");
 		byte menu = ler.nextByte();
 		switch (menu) {
 		case 1: {
@@ -110,15 +116,19 @@ public class AppBancoCentral {
 			AppAlterarBanco.main();
 		}
 			break;
+		/*case 3: {
+			AppExcluirBanco.main(); -- não implementado
+			
+		}*/
 		case 3: {
-			AppExcluirBanco.main();
+			// Volta
 		}
-		case 4: {
-			// Voltar
-		}
+			break;
 		default: {
-			System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
+			System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
 		}
 		}
+		return true;
 	}
+
 }
