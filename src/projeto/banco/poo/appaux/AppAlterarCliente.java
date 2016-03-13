@@ -75,6 +75,7 @@ public class AppAlterarCliente {
 				System.out.println("Renda Mensal atual: " + cliente.getRendaMensal());
 				System.out.println("\nDigite a nova renda mensal:\n\nPara cancelar a operação, digite o número '1' (um).");
 				dblNovosDados = ler.nextDouble();
+				ler.nextLine();
 				if (dblNovosDados == 1.0) {
 					// voltar
 				} else {

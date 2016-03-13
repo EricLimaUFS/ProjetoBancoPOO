@@ -9,6 +9,7 @@ import projeto.banco.poo.core.Agencia;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.db.DbGetCodigoNovoCliente;
 import projeto.banco.poo.db.DbGetDadosAgencias;
+import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbPesquisarCliente;
 
 /**
@@ -89,7 +90,26 @@ public class AppGerirAgencia {
 			byte opcao = ler.nextByte();
 			if (opcao == 1) {
 				cliente.setCodigo(DbPesquisarCliente.main(agencia.getBanco()));
-				AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
+				if (cliente.getCodigo() != 0) {
+					cliente = DbGetDadosClientes.main(cliente.getCodigo(), agencia.getBanco());
+					System.out.println("Deseja vincular a conta à este cliente?\n");
+					if (cliente.getTipo() == 1) {
+						System.out.println("Nome: " + cliente.getNome());
+						System.out.println("CPF: " + cliente.getCpf());
+					} else {
+						System.out.println("Razão Social: " + cliente.getRazaoSocial());
+						System.out.println("CNPJ: " + cliente.getCnpj());
+					}
+					System.out.println("1 - SIM");
+					System.out.println("2 - NÃO");
+					opcao = ler.nextByte();
+					if (opcao == 1) {
+						AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
+					} else {
+						menuCadastroContas(agencia);
+					}
+				}
+
 			}
 			if (opcao == 2) {
 				AppInserirCliente.main(agencia.getBanco());

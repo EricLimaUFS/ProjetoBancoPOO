@@ -45,6 +45,7 @@ public class DbPesquisarCliente {
 		} catch (Exception ex) {
 			ex.getMessage();
 			System.out.println("Cliente não encontrado.");
+			codCliente = 0;
 		}
 
 		return codCliente;
