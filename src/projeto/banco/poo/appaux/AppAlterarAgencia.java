@@ -3,7 +3,6 @@
  */
 package projeto.banco.poo.appaux;
 
-import java.sql.*;
 import java.util.*;
 
 import projeto.banco.poo.core.Agencia;

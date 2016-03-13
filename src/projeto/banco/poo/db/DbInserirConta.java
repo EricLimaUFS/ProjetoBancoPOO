@@ -1,5 +1,5 @@
 /**
- * CRIADA POR BRUNO, FALTA CONFERIR!
+ * 
  */
 package projeto.banco.poo.db;
 
@@ -35,7 +35,7 @@ public class DbInserirConta {
 			
 			statement.executeUpdate(sql);
 			
-			System.out.println("Conta cadastrada com sucesso! O código da agência é: " + conta.getCodigo());
+			System.out.println("Conta cadastrada com sucesso! O código da conta é: " + conta.getCodigo());
 			statement.close();
 			conexao.close();
 		} catch (Exception e) {

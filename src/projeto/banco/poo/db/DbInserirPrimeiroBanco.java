@@ -26,9 +26,9 @@ public class DbInserirPrimeiroBanco {
 			statement = conexao.createStatement();
 
 			// Criação das tabelas para o novo banco de dados criado
-			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj VARCHAR(20), "
+			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj INT(20), "
 					+ "nome_razaosocial VARCHAR(255), renda_mensal DOUBLE, data_cadastro VARCHAR(11), "
-					+ "data_nascimento VARCHAR(11), nome_fantasia VARCHAR(255))";
+					+ "data_nascimento VARCHAR(11), nome_fantasia VARCHAR(255), tipo INT(1))";
 
 			String criarTableAgencias = "CREATE TABLE agencias (codigo INT(11), banco INT(11), endereco VARCHAR(255), "
 					+ "data_cadastro VARCHAR(11))";
@@ -48,7 +48,6 @@ public class DbInserirPrimeiroBanco {
 			statement.executeUpdate(criarTableClientes);
 			statement.executeUpdate(criarTableContas);
 			statement.executeUpdate(criarTableOperacoes);
-			System.out.println("Tabelas criadas com sucesso!");
 			statement.close();
 			conexao.close();
 		} catch (Exception ex) {

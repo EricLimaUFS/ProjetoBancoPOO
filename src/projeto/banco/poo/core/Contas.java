@@ -3,6 +3,8 @@
  */
 package projeto.banco.poo.core;
 
+import projeto.banco.poo.db.DbGetDadosClientes;
+
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
@@ -109,5 +111,19 @@ public class Contas {
 	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-		
+	
+	public static double CalcularCredito(int codCliente, int codBanco) {
+
+		double novoCredito = 0;
+		Clientes cliente = new Clientes(codCliente, 0, 0, null, null, null, 0, null, null, 0);
+		cliente = DbGetDadosClientes.main(codCliente, codBanco);
+
+		if (cliente.getTipo() == 1) {
+			novoCredito = (cliente.getRendaMensal() * 0.40);
+		} else {
+			novoCredito = (cliente.getRendaMensal() * 0.65);
+		}
+		return novoCredito;
+	}
+	
 }

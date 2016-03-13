@@ -18,12 +18,13 @@ public class Clientes {
 	private double rendaMensal;
 	private String dataCadastro;
 	private String dataNascimento;
+	private int tipo; // Pessoa física ou jurídica
 	
 	/**
 	 * 
 	 */
 	public Clientes(int codigo, int cpf, int cnpj, String nome, String razaoSocial, String nomeFantasia,
-					double rendaMensal, String dataCadastro, String dataNascimento) {
+					double rendaMensal, String dataCadastro, String dataNascimento, int tipo) {
 
 		this.codigo = codigo;
 		this.cpf = cpf;
@@ -34,6 +35,7 @@ public class Clientes {
 		this.rendaMensal = rendaMensal;
 		this.dataCadastro = dataCadastro;
 		this.dataNascimento = dataNascimento;
+		this.tipo = tipo;
 	}
 	
 	public int getCodigo() {
@@ -106,6 +108,14 @@ public class Clientes {
 	
 	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
+	}
+
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
 	}
 
 }
