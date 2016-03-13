@@ -29,6 +29,7 @@ public class AppInserirConta {
 		
 		System.out.println("Saldo inicial da conta:");
 		conta.setSaldo(ler.nextDouble());
+		ler.nextLine();
 		System.out.println("Senha da conta:");
 		conta.setSenha(ler.nextLine());
 		

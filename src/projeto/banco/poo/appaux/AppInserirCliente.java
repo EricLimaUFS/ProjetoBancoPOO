@@ -32,6 +32,7 @@ public class AppInserirCliente {
 		System.out.println("1 - Pessoa Física");
 		System.out.println("2 - Pessoa Jurídica");
 		menu = ler.nextByte();
+		ler.nextLine();
 		
 		if (menu == 1) {
 			System.out.println("Insira os dados do cliente\n");
@@ -41,6 +42,7 @@ public class AppInserirCliente {
 			cliente.setCpf(ler.nextInt());
 			System.out.println("Renda Mensal:");
 			cliente.setRendaMensal(ler.nextDouble());
+			ler.nextLine();
 			System.out.println("Data de Nascimento:");
 			cliente.setDataNascimento(ler.nextLine());
 			
@@ -58,6 +60,7 @@ public class AppInserirCliente {
 			cliente.setCnpj(ler.nextInt());
 			System.out.println("Renda Mensal:");
 			cliente.setRendaMensal(ler.nextDouble());
+			ler.nextLine();
 			System.out.println("Nome Fantasia:");
 			cliente.setNomeFantasia(ler.nextLine());
 			

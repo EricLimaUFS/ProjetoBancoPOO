@@ -45,11 +45,11 @@ public class AppBanco {
 			ler.nextLine();
 
 			switch (menu) {
+
 			case 1: {
 				System.out.println("1 - Inserir cadastro de agência");
 				System.out.println("2 - Alterar cadastro de agência");
-				// System.out.println("3 - Excluir cadastro de agência"); -- não
-				// implementado
+				// System.out.println("3 - Excluir cadastro de agência"); -- não implementado
 				System.out.println("3 - Voltar");
 				menu = ler.nextByte();
 				switch (menu) {
@@ -58,7 +58,7 @@ public class AppBanco {
 				}
 					break;
 				case 2: {
-					 AppAlterarAgencia.main(banco.getCodigo());
+					AppAlterarAgencia.main(banco.getCodigo());
 				}
 					break;
 				/*
