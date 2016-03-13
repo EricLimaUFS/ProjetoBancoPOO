@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import projeto.banco.poo.core.Clientes;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
@@ -22,13 +21,13 @@ public class DbPesquisarCliente {
 	 */
 	public static int main(int codBanco) {
 		
-		int cpfCnpj;
+		long cpfCnpj;
 		int codCliente = 0;
 		
 		Scanner input = new Scanner(System.in);
 
 		System.out.println("Digite o CPF ou o CNPJ (Apenas números): ");
-		cpfCnpj = input.nextInt();
+		cpfCnpj = input.nextLong();
 		
 		try {
 			Class.forName("org.sqlite.JDBC");

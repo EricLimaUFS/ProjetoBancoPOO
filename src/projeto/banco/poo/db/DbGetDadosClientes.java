@@ -34,7 +34,7 @@ public class DbGetDadosClientes {
 
 			if (resultSet.getInt("tipo") == 1) {
 				cliente.setCodigo(resultSet.getInt("codigo"));
-				cliente.setCpf(resultSet.getInt("cpf_cnpj"));
+				cliente.setCpf(resultSet.getLong("cpf_cnpj"));
 				cliente.setNome(resultSet.getString("nome_razaosocial"));
 				cliente.setRendaMensal(resultSet.getDouble("renda_mensal"));
 				cliente.setDataCadastro(resultSet.getString("data_cadastro"));
@@ -43,7 +43,7 @@ public class DbGetDadosClientes {
 
 			} else {
 				cliente.setCodigo(resultSet.getInt("codigo"));
-				cliente.setCnpj(resultSet.getInt("cpf_cnpj"));
+				cliente.setCnpj(resultSet.getLong("cpf_cnpj"));
 				cliente.setRazaoSocial(resultSet.getString("nome_razaosocial"));
 				cliente.setRendaMensal(resultSet.getDouble("renda_mensal"));
 				cliente.setDataCadastro(resultSet.getString("data_cadastro"));

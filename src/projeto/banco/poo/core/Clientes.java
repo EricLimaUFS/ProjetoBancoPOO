@@ -10,8 +10,8 @@ package projeto.banco.poo.core;
 public class Clientes {
 	
 	private int codigo;
-	private int cpf;
-	private int cnpj;
+	private long cpf;
+	private long cnpj;
 	private String nome;
 	private String razaoSocial;
 	private String nomeFantasia;
@@ -23,7 +23,7 @@ public class Clientes {
 	/**
 	 * 
 	 */
-	public Clientes(int codigo, int cpf, int cnpj, String nome, String razaoSocial, String nomeFantasia,
+	public Clientes(int codigo, long cpf, long cnpj, String nome, String razaoSocial, String nomeFantasia,
 					double rendaMensal, String dataCadastro, String dataNascimento, int tipo) {
 
 		this.codigo = codigo;
@@ -46,19 +46,19 @@ public class Clientes {
 		this.codigo = codigo;
 	}
 	
-	public int getCpf() {
+	public long getCpf() {
 		return cpf;
 	}
 	
-	public void setCpf(int cpf) {
+	public void setCpf(long cpf) {
 		this.cpf = cpf;
 	}
 	
-	public int getCnpj() {
+	public long getCnpj() {
 		return cnpj;
 	}
 	
-	public void setCnpj(int cnpj) {
+	public void setCnpj(long cnpj) {
 		this.cnpj = cnpj;
 	}
 	

@@ -29,7 +29,7 @@ public class DbInserirBanco {
 			//System.out.println("Banco de dados 'banco" + codBanco + "' criado com sucesso!");
 
 			// Criação das tabelas para o novo banco de dados criado
-			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj VARCHAR(20), "
+			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj BIGINT(20), "
 					+ "nome_razaosocial VARCHAR(255), renda_mensal DOUBLE, data_cadastro VARCHAR(11), "
 					+ "data_nascimento VARCHAR(11), nome_fantasia VARCHAR(255))";
 

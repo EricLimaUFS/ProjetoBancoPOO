@@ -39,7 +39,7 @@ public class AppInserirCliente {
 			System.out.println("Nome:");
 			cliente.setNome(ler.nextLine());
 			System.out.println("CPF (apenas números):");
-			cliente.setCpf(ler.nextInt());
+			cliente.setCpf(ler.nextLong());
 			System.out.println("Renda Mensal:");
 			cliente.setRendaMensal(ler.nextDouble());
 			ler.nextLine();
@@ -57,7 +57,7 @@ public class AppInserirCliente {
 			System.out.println("Razão Social:");
 			cliente.setRazaoSocial(ler.nextLine());
 			System.out.println("CNPJ (apenas números):");
-			cliente.setCnpj(ler.nextInt());
+			cliente.setCnpj(ler.nextLong());
 			System.out.println("Renda Mensal:");
 			cliente.setRendaMensal(ler.nextDouble());
 			ler.nextLine();
