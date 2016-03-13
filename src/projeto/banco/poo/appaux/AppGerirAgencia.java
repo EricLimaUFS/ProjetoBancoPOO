@@ -50,7 +50,7 @@ public class AppGerirAgencia {
 				break;
 
 			case 2: {
-				// AppGerirConta.main();
+				//AppGerirConta.main();
 			}
 				break;
 
@@ -83,11 +83,15 @@ public class AppGerirAgencia {
 		switch (menu) {
 		case 1: {
 			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
-			System.out.println(
-					"Deseja vincular a conta à ser criada à um cliente, ou deseja cadastrar um novo cliente para conta? ");
+			
+			System.out.println("Deseja vincular a conta à ser criada à um cliente, "
+					+ "ou deseja cadastrar um novo cliente para conta? ");
+
 			System.out.println("1 - Vincular à um cliente");
 			System.out.println("2 - Cadastrar um novo cliente para conta");
+
 			byte opcao = ler.nextByte();
+
 			if (opcao == 1) {
 				cliente.setCodigo(DbPesquisarCliente.main(agencia.getBanco()));
 				if (cliente.getCodigo() != 0) {

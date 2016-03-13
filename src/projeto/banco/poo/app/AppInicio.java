@@ -55,8 +55,10 @@ public class AppInicio {
 			}
 				break;
 			case 3: {
-				if (AppCaixa.main(args) == true)
+				if (AppCaixa.main() == true)
 					retorno = true;
+				
+				
 			}
 				break;
 			case 4: {
