@@ -8,9 +8,13 @@ import projeto.banco.poo.appaux.AppExcluirBanco;
 import projeto.banco.poo.appaux.AppInserirBanco;
 import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
 import projeto.banco.poo.core.Banco;
+import projeto.banco.poo.core.Clientes;
+import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbBanco;
 import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetDadosBancos;
+import projeto.banco.poo.db.DbGetDadosClientes;
+import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbPrimeiraConexao;
 import projeto.banco.poo.db.DbSetDadosBancos;
 
@@ -130,5 +134,57 @@ public class AppBancoCentral {
 		}
 		return true;
 	}
-
+	public static boolean menuConsultaDeDados() {
+		
+		Scanner ler = new Scanner(System.in);
+		byte menu = 0;
+		int codBanco;
+		System.out.println("Digite o número do banco:");
+		codBanco = ler.nextInt();
+		
+		System.out.println("\nConsulta de Dados\n");
+		System.out.println("1 - Exibir o montante em dinheiro aplicado no banco");
+		System.out.println("2 - Exibir o montante em dinheiro aplicado numa determinada agência");
+		System.out.println("3 - Exibir saldo do cliente");
+		System.out.println("4 - Exibir extrato detalhado do cliente no banco");
+		System.out.println("5 - Exibir extrato detalhado do cliente em todos os bancos");
+		System.out.println("6 - Voltar");
+		menu = ler.nextByte();
+		ler.nextLine();
+		
+		switch (menu) {
+		case 1: {
+			System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
+		} break;
+		case 2: {
+			System.out.println("Digite o código da agência:");
+			int codAgencia = ler.nextInt();
+			System.out.println("Montante aplicado na agência: R$" + MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
+		} break;
+		case 3: {
+	
+			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
+			cliente.setCodigo(DbPesquisarCliente.main(codBanco));
+			cliente = DbGetDadosClientes.main(cliente.getCodigo(), codBanco);
+			
+			System.out.println("1 - Por agência");
+			System.out.println("2 - Total");
+			System.out.println("3 - Voltar");
+			
+			menu = ler.nextByte();
+			if (menu == 1) {
+				System.out.println("Digite o código da agência:");
+			} else if (menu == 2) {
+				
+			} else if (menu == 3) {
+				
+			} else {
+				System.out.println("Opção inválida!");
+			}
+			
+		} break;
+		}
+		
+		return true;
+	}
 }

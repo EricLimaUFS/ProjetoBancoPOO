@@ -31,7 +31,7 @@ public class DbInserirBanco {
 			// Criação das tabelas para o novo banco de dados criado
 			String criarTableClientes = "CREATE TABLE clientes (codigo INT(11), cpf_cnpj BIGINT(20), "
 					+ "nome_razaosocial VARCHAR(255), renda_mensal DOUBLE, data_cadastro VARCHAR(11), "
-					+ "data_nascimento VARCHAR(11), nome_fantasia VARCHAR(255))";
+					+ "data_nascimento VARCHAR(11), nome_fantasia VARCHAR(255), tipo INT(1))";
 
 			String criarTableAgencias = "CREATE TABLE agencias (codigo INT(11), banco INT(11), endereco VARCHAR(255), "
 					+ "data_cadastro VARCHAR(11))";
@@ -40,8 +40,8 @@ public class DbInserirBanco {
 					+ "cliente INT(11), saldo DOUBLE, credito DOUBLE, divida DOUBLE, senha VARCHAR(7), "
 					+ "data_cadastro VARCHAR(11))";
 
-			String criarTableOperacoes = "CREATE TABLE operacoes (codigo INT(11), tipo_operacao INT(1), banco INT(11), "
-					+ "agencia INT(11), cliente INT(11), cliente2 INT(11), data VARCHAR(11))";
+			String criarTableOperacoes = "CREATE TABLE operacoes (codigo INT(11), tipo_operacao INT(1), valor_operacao DOUBLE, banco INT(11), "
+					+ "agencia INT(11), conta INT(11), conta2 INT(11), data VARCHAR(11))";
 
 			String criarTableBanco = "CREATE TABLE banco (codigo INT(11), razao_social VARCHAR(255), "
 					+ "cnpj VARCHAR(20), nome_fantasia VARCHAR(255), endereco VARCHAR(255), data_cadastro VARCHAR(11))";

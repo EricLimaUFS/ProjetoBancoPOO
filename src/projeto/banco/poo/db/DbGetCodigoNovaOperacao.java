@@ -11,9 +11,9 @@ import java.sql.Statement;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 6 de mar de 2016
+ * @since 13 de mar de 2016
  */
-public class DbGetCodigoNovaConta {
+public class DbGetCodigoNovaOperacao {
 	
 	/**
 	 * @param args
@@ -27,7 +27,7 @@ public class DbGetCodigoNovaConta {
 			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			Statement statement = conexao.createStatement();
 
-			String query = "SELECT codigo FROM contas ORDER BY codigo DESC LIMIT 1";
+			String query = "SELECT codigo FROM operacoes ORDER BY codigo DESC LIMIT 1";
 
 			ResultSet resultSet = statement.executeQuery(query);
 

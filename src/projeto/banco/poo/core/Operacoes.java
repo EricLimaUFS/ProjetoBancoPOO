@@ -11,24 +11,26 @@ public class Operacoes {
 	
 	private int codigo;
 	private int tipoOperacao;
+	private double valorOperacao;
 	private int banco;
 	private int agencia;
-	private int cliente;
-	private int cliente2;
+	private int conta;
+	private int conta2;
 	private String data;
 	
 	
 	/**
 	 * 
 	 */
-	public Operacoes(int codigo, int tipoOperacao, int banco, int agencia, int cliente, int cliente2, String data) {
+	public Operacoes(int codigo, int tipoOperacao, double valorOperacao, int banco, int agencia, int conta, int conta2, String data) {
 
 		this.codigo = codigo;
 		this.tipoOperacao = tipoOperacao;
+		this.valorOperacao = valorOperacao;
 		this.banco = banco;
 		this.agencia = agencia;
-		this.cliente = cliente;
-		this.cliente2 = cliente2;
+		this.conta = conta;
+		this.conta2 = conta2;
 		this.data = data;
 		
 	}
@@ -54,6 +56,16 @@ public class Operacoes {
 	}
 
 
+	public double getValorOperacao() {
+		return valorOperacao;
+	}
+
+
+	public void setValorOperacao(double valorOperacao) {
+		this.valorOperacao = valorOperacao;
+	}
+
+
 	public int getBanco() {
 		return banco;
 	}
@@ -74,23 +86,23 @@ public class Operacoes {
 	}
 
 
-	public int getCliente() {
-		return cliente;
+	public int getConta() {
+		return conta;
 	}
 
 
-	public void setCliente(int cliente) {
-		this.cliente = cliente;
+	public void setConta(int conta) {
+		this.conta = conta;
 	}
 
 
-	public int getCliente2() {
-		return cliente2;
+	public int getConta2() {
+		return conta2;
 	}
 
 
-	public void setCliente2(int cliente2) {
-		this.cliente2 = cliente2;
+	public void setConta2(int conta2) {
+		this.conta2 = conta2;
 	}
 
 
@@ -102,8 +114,6 @@ public class Operacoes {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
-	
 	
 	
 
