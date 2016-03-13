@@ -35,7 +35,7 @@ public class MetodosAuxiliares {
 
 			ResultSet resultSet = statement.executeQuery(query);
 
-			montante = resultSet.getDouble(0);
+			montante = resultSet.getDouble("SUM(saldo)");
 
 			statement.close();
 
@@ -57,7 +57,7 @@ public class MetodosAuxiliares {
 
 			ResultSet resultSet = statement.executeQuery(query);
 
-			montante = resultSet.getDouble(0);
+			montante = resultSet.getDouble("SUM(saldo)");
 
 			statement.close();
 
@@ -67,6 +67,49 @@ public class MetodosAuxiliares {
 		return montante;
 	}
 
+	public static double getSaldoTotalClienteAg(int codBanco, int codAgencia, int codCliente) {
+		double soma = 0;
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
+			Statement statement = conexao.createStatement();
+
+			String query = "SELECT SUM(saldo) FROM contas WHERE agencia='" + codAgencia + "' AND cliente='" + codCliente + "'";
+
+			ResultSet resultSet = statement.executeQuery(query);
+
+			soma = resultSet.getDouble("SUM(saldo)");
+
+			statement.close();
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		return soma;
+	}
+	
+	public static double getSaldoTotalCliente(int codBanco, int codCliente) {
+		double soma = 0;
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
+			Statement statement = conexao.createStatement();
+
+			String query = "SELECT SUM(saldo) FROM contas WHERE cliente='" + codCliente + "'";
+
+			ResultSet resultSet = statement.executeQuery(query);
+
+			soma = resultSet.getDouble("SUM(saldo)");
+
+			statement.close();
+
+		} catch (Exception ex) {
+			ex.getMessage();
+		}
+		return soma;
+	}
 	/**
 	 * @param args
 	 */

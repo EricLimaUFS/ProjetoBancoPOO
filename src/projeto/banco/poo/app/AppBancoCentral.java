@@ -12,6 +12,7 @@ import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbBanco;
 import projeto.banco.poo.db.DbGetCodigoBanco;
+import projeto.banco.poo.db.DbGetDadosAgencias;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbPesquisarCliente;
@@ -80,12 +81,16 @@ public class AppBancoCentral {
 				menu = ler.nextByte();
 				switch (menu) {
 				case 1: {
-					if (menuCadastroDeBancos() == true);
+					if (menuCadastroDeBancos() == true)
+						;
 					volta = true;
 				}
 					break;
 				case 2: {
+					int codBanco;
 					System.out.println("Digite o número do banco:");
+					codBanco = ler.nextInt();
+					menuConsultaDeDados(codBanco);
 				}
 					break;
 				case 3: {
@@ -104,11 +109,12 @@ public class AppBancoCentral {
 	}
 
 	public static boolean menuCadastroDeBancos() {
-		
+
 		Scanner ler = new Scanner(System.in);
 		System.out.println("1 - Inserir cadastro de banco");
 		System.out.println("2 - Alterar cadastro de banco");
-	//	System.out.println("3 - Excluir cadastro de banco"); -- não implementado
+		// System.out.println("3 - Excluir cadastro de banco"); -- não
+		// implementado
 		System.out.println("3 - Voltar");
 		byte menu = ler.nextByte();
 		switch (menu) {
@@ -120,10 +126,11 @@ public class AppBancoCentral {
 			AppAlterarBanco.main();
 		}
 			break;
-		/*case 3: {
-			AppExcluirBanco.main(); -- não implementado
-			
-		}*/
+		/*
+		 * case 3: { AppExcluirBanco.main(); -- não implementado
+		 * 
+		 * }
+		 */
 		case 3: {
 			// Volta
 		}
@@ -134,14 +141,13 @@ public class AppBancoCentral {
 		}
 		return true;
 	}
-	public static boolean menuConsultaDeDados() {
-		
+
+	public static boolean menuConsultaDeDados(int codBanco) {
+
 		Scanner ler = new Scanner(System.in);
 		byte menu = 0;
-		int codBanco;
-		System.out.println("Digite o número do banco:");
-		codBanco = ler.nextInt();
-		
+		boolean volta = true;
+
 		System.out.println("\nConsulta de Dados\n");
 		System.out.println("1 - Exibir o montante em dinheiro aplicado no banco");
 		System.out.println("2 - Exibir o montante em dinheiro aplicado numa determinada agência");
@@ -151,40 +157,81 @@ public class AppBancoCentral {
 		System.out.println("6 - Voltar");
 		menu = ler.nextByte();
 		ler.nextLine();
-		
+
 		switch (menu) {
 		case 1: {
 			System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
-		} break;
+			menuConsultaDeDados(codBanco);
+		}
+			break;
 		case 2: {
 			System.out.println("Digite o código da agência:");
 			int codAgencia = ler.nextInt();
-			System.out.println("Montante aplicado na agência: R$" + MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
-		} break;
+			System.out.println(
+					"Montante aplicado na agência: R$" + MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
+			menuConsultaDeDados(codBanco);
+		}
+			break;
 		case 3: {
-	
+
 			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 			cliente.setCodigo(DbPesquisarCliente.main(codBanco));
-			cliente = DbGetDadosClientes.main(cliente.getCodigo(), codBanco);
-			
-			System.out.println("1 - Por agência");
-			System.out.println("2 - Total");
-			System.out.println("3 - Voltar");
-			
-			menu = ler.nextByte();
-			if (menu == 1) {
-				System.out.println("Digite o código da agência:");
-			} else if (menu == 2) {
-				
-			} else if (menu == 3) {
-				
+			if (cliente.getCodigo() != 0) {
+				cliente = DbGetDadosClientes.main(cliente.getCodigo(), codBanco);
+
+				while (volta == true) {
+					volta = false;
+					System.out.println("1 - Por agência");
+					System.out.println("2 - Total");
+					System.out.println("3 - Voltar");
+
+					menu = ler.nextByte();
+					if (menu == 1) {
+						System.out.println("Digite o código da agência:");
+						int codAgencia = ler.nextInt();
+						if (DbGetDadosAgencias.main(codAgencia, codBanco).getCodigo() != 0) {
+							System.out.println("Saldo total do cliente na agência '" + codAgencia + "': " + "R$"
+									+ MetodosAuxiliares.getSaldoTotalClienteAg(codBanco, codAgencia,
+											cliente.getCodigo()));
+							menuConsultaDeDados(codBanco);
+						} else {
+							System.out.println("Agência não encontrada! Tente novamente.");
+							menuConsultaDeDados(codBanco);
+						}
+					} else if (menu == 2) {
+						System.out.println("Saldo total do cliente no banco: " + "R$"
+								+ MetodosAuxiliares.getSaldoTotalCliente(codBanco, cliente.getCodigo()));
+						menuConsultaDeDados(codBanco);
+					} else if (menu == 3) {
+						menuConsultaDeDados(codBanco);
+					} else {
+						System.out.println("Opção inválida!");
+						volta = true;
+					}
+				}
 			} else {
-				System.out.println("Opção inválida!");
+				menuConsultaDeDados(codBanco);
 			}
-			
-		} break;
 		}
-		
+			break;
+		case 4: {
+
+		}
+			break;
+		case 5: {
+
+		}
+			break;
+		case 6: {
+			AppBancoCentral.main();
+		}
+			break;
+		default: {
+			System.out.println("Opção inválida! Digite apenas números de 1 a 6.");
+			menuConsultaDeDados(codBanco);
+		}
+		}
+
 		return true;
 	}
 }
