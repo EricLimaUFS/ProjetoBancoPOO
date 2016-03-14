@@ -36,7 +36,7 @@ public class DbSetDadosBancos {
 
 			statement.close();
 
-			System.out.println("Dados atualizados com sucesso!");
+			System.out.println("Operação realizada com sucesso!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			ex.getMessage();
