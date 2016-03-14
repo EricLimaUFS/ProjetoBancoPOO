@@ -99,11 +99,13 @@ public class AppCaixa {
 		System.out.println("DEPÓSITO EM CONTA\n\n");
 		
 		Scanner ler = new Scanner(System.in);
+		
+		System.out.println("Dados do favorecido\n");
 
 		System.out.println("Digite o número da agência: ");
 		int codAgencia = ler.nextInt();
 
-		System.out.println("Digite o número da conta que deseja efetuar o depósito:");
+		System.out.println("Digite o número da conta:");
 		conta.setCodigo(ler.nextInt());
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
@@ -122,12 +124,12 @@ public class AppCaixa {
 		double valorDeposito = ler.nextDouble();
 		ler.nextLine();
 
-		System.out.println("Informações da conta:");
+		System.out.println("Favorecido:");
 		if (cliente.getTipo() == 1) {
 			System.out.println("Nome: " + cliente.getNome());
 			System.out.println("CPF: " + cliente.getCpf());
 			System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-			System.out.println("Valor do depósito: " + valorDeposito);
+			System.out.println("Valor do depósito: R$" + valorDeposito);
 		} else {
 			System.out.println("Razão Social: " + cliente.getRazaoSocial());
 			System.out.println("CNPJ: " + cliente.getCnpj());
@@ -145,8 +147,9 @@ public class AppCaixa {
 		if (opcao == 1) {
 			conta.setSaldo(conta.getSaldo() + valorDeposito);
 			DbSetDadosContas.main(conta, conta.getBanco());
-			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
+			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
 			operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+			operacao.setSaldoConta(conta.getSaldo());
 			DbInserirOperacao.main(operacao, conta.getBanco());
 		}
 		if (opcao == 2) {
@@ -226,8 +229,9 @@ public class AppCaixa {
 					if (conta.getSaldo() >= valorSaque) {
 						conta.setSaldo(conta.getSaldo() - valorSaque);
 						DbSetDadosContas.main(conta, conta.getBanco());
-						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
+						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
 						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+						operacao.setSaldoConta(conta.getSaldo());
 						DbInserirOperacao.main(operacao, conta.getBanco());
 					} else {
 						System.out.println("Erro: O valor solicitado é maior que o disponível!");
@@ -350,7 +354,7 @@ public class AppCaixa {
 			System.out.println("Tente Novamente!");
 			AppCaixa.main();
 		} else if (codAgencia2 != conta2.getAgencia()) {
-			System.out.println("Aência inexistente.\nTente Novamente!");
+			System.out.println("Agência inexistente.\nTente Novamente!");
 			AppCaixa.main();
 		}
 
@@ -410,8 +414,10 @@ public class AppCaixa {
 					conta2.setSaldo(conta2.getSaldo() + valorTransferencia);
 					DbSetDadosContas.main(conta, conta.getBanco());
 					DbSetDadosContas.main(conta2, conta2.getBanco());
-					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), conta2.getCodigo(), conta.getSaldo(), conta2.getSaldo(), MetodosAuxiliares.getDataAtual());
+					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), conta2.getCodigo(), 0, 0, MetodosAuxiliares.getDataAtual());
 					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+					operacao.setSaldoConta(conta.getSaldo());
+					operacao.setSaldoConta2(conta2.getSaldo());
 					DbInserirOperacao.main(operacao, conta.getBanco());
 				} else {
 					System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente");
@@ -473,12 +479,12 @@ public class AppCaixa {
 		if (cliente.getTipo() == 1) {
 			System.out.println("Nome: " + cliente.getNome());
 			System.out.println("CPF: " + cliente.getCpf());
-			System.out.println("O valor da dívida: " + conta.getDivida());
+			System.out.println("O valor da dívida: R$" + conta.getDivida());
 			System.out.println("Valor a pagar: R$" + valorPagamento);
 		} else {
 			System.out.println("Razão Social: " + cliente.getRazaoSocial());
 			System.out.println("CNPJ: " + cliente.getCnpj());
-			System.out.println("O valor da dívida: " + conta.getDivida());
+			System.out.println("O valor da dívida: R$" + conta.getDivida());
 			System.out.println("Valor a pagar: R$" + valorPagamento);
 		}
 		System.out.println();
@@ -499,8 +505,9 @@ public class AppCaixa {
 				conta.setDivida(conta.getDivida() - valorPagamento);
 				conta.setCredito(conta.getCredito() + valorPagamento);
 				DbSetDadosContas.main(conta, conta.getBanco());
-				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
+				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
 				operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+				operacao.setSaldoConta(conta.getSaldo());
 				DbInserirOperacao.main(operacao, conta.getBanco());
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
