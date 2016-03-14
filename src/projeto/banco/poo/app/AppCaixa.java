@@ -96,7 +96,7 @@ public class AppCaixa {
 
 	public static void menuDepositar(Contas conta) {
 
-		System.out.println("OPERAÇÃO DEPÓSITO\n\n");
+		System.out.println("DEPÓSITO EM CONTA\n\n");
 		
 		Scanner ler = new Scanner(System.in);
 
@@ -145,7 +145,7 @@ public class AppCaixa {
 		if (opcao == 1) {
 			conta.setSaldo(conta.getSaldo() + valorDeposito);
 			DbSetDadosContas.main(conta, conta.getBanco());
-			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
 			operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 			DbInserirOperacao.main(operacao, conta.getBanco());
 		}
@@ -161,7 +161,7 @@ public class AppCaixa {
 	public static void menuSacar(Contas conta) {
 		Scanner ler = new Scanner(System.in);
 
-		System.out.println("OPERAÇÃO SAQUE\n\n");
+		System.out.println("SAQUE\n\n");
 		
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
@@ -175,7 +175,7 @@ public class AppCaixa {
 			System.out.println("Tente Novamente!");
 			AppCaixa.main();
 		} else if (codAgencia != conta.getAgencia()) {
-			System.out.println("Aência inexistente.\nTente Novamente!");
+			System.out.println("Agência inexistente.\nTente Novamente!");
 			AppCaixa.main();
 		}
 
@@ -199,13 +199,13 @@ public class AppCaixa {
 				System.out.println("Nome: " + cliente.getNome());
 				System.out.println("CPF: " + cliente.getCpf());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Saldo da conta: R$" + conta.getSaldo());
+				System.out.println("Saldo disponível: R$" + conta.getSaldo());
 				System.out.println("Valor a ser sacado: R$" + valorSaque);
 			} else {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Saldo da conta: R$" + conta.getSaldo());
+				System.out.println("Saldo disponível: R$" + conta.getSaldo());
 				System.out.println("Valor a ser sacado: R$" + valorSaque);
 			}
 			System.out.println();
@@ -226,7 +226,7 @@ public class AppCaixa {
 					if (conta.getSaldo() >= valorSaque) {
 						conta.setSaldo(conta.getSaldo() - valorSaque);
 						DbSetDadosContas.main(conta, conta.getBanco());
-						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
 						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 						DbInserirOperacao.main(operacao, conta.getBanco());
 					} else {
@@ -318,7 +318,7 @@ public class AppCaixa {
 
 	public static void menuTransferir(Contas conta, Contas conta2) {
 		
-		System.out.println("OPERAÇÃO TRANSFERIR\n\n");
+		System.out.println("TRANSFERÊNCIA ENTRE CONTAS\n\n");
 		
 		Scanner ler = new Scanner(System.in);
 
@@ -410,7 +410,7 @@ public class AppCaixa {
 					conta2.setSaldo(conta2.getSaldo() + valorTransferencia);
 					DbSetDadosContas.main(conta, conta.getBanco());
 					DbSetDadosContas.main(conta2, conta2.getBanco());
-					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), conta2.getCodigo(), MetodosAuxiliares.getDataAtual());
+					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), conta2.getCodigo(), conta.getSaldo(), conta2.getSaldo(), MetodosAuxiliares.getDataAtual());
 					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 					DbInserirOperacao.main(operacao, conta.getBanco());
 				} else {
@@ -434,7 +434,7 @@ public class AppCaixa {
 
 	public static void menuPagar(Contas conta) {
 		
-		System.out.println("OPERAÇÃO PAGAMENTO\n\n");
+		System.out.println("PAGAMENTOS\n\n");
 		
 		Scanner ler = new Scanner(System.in);
 
@@ -499,7 +499,7 @@ public class AppCaixa {
 				conta.setDivida(conta.getDivida() - valorPagamento);
 				conta.setCredito(conta.getCredito() + valorPagamento);
 				DbSetDadosContas.main(conta, conta.getBanco());
-				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, conta.getSaldo(), 0, MetodosAuxiliares.getDataAtual());
 				operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 				DbInserirOperacao.main(operacao, conta.getBanco());
 			} else {

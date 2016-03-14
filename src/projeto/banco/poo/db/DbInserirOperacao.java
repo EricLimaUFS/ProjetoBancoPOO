@@ -29,10 +29,11 @@ public class DbInserirOperacao {
 			conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			statement = conexao.createStatement();
 
-			String sql = "INSERT INTO operacoes (codigo, tipo_operacao, valor_operacao, banco, agencia, conta, conta2, data) "
+			String sql = "INSERT INTO operacoes (codigo, tipo_operacao, valor_operacao, banco, agencia, conta, conta2, saldo_conta, saldo_conta2, data) "
 					+ "VALUES ('" + operacao.getCodigo() + "', '" + operacao.getTipoOperacao() + "', '"
 					+ operacao.getValorOperacao() + "', '" + operacao.getBanco() + "', '" + operacao.getAgencia()
-					+ "', '" + operacao.getConta() + "', '" + operacao.getConta2() + "', '" + operacao.getData() + "')";
+					+ "', '" + operacao.getConta() + "', '" + operacao.getConta2() + "', '" + operacao.getSaldoConta()
+					+ "', '" + operacao.getSaldoConta2() + "', '" + operacao.getData() + "')";
 
 			statement.executeUpdate(sql);
 

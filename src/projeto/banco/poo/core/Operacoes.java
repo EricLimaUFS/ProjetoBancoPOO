@@ -8,7 +8,7 @@ package projeto.banco.poo.core;
  * @since 6 de mar de 2016
  */
 public class Operacoes {
-	
+
 	private int codigo;
 	private int tipoOperacao;
 	private double valorOperacao;
@@ -16,13 +16,15 @@ public class Operacoes {
 	private int agencia;
 	private int conta;
 	private int conta2;
+	private double saldoConta;
+	private double saldoConta2;
 	private String data;
-	
-	
+
 	/**
 	 * 
 	 */
-	public Operacoes(int codigo, int tipoOperacao, double valorOperacao, int banco, int agencia, int conta, int conta2, String data) {
+	public Operacoes(int codigo, int tipoOperacao, double valorOperacao, int banco, int agencia, int conta, int conta2,
+			double saldoConta, double saldoConta2, String data) {
 
 		this.codigo = codigo;
 		this.tipoOperacao = tipoOperacao;
@@ -32,89 +34,87 @@ public class Operacoes {
 		this.conta = conta;
 		this.conta2 = conta2;
 		this.data = data;
-		
-	}
 
+	}
 
 	public int getCodigo() {
 		return codigo;
 	}
 
-
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
 
 	public int getTipoOperacao() {
 		return tipoOperacao;
 	}
 
-
 	public void setTipoOperacao(int tipoOperacao) {
 		this.tipoOperacao = tipoOperacao;
 	}
-
 
 	public double getValorOperacao() {
 		return valorOperacao;
 	}
 
-
 	public void setValorOperacao(double valorOperacao) {
 		this.valorOperacao = valorOperacao;
 	}
-
 
 	public int getBanco() {
 		return banco;
 	}
 
-
 	public void setBanco(int banco) {
 		this.banco = banco;
 	}
-
 
 	public int getAgencia() {
 		return agencia;
 	}
 
-
 	public void setAgencia(int agencia) {
 		this.agencia = agencia;
 	}
-
 
 	public int getConta() {
 		return conta;
 	}
 
-
 	public void setConta(int conta) {
 		this.conta = conta;
 	}
-
 
 	public int getConta2() {
 		return conta2;
 	}
 
-
 	public void setConta2(int conta2) {
 		this.conta2 = conta2;
 	}
 
+	public double getSaldoConta() {
+		return saldoConta;
+	}
+
+	public void setSaldoConta(double saldoConta) {
+		this.saldoConta = saldoConta;
+	}
+
+	public double getSaldoConta2() {
+		return saldoConta2;
+	}
+
+	public void setSaldoConta2(double saldoConta2) {
+		this.saldoConta2 = saldoConta2;
+	}
 
 	public String getData() {
 		return data;
 	}
 
-
 	public void setData(String data) {
 		this.data = data;
 	}
-	
-	
 
 }

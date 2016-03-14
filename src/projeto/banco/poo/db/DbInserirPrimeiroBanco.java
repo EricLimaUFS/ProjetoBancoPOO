@@ -38,7 +38,7 @@ public class DbInserirPrimeiroBanco {
 					+ "data_cadastro VARCHAR(11))";
 
 			String criarTableOperacoes = "CREATE TABLE operacoes (codigo INT(11), tipo_operacao INT(1), valor_operacao DOUBLE, banco INT(11), "
-					+ "agencia INT(11), conta INT(11), conta2 INT(11), data VARCHAR(11))";
+					+ "agencia INT(11), conta INT(11), conta2 INT(11), saldo_conta DOUBLE, saldo_conta2 DOUBLE, data VARCHAR(11))";
 
 			String criarTableBanco = "CREATE TABLE banco (codigo INT(11), razao_social VARCHAR(255), "
 					+ "cnpj VARCHAR(20), nome_fantasia VARCHAR(255), endereco VARCHAR(255), data_cadastro VARCHAR(11))";
