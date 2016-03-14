@@ -5,9 +5,10 @@ package projeto.banco.poo.appaux;
 
 import java.util.*;
 
+import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
+import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbGetDadosContas;
 import projeto.banco.poo.db.DbSetDadosContas;
@@ -23,10 +24,13 @@ public class AppGerirContasEClientes {
 	 */
 	public static void main(int codBanco, int codAgencia) {
 
+		Banco objBanco = new Banco(codBanco, null, null, null, null, null);
+		objBanco = DbGetDadosBancos.main(codBanco);
 		Scanner ler = new Scanner(System.in);
 		byte menu = 0;
 		System.out.println("1 - Gerir Contas\n[Realizar consultas, alterações e operações financeiras numa conta]\n");
 		System.out.println("2 - Gerir Clientes\n[Realizar consultas e alterações num cliente]\n");
+		System.out.println("3 - Voltar");
 		menu = ler.nextByte();
 
 		switch (menu) {
@@ -38,6 +42,9 @@ public class AppGerirContasEClientes {
 			// menuGerirClientes(codBanco, codAgencia);
 		}
 			break;
+		case 3: {
+			AppGerirAgencia.main(objBanco);
+		}
 		default: {
 			System.out.println("Opção inválida! Digite apenas o número 1 ou 2.");
 		}
@@ -107,11 +114,13 @@ public class AppGerirContasEClientes {
 					System.out.println("3 - Visualizar dados detalhados");
 					System.out.println("4 - Voltar");
 					menu = ler.nextByte();
+					ler.nextLine();
 
 					if (menu == 1) {
 						System.out.println("Digite a nova senha: ");
 						conta.setSenha(ler.nextLine());
 						DbSetDadosContas.main(conta, codBanco);
+						volta = true;
 					} else if (menu == 2) {
 						// extrato
 					} else if (menu == 3) {
@@ -139,7 +148,6 @@ public class AppGerirContasEClientes {
 						System.out.println("Conta criada em: " + conta.getDataCadastro());
 						System.out.println("\nPara voltar, pressione enter.");
 
-						ler.nextLine();
 						ler.nextLine();
 						volta = true;
 

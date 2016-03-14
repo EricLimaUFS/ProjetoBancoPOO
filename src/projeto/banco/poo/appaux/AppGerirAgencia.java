@@ -57,7 +57,7 @@ public class AppGerirAgencia {
 				break;
 
 			case 3: {
-				// voltar
+				AppBanco.main();
 			}
 				break;
 
@@ -112,6 +112,7 @@ public class AppGerirAgencia {
 					opcao = ler.nextByte();
 					if (opcao == 1) {
 						AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
+						menuCadastroContas(agencia);
 					} else {
 						menuCadastroContas(agencia);
 					}
@@ -122,6 +123,7 @@ public class AppGerirAgencia {
 				AppInserirCliente.main(agencia.getBanco());
 				cliente.setCodigo(DbGetCodigoNovoCliente.main(agencia.getBanco()));
 				AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
+				menuCadastroContas(agencia);
 			}
 		}
 			break;

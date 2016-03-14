@@ -8,9 +8,13 @@ import java.util.Scanner;
 
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
+import projeto.banco.poo.core.MetodosAuxiliares;
+import projeto.banco.poo.core.Operacoes;
 import projeto.banco.poo.db.DbGetCodigoBanco;
+import projeto.banco.poo.db.DbGetCodigoNovaOperacao;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbGetDadosContas;
+import projeto.banco.poo.db.DbInserirOperacao;
 import projeto.banco.poo.db.DbPrimeiraConexao;
 import projeto.banco.poo.db.DbSetDadosContas;
 
@@ -141,6 +145,9 @@ public class AppCaixa {
 		if (opcao == 1) {
 			conta.setSaldo(conta.getSaldo() + valorDeposito);
 			DbSetDadosContas.main(conta, conta.getBanco());
+			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+			operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+			DbInserirOperacao.main(operacao, conta.getBanco());
 		}
 		if (opcao == 2) {
 			System.out.println("Operação cancelada pelo usuário!");
@@ -219,6 +226,9 @@ public class AppCaixa {
 					if (conta.getSaldo() >= valorSaque) {
 						conta.setSaldo(conta.getSaldo() - valorSaque);
 						DbSetDadosContas.main(conta, conta.getBanco());
+						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+						DbInserirOperacao.main(operacao, conta.getBanco());
 					} else {
 						System.out.println("Erro: O valor solicitado é maior que o disponível!");
 						menuSacar(conta);
@@ -400,6 +410,9 @@ public class AppCaixa {
 					conta2.setSaldo(conta2.getSaldo() + valorTransferencia);
 					DbSetDadosContas.main(conta, conta.getBanco());
 					DbSetDadosContas.main(conta2, conta2.getBanco());
+					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), conta2.getCodigo(), MetodosAuxiliares.getDataAtual());
+					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+					DbInserirOperacao.main(operacao, conta.getBanco());
 				} else {
 					System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente");
 					AppCaixa.main();
@@ -486,6 +499,9 @@ public class AppCaixa {
 				conta.setDivida(conta.getDivida() - valorPagamento);
 				conta.setCredito(conta.getCredito() + valorPagamento);
 				DbSetDadosContas.main(conta, conta.getBanco());
+				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, MetodosAuxiliares.getDataAtual());
+				operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+				DbInserirOperacao.main(operacao, conta.getBanco());
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
 				AppCaixa.main();

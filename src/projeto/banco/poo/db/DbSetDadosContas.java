@@ -30,9 +30,9 @@ public class DbSetDadosContas {
 			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			Statement statement = conexao.createStatement();
 			
-			String query = "UPDATE contas SET saldo=" + conta.getSaldo() + ", "
-						+ "credito=" + conta.getCredito() + ", divida=" + conta.getDivida() + ", "
-						+ "senha='" + conta.getSenha() + "' WHERE codigo=" + conta.getCodigo();
+			String query = "UPDATE contas SET saldo='" + conta.getSaldo() + "', "
+						+ "credito='" + conta.getCredito() + "', divida='" + conta.getDivida() + "', "
+						+ "senha='" + conta.getSenha() + "' WHERE codigo='" + conta.getCodigo() +"'";
 				
 			statement.executeUpdate(query);
 

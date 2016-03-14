@@ -31,6 +31,7 @@ public class AppBanco {
 		Scanner ler = new Scanner(System.in);
 		Banco banco = new Banco(0, null, null, null, null, null);
 		byte menu = 0;
+		boolean volta = true;
 
 		System.out.println("Digite o código do banco que deseja conectar-se: ");
 		banco.setCodigo(ler.nextInt());
@@ -52,6 +53,8 @@ public class AppBanco {
 			switch (menu) {
 
 			case 1: {
+				while (volta = true) {
+					volta = false;
 				System.out.println("1 - Inserir cadastro de agência");
 				System.out.println("2 - Alterar cadastro de agência");
 				// System.out.println("3 - Excluir cadastro de agência"); -- não implementado
@@ -60,10 +63,12 @@ public class AppBanco {
 				switch (menu) {
 				case 1: {
 					AppInserirAgencia.main(banco.getCodigo());
+					volta = true;
 				}
 					break;
 				case 2: {
 					AppAlterarAgencia.main(banco.getCodigo());
+					volta = true;
 				}
 					break;
 				/*
@@ -72,11 +77,12 @@ public class AppBanco {
 				 * }
 				 */
 				case 3: {
-					// Volta
+					AppBanco.main();
 				}
 					break;
 				default: {
 					System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+				}
 				}
 				}
 			}
