@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
  * @since 6 de mar de 2016
  */
 public class MetodosAuxiliares {
-
+	
 	public static String getDataAtual() {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();

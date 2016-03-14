@@ -5,7 +5,9 @@ package projeto.banco.poo.appaux;
 
 import java.util.*;
 
+import projeto.banco.poo.app.AppBanco;
 import projeto.banco.poo.core.Agencia;
+import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.db.DbGetCodigoNovoCliente;
 import projeto.banco.poo.db.DbGetDadosAgencias;
@@ -21,10 +23,10 @@ public class AppGerirAgencia {
 	/**
 	 * @param args
 	 */
-	public static boolean main(int codBanco) {
+	public static boolean main(Banco objBanco) {
 
 		Scanner ler = new Scanner(System.in);
-		Agencia agencia = new Agencia(0, codBanco, null, null);
+		Agencia agencia = new Agencia(0, objBanco.getCodigo(), null, null);
 		System.out.println("Digite o código da agência que deseja se conectar:");
 		agencia.setCodigo(ler.nextInt());
 		byte menu = 0;
@@ -32,12 +34,12 @@ public class AppGerirAgencia {
 		if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
 			agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 
-			System.out.println("Banco '" + agencia.getBanco() + "' | Agência '" + agencia.getCodigo()
+			System.out.println("'" + objBanco.getNomeFantasia() + "' | Agência '" + agencia.getCodigo()
 					+ "' 		-		 App Agencia");
 			System.out.println();
 			System.out.println();
 			System.out.println("1 - Cadastro de Contas");
-			System.out.println("2 - Gerir Contas");
+			System.out.println("2 - Gerir Contas e Clientes");
 			System.out.println("3 - Voltar");
 			menu = ler.nextByte();
 			ler.nextLine();
@@ -50,7 +52,7 @@ public class AppGerirAgencia {
 				break;
 
 			case 2: {
-				//AppGerirConta.main();
+				AppGerirContasEClientes.main(agencia.getBanco(), agencia.getCodigo());
 			}
 				break;
 
@@ -67,7 +69,8 @@ public class AppGerirAgencia {
 
 		} else {
 			System.out.println(
-					"Não foi possível encontrar a agência '" + agencia.getCodigo() + "' no banco '" + codBanco + "'.");
+					"Não foi possível encontrar a agência '" + agencia.getCodigo() + "' no banco '" + objBanco.getCodigo() + "'.");
+			AppBanco.main();
 		}
 		return true;
 	}
