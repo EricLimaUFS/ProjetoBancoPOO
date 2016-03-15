@@ -3,6 +3,7 @@
  */
 package projeto.banco.poo.app;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -35,7 +36,6 @@ public class AppBanco {
 		Scanner ler = new Scanner(System.in);
 		Banco banco = new Banco(0, null, null, null, null, null);
 		byte menu = 0;
-		boolean volta = true;
 
 		System.out.println("Digite o código do banco que deseja conectar-se: ");
 		banco.setCodigo(ler.nextInt());
@@ -44,7 +44,7 @@ public class AppBanco {
 		if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 			banco = DbGetDadosBancos.main(banco.getCodigo());
 
-			System.out.println("		" + banco.getNomeFantasia() + "		-		App Banco");
+			System.out.println("	  " + banco.getNomeFantasia() + "		-		App Banco");
 			System.out.println();
 			System.out.println();
 			System.out.println("1 - Cadastros de Agências");
@@ -57,38 +57,7 @@ public class AppBanco {
 			switch (menu) {
 
 			case 1: {
-				while (volta = true) {
-					volta = false;
-				System.out.println("1 - Inserir cadastro de agência");
-				System.out.println("2 - Alterar cadastro de agência");
-				// System.out.println("3 - Excluir cadastro de agência"); -- não implementado
-				System.out.println("3 - Voltar");
-				menu = ler.nextByte();
-				switch (menu) {
-				case 1: {
-					AppInserirAgencia.main(banco.getCodigo());
-					volta = true;
-				}
-					break;
-				case 2: {
-					AppAlterarAgencia.main(banco.getCodigo());
-					volta = true;
-				}
-					break;
-				/*
-				 * case 3: { AppExcluirAgencia.main(); -- não implementado
-				 * 
-				 * }
-				 */
-				case 3: {
-					AppBanco.main();
-				}
-					break;
-				default: {
-					System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
-				}
-				}
-				}
+				menuCadastroDeAgencias(banco.getCodigo());
 			}
 				break;
 			case 2: {
@@ -100,7 +69,7 @@ public class AppBanco {
 			}
 				break;
 			case 4: {
-				// chamar app correspondente
+				AppInicio.main(null);
 			}
 				break;
 			default: {
@@ -113,7 +82,7 @@ public class AppBanco {
 		}
 		return true;
 	}
-	
+
 	public static boolean menuConsultaDeDados(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
@@ -134,23 +103,22 @@ public class AppBanco {
 			System.out.println("2 - Numa determinada agência");
 			System.out.println("3 - Voltar");
 			menu = ler.nextByte();
-			
+
 			if (menu == 1) {
 				System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
 				menuConsultaDeDados(codBanco);
 			} else if (menu == 2) {
 				System.out.println("Digite o código da agência:");
 				int codAgencia = ler.nextInt();
-				System.out.println(
-						"Montante aplicado na agência: R$" + MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
+				System.out.println("Montante aplicado na agência: R$"
+						+ MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
 				menuConsultaDeDados(codBanco);
 			} else if (menu == 3) {
 				menuConsultaDeDados(codBanco);
 			} else {
 				System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
 			}
-			
-			
+
 		}
 			break;
 		case 2: {
@@ -199,7 +167,7 @@ public class AppBanco {
 			int codCliente = DbPesquisarCliente.main(codBanco);
 			ArrayList<Contas> contas = new ArrayList<Contas>();
 			contas = DbGetContasCliente.main(codBanco, codCliente);
-			
+
 			for (int i = 0; i < contas.size(); i++) {
 				AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
 			}
@@ -209,14 +177,57 @@ public class AppBanco {
 			AppBanco.main();
 		}
 			break;
-		
+
 		default: {
 			System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
 			menuConsultaDeDados(codBanco);
 		}
 		}
-
 		return true;
+	}
+
+	public static void menuCadastroDeAgencias(int codBanco) {
+
+		Banco banco = new Banco(0, null, null, null, null, null);
+		Scanner ler = new Scanner(System.in);
+		boolean volta = true;
+		byte menu = 0;
+
+		while (volta = true) {
+			volta = false;
+			System.out.println("1 - Inserir cadastro de agência");
+			System.out.println("2 - Alterar cadastro de agência");
+			// System.out.println("3 - Excluir cadastro de agência"); -- não
+			// implementado
+			System.out.println("3 - Voltar");
+			menu = ler.nextByte();
+			ler.nextLine();
+			switch (menu) {
+			case 1: {
+				AppInserirAgencia.main(banco.getCodigo());
+				volta = true;
+			}
+				break;
+			case 2: {
+				AppAlterarAgencia.main(banco.getCodigo());
+				volta = true;
+			}
+				break;
+			/*
+			 * case 3: { AppExcluirAgencia.main(); -- não implementado
+			 * 
+			 * }
+			 */
+			case 3: {
+				AppBanco.main();
+			}
+				break;
+			default: {
+				System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+			}
+			}
+		}
+
 	}
 
 }
