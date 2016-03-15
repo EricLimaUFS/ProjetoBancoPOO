@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
@@ -21,6 +22,11 @@ public class MetodosAuxiliares {
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		return dateFormat.format(date);
+	}
+	
+	public static String formatarDinheiro(double valorDinheiro) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		return df.format(valorDinheiro);
 	}
 	
 	public static double getMontanteBanco(int codBanco) {

@@ -8,9 +8,11 @@ import java.util.*;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
+import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbGetDadosContas;
+import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbSetDadosContas;
 
 /**
@@ -39,7 +41,7 @@ public class AppGerirContasEClientes {
 		}
 			break;
 		case 2: {
-			// menuGerirClientes(codBanco, codAgencia);
+			menuGerirClientes(codBanco, codAgencia);
 		}
 			break;
 		case 3: {
@@ -51,7 +53,7 @@ public class AppGerirContasEClientes {
 		}
 	}
 
-	public static void menuGerirContas(int codBanco, int codAgencia) {
+	private static void menuGerirContas(int codBanco, int codAgencia) {
 		Scanner ler = new Scanner(System.in);
 		Contas conta = new Contas(0, codBanco, codAgencia, 0, 0, 0, 0, null, null);
 		int codConta;
@@ -122,7 +124,8 @@ public class AppGerirContasEClientes {
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu == 2) {
-						// extrato
+						AppExibirExtrato.main(codConta, codBanco);
+						volta = true;
 					} else if (menu == 3) {
 						Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
 						cliente = DbGetDadosClientes.main(conta.getCliente(), codBanco);
@@ -151,7 +154,6 @@ public class AppGerirContasEClientes {
 						ler.nextLine();
 						volta = true;
 
-
 					} else if (menu == 4) {
 						menuGerirContas(codBanco, codAgencia);
 					} else {
@@ -176,6 +178,74 @@ public class AppGerirContasEClientes {
 			AppGerirContasEClientes.main(codBanco, codAgencia);
 		}
 
-	
+	}
+
+	private static void menuGerirClientes(int codBanco, int codAgencia) {
+
+		Scanner ler = new Scanner(System.in);
+		byte menu = 0;
+		int codCliente = 0;
+		System.out.println("1 - Cadastro de Clientes");
+		System.out.println("2 - Consulta de Dados");
+		System.out.println("3 - Voltar");
+		menu = ler.nextByte();
+		ler.nextLine();
+
+		switch (menu) {
+		case 1: {
+			System.out.println("1 - Inserir cliente");
+			System.out.println("2 - Alterar cliente");
+			System.out.println("3 - Excluir cliente");
+			System.out.println("4 - Voltar");
+			menu = ler.nextByte();
+			ler.nextLine();
+
+			if (menu == 1) {
+				AppInserirCliente.main(codBanco);
+			} else if (menu == 2) {
+				codCliente = DbPesquisarCliente.main(codBanco);
+				AppAlterarCliente.main(codCliente, codBanco);
+			} else if (menu == 3) {
+				// AppExcluirCliente.main(codCliente, codBanco);
+			} else if (menu == 4) {
+				menuGerirClientes(codBanco, codAgencia);
+			} else {
+				System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
+			}
+		}
+			break;
+		case 2: {
+
+			System.out.println("1 - Visualizar dados detalhados de um cliente");
+			System.out.println("2 - Visualizar extrato de um cliente");
+			System.out.println("3 - Voltar");
+			menu = ler.nextByte();
+			ler.nextLine();
+
+			if (menu == 1) {
+				// visualizar dados detalhados de um cliente
+			} else if (menu == 2) {
+				codCliente = DbPesquisarCliente.main(codBanco);
+				ArrayList<Contas> contas = new ArrayList<Contas>();
+				contas = DbGetContasCliente.main(codBanco, codCliente);
+
+				for (int i = 0; i < contas.size(); i++) {
+					AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
+				}
+			} else if (menu == 3) {
+				menuGerirClientes(codBanco, codAgencia);
+			} else {
+				System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+			}
+		}
+			break;
+		case 3: {
+			AppGerirContasEClientes.main(codBanco, codAgencia);
+		}
+			break;
+		default: {
+			System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+		}
+		}
 	}
 }
