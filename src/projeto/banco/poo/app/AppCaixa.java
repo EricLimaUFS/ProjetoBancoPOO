@@ -5,7 +5,6 @@ package projeto.banco.poo.app;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
-
 import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
@@ -26,7 +25,6 @@ import projeto.banco.poo.db.DbSetDadosContas;
  * @since 6 de mar de 2016
  */
 public class AppCaixa {
-
 	/**
 	 * @param args
 	 */
@@ -48,11 +46,11 @@ public class AppCaixa {
 			System.out.println("ERRO: Não há banco cadastrado!");
 			retorno = true;
 		} else {
-			
+
 			System.out.println("Cliente, digite o número do seu banco:");
 			banco.setCodigo(ler.nextInt());
 			ler.nextLine();
-			
+
 			conta.setBanco(banco.getCodigo());
 			conta2.setBanco(conta.getBanco());
 
@@ -65,7 +63,7 @@ public class AppCaixa {
 				System.out.println("1 - Depósito");
 				System.out.println("2 - Saque");
 				System.out.println("3 - Transferência");
-				System.out.println("4 - Pagamento de fatura");
+				System.out.println("4 - Pagamento");
 				System.out.println("5 - Realizar consulta");
 				System.out.println("6 - Sair");
 				menu = ler.nextLine();
@@ -95,19 +93,19 @@ public class AppCaixa {
 					menuPagar(conta);
 				}
 					break;
-				
+
 				// Consultar
 				case "5": {
 					menuConsultar(conta);
 				}
-					break;	
-					
+					break;
+
 				// Voltar
 				case "6": {
 					AppInicio.main(null);
 				}
 					break;
-				
+
 				default: {
 					System.out.println("Erro, digite entre as opções 1 e 6!");
 					AppCaixa.main();
@@ -124,9 +122,9 @@ public class AppCaixa {
 	private static void menuDepositar(Contas conta) {
 
 		System.out.println("\nDEPÓSITO EM CONTA\n");
-		
+
 		Scanner ler = new Scanner(System.in);
-		
+
 		System.out.println("Insira os dados do favorecido:\n");
 
 		System.out.println("Digite o número da agência: ");
@@ -150,8 +148,8 @@ public class AppCaixa {
 		System.out.println("Digite o valor do depósito: ");
 		double valorDeposito = ler.nextDouble();
 		ler.nextLine();
-		
-		if (valorDeposito == 0){
+
+		if (valorDeposito == 0) {
 			System.out.println("O valor precisa ser diferente de R$0,00\nTente Novamente!");
 			AppCaixa.main();
 		}
@@ -161,12 +159,12 @@ public class AppCaixa {
 			System.out.println("Nome: " + cliente.getNome());
 			System.out.println("CPF: " + cliente.getCpf());
 			System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-			System.out.println("Valor do depósito: R$" + valorDeposito);
+			System.out.println("Valor do depósito: R$" + MetodosAuxiliares.formatarDinheiro(valorDeposito));
 		} else {
 			System.out.println("Razão Social: " + cliente.getRazaoSocial());
 			System.out.println("CNPJ: " + cliente.getCnpj());
 			System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-			System.out.println("Valor do depósito: R$" + valorDeposito);
+			System.out.println("Valor do depósito: R$" + MetodosAuxiliares.formatarDinheiro(valorDeposito));
 		}
 		System.out.println();
 		System.out.println("Deseja confirmar o depósito?");
@@ -178,7 +176,8 @@ public class AppCaixa {
 		if (opcao == 1) {
 			conta.setSaldo(conta.getSaldo() + valorDeposito);
 			DbSetDadosContas.main(conta, conta.getBanco());
-			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
+			Operacoes operacao = new Operacoes(0, 1, valorDeposito, conta.getBanco(), conta.getAgencia(),
+					conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
 			operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 			operacao.setSaldoConta(conta.getSaldo());
 			DbInserirOperacao.main(operacao, conta.getBanco());
@@ -197,15 +196,15 @@ public class AppCaixa {
 		DecimalFormat decimal = new DecimalFormat("0.00");
 
 		System.out.println("\nSAQUE\n");
-		
+
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
-		
+
 		System.out.println("Digite o número da conta que deseja efetuar o saque: ");
 		conta.setCodigo(ler.nextInt());
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
-		
+
 		if (conta.getCliente() == 0) {
 			System.out.println("Tente Novamente!");
 			AppCaixa.main();
@@ -215,8 +214,10 @@ public class AppCaixa {
 		}
 
 		System.out.println("Selecione o tipo de saque: \n");
-		System.out.println("1 - Sacar a partir do saldo da conta\n[SALDO DISPONÍVEL: R$" + decimal.format(conta.getSaldo()) + "]\n");
-		System.out.println("2 - Sacar a partir do crédito disponível da conta\n[CRÉDITO DISPONÍVEL: R$" + decimal.format(conta.getCredito()) + "]\n");
+		System.out.println("1 - Sacar a partir do saldo da conta\n[SALDO DISPONÍVEL: R$"
+				+ decimal.format(conta.getSaldo()) + "]\n");
+		System.out.println("2 - Sacar a partir do crédito disponível da conta\n[CRÉDITO DISPONÍVEL: R$"
+				+ decimal.format(conta.getCredito()) + "]\n");
 		System.out.println("3 - Sair");
 		byte opcao = ler.nextByte();
 
@@ -228,8 +229,8 @@ public class AppCaixa {
 			System.out.println("Digite o valor do saque: ");
 			double valorSaque = ler.nextDouble();
 			ler.nextLine();
-			
-			if (valorSaque == 0){
+
+			if (valorSaque == 0) {
 				System.out.println("O valor precisa ser diferente de R$0,00\nTente Novamente!");
 				AppCaixa.main();
 			}
@@ -240,13 +241,13 @@ public class AppCaixa {
 				System.out.println("CPF: " + cliente.getCpf());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
 				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
-				System.out.println("Valor a ser sacado: R$" + valorSaque);
+				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			} else {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
 				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
-				System.out.println("Valor a ser sacado: R$" + valorSaque);
+				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			}
 			System.out.println();
 			System.out.println("Deseja confirmar o saque?");
@@ -266,10 +267,10 @@ public class AppCaixa {
 					if (conta.getSaldo() >= valorSaque) {
 						conta.setSaldo(conta.getSaldo() - valorSaque);
 						DbSetDadosContas.main(conta, conta.getBanco());
-						
-						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(), 
-													conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
-						
+
+						Operacoes operacao = new Operacoes(0, 2, valorSaque, conta.getBanco(), conta.getAgencia(),
+								conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
+
 						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 						operacao.setSaldoConta(conta.getSaldo());
 						DbInserirOperacao.main(operacao, conta.getBanco());
@@ -306,13 +307,13 @@ public class AppCaixa {
 				System.out.println("CPF: " + cliente.getCpf());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
 				System.out.println("Crédito disponível: R$" + decimal.format(conta.getCredito()));
-				System.out.println("Valor a ser sacado: R$" + valorSaque);
+				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			} else if (opcao != 1 || opcao != 2) {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
 				System.out.println("Crédito disponível: R$" + decimal.format(conta.getCredito()));
-				System.out.println("Valor a ser sacado: R$" + valorSaque);
+				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			}
 			System.out.println();
 			System.out.println("Deseja confirmar o saque?");
@@ -362,9 +363,9 @@ public class AppCaixa {
 	}
 
 	private static void menuTransferir(Contas conta, Contas conta2) {
-		
+
 		System.out.println("\nTRANSFERÊNCIA ENTRE CONTAS\n");
-		
+
 		Scanner ler = new Scanner(System.in);
 
 		System.out.println("Digite o número da sua agência:");
@@ -398,7 +399,7 @@ public class AppCaixa {
 			System.out.println("Agência inexistente.\nTente Novamente!");
 			AppCaixa.main();
 		}
-		if (conta.getCliente() == conta2.getCliente()){
+		if (conta.getCliente() == conta2.getCliente()) {
 			System.out.println("Contas iguais.\nTente Novamente!");
 			AppCaixa.main();
 		}
@@ -410,8 +411,8 @@ public class AppCaixa {
 
 		System.out.println("Digite o valor que deseja transferir: ");
 		double valorTransferencia = ler.nextDouble();
-		
-		if (valorTransferencia == 0){
+
+		if (valorTransferencia == 0) {
 			System.out.println("Digite um valor maior que R$0,00\nTente Novamente!");
 			AppCaixa.main();
 		}
@@ -443,7 +444,7 @@ public class AppCaixa {
 		}
 
 		System.out.println();
-		System.out.println("Valor da transferência: R$" + valorTransferencia);
+		System.out.println("Valor da transferência: R$" + MetodosAuxiliares.formatarDinheiro(valorTransferencia));
 		System.out.println();
 		System.out.println("Deseja confirmar a operação?");
 		System.out.println();
@@ -461,10 +462,10 @@ public class AppCaixa {
 					conta2.setSaldo(conta2.getSaldo() + valorTransferencia);
 					DbSetDadosContas.main(conta, conta.getBanco());
 					DbSetDadosContas.main(conta2, conta2.getBanco());
-					
-					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(), 
-										conta.getCodigo(), conta2.getCodigo(), 0, 0, MetodosAuxiliares.getDataAtual());
-					
+
+					Operacoes operacao = new Operacoes(0, 3, valorTransferencia, conta.getBanco(), conta.getAgencia(),
+							conta.getCodigo(), conta2.getCodigo(), 0, 0, MetodosAuxiliares.getDataAtual());
+
 					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 					operacao.setSaldoConta(conta.getSaldo());
 					operacao.setSaldoConta2(conta2.getSaldo());
@@ -489,19 +490,26 @@ public class AppCaixa {
 	}
 
 	private static void menuPagar(Contas conta) {
-		
-		System.out.println("\nPAGAMENTOS\n");
-		
+
+		String menu = null;
 		Scanner ler = new Scanner(System.in);
+
+		System.out.println("\nPAGAMENTOS\n");
+		System.out.println();
+		System.out.println("Escolha uma opção:");
+		System.out.println();
+		System.out.println("1 - Pagar boleto");
+		System.out.println("2 - Pagar fatura da conta");
+		menu = ler.nextLine();
 
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
-		
+
 		System.out.println("Digite o número da conta que deseja utilizar para efetuar o pagamento: ");
 		conta.setCodigo(ler.nextInt());
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
-		
+
 		if (conta.getCliente() == 0) {
 			System.out.println("Tente Novamente!");
 			AppCaixa.main();
@@ -510,92 +518,178 @@ public class AppCaixa {
 			AppCaixa.main();
 		}
 
-		System.out.println("O valor da dívida dessa conta é: R$" + conta.getDivida());
+		switch (menu) {
 
-		System.out.println("Digite o valor que deseja pagar:\n[Para sair digite 0]");
+		case "1": {
 
-		double valorPagamento = ler.nextDouble();
-		ler.nextLine();
-		
-		if (valorPagamento == 0){
-			System.out.println("Operação cancelada pelo usuário!");
-			AppCaixa.main();
-		}
-
-		if (valorPagamento > conta.getDivida()) {
-			System.out.println("Erro: Valor maior que a dívida existente!");
-			AppCaixa.main();
-		}
-
-		Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
-		cliente = DbGetDadosClientes.main(cliente.getCodigo(), conta.getBanco());
-
-		System.out.println("Informações da conta:");
-		if (cliente.getTipo() == 1) {
-			System.out.println("Nome: " + cliente.getNome());
-			System.out.println("CPF: " + cliente.getCpf());
-			System.out.println("O valor da dívida: R$" + conta.getDivida());
-			System.out.println("Valor a pagar: R$" + valorPagamento);
-		} else {
-			System.out.println("Razão Social: " + cliente.getRazaoSocial());
-			System.out.println("CNPJ: " + cliente.getCnpj());
-			System.out.println("O valor da dívida: R$" + conta.getDivida());
-			System.out.println("Valor a pagar: R$" + valorPagamento);
-		}
-		System.out.println();
-		System.out.println("Deseja confirmar o pagamento?");
-		System.out.println();
-		System.out.println("1 - Sim");
-		System.out.println("2 - Não");
-		byte opcao = ler.nextByte();
-		ler.nextLine();
-
-		if (opcao == 1) {
-			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
+			System.out.println("Digite o código de barras do boleto: ");
+			int codBoleto = ler.nextInt();
 			ler.nextLine();
 
-			if (conta.getSenha().equals(senha)) {
-				conta.setSaldo(conta.getSaldo() - valorPagamento);
-				conta.setDivida(conta.getDivida() - valorPagamento);
-				conta.setCredito(conta.getCredito() + valorPagamento);
-				DbSetDadosContas.main(conta, conta.getBanco());
-				
-				Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 
-													0, 0, 0, MetodosAuxiliares.getDataAtual());
-				
-				operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
-				operacao.setSaldoConta(conta.getSaldo());
-				DbInserirOperacao.main(operacao, conta.getBanco());
-			} else {
-				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
+			System.out.println("Digite o valor do boleto:\n[Para sair digite 0]");
+			double valorPagamento = ler.nextDouble();
+			ler.nextLine();
+
+			if (valorPagamento == 0) {
+				System.out.println("Operação cancelada pelo usuário!");
+				AppCaixa.main();
+			}
+			if (valorPagamento < 0) {
+				System.out.println("Erro: Digite um valor maior que 0!");
 				AppCaixa.main();
 			}
 
+			Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
+			cliente = DbGetDadosClientes.main(cliente.getCodigo(), conta.getBanco());
+
+			System.out.println("Informações do boleto:");
+			System.out.println("Código do boleto: " + codBoleto);
+			System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
+			System.out.println();
+			System.out.println("Deseja confirmar o pagamento?");
+			System.out.println();
+			System.out.println("1 - Sim");
+			System.out.println("2 - Não");
+			byte opcao = ler.nextByte();
+
+			if (opcao == 1) {
+				System.out.println("Digite a senha da conta: ");
+				String senha = ler.next();
+				ler.nextLine();
+
+				if (conta.getSenha().equals(senha)) {
+					if (conta.getSaldo() >= valorPagamento) {
+						conta.setSaldo(conta.getSaldo() - valorPagamento);
+						DbSetDadosContas.main(conta, conta.getBanco());
+
+						Operacoes operacao = new Operacoes(0, 5, valorPagamento, conta.getBanco(), conta.getAgencia(),
+								conta.getCodigo(), codBoleto, 0, 0, MetodosAuxiliares.getDataAtual());
+
+						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+						operacao.setSaldoConta(conta.getSaldo());
+						DbInserirOperacao.main(operacao, conta.getBanco());
+
+					} else {
+						System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
+						AppCaixa.main();
+					}
+				} else {
+					System.out.println("Erro: Senha incorreta!\nTente Novamente!");
+					AppCaixa.main();
+				}
+
+			}
+			if (opcao == 2) {
+				System.out.println("Operação cancelada pelo usuário!");
+				AppCaixa.main();
+			} else if (opcao != 1 && opcao != 2) {
+				System.out.println("Opção inválida!\nTente Novamente");
+				AppCaixa.main();
+			}
 		}
-		if (opcao == 2) {
-			System.out.println("Operação cancelada pelo usuário!");
-			AppCaixa.main();
-		} else if (opcao != 1 && opcao != 2) {
-			System.out.println("Opção inválida!\nTente Novamente");
-			AppCaixa.main();
+			break;
+
+		case "2": {
+
+			System.out.println("O valor da dívida dessa conta é: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
+
+			System.out.println("Digite o valor que deseja pagar:\n[Para sair digite 0]");
+
+			double valorPagamento = ler.nextDouble();
+			ler.nextLine();
+			
+			if (valorPagamento == 0){
+				System.out.println("Operação cancelada pelo usuário!");
+				AppCaixa.main();
+			}
+			if (valorPagamento < 0) {
+				System.out.println("Erro: Digite um valor maior que 0!");
+				AppCaixa.main();
+			}
+			if (valorPagamento > conta.getDivida()) {
+				System.out.println("Erro: Valor maior que a dívida existente!");
+				AppCaixa.main();
+			}
+
+			Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
+			cliente = DbGetDadosClientes.main(cliente.getCodigo(), conta.getBanco());
+
+			System.out.println("Informações da conta:");
+			if (cliente.getTipo() == 1) {
+				System.out.println("Nome: " + cliente.getNome());
+				System.out.println("CPF: " + cliente.getCpf());
+				System.out.println("O valor da dívida: R$" + conta.getDivida());
+				System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
+			} else {
+				System.out.println("Razão Social: " + cliente.getRazaoSocial());
+				System.out.println("CNPJ: " + cliente.getCnpj());
+				System.out.println("O valor da dívida: R$" + conta.getDivida());
+				System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
+			}
+			System.out.println();
+			System.out.println("Deseja confirmar o pagamento?");
+			System.out.println();
+			System.out.println("1 - Sim");
+			System.out.println("2 - Não");
+			byte opcao = ler.nextByte();
+			ler.nextLine();
+
+			if (opcao == 1) {
+				System.out.println("Digite a senha da conta: ");
+				String senha = ler.next();
+				ler.nextLine();
+
+				if (conta.getSenha().equals(senha)) {
+					conta.setSaldo(conta.getSaldo() - valorPagamento);
+					conta.setDivida(conta.getDivida() - valorPagamento);
+					conta.setCredito(conta.getCredito() + valorPagamento);
+					DbSetDadosContas.main(conta, conta.getBanco());
+					
+					Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 
+														0, 0, 0, MetodosAuxiliares.getDataAtual());
+					
+					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+					operacao.setSaldoConta(conta.getSaldo());
+					DbInserirOperacao.main(operacao, conta.getBanco());
+				} else {
+					System.out.println("Erro: Senha incorreta!\nTente Novamente!");
+					AppCaixa.main();
+				}
+
+			}
+			if (opcao == 2) {
+				System.out.println("Operação cancelada pelo usuário!");
+				AppCaixa.main();
+			} else if (opcao != 1 && opcao != 2) {
+				System.out.println("Opção inválida!\nTente Novamente");
+				AppCaixa.main();
+			}
+			
 		}
+			break;
+			
+		default: {
+			System.out.println("Erro, digite entre as opções 1 e 2!");
+			menuPagar(conta);
+		}
+		}
+
 	}
 
-	private static void menuConsultar(Contas conta){
-		
+	private static void menuConsultar(Contas conta) {
+
 		String menu = null;
 		Scanner ler = new Scanner(System.in);
 		DecimalFormat decimal = new DecimalFormat("0.00");
-		
+
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
-		
+
 		System.out.println("Digite o número da conta que deseja efetuar a consulta: ");
 		conta.setCodigo(ler.nextInt());
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
-		
+
 		if (conta.getCliente() == 0) {
 			System.out.println("Tente Novamente!");
 			AppCaixa.main();
@@ -603,7 +697,7 @@ public class AppCaixa {
 			System.out.println("Agência inexistente.\nTente Novamente!");
 			AppCaixa.main();
 		}
-				
+
 		System.out.println();
 		System.out.println("Escolha uma opção:");
 		System.out.println();
@@ -612,10 +706,10 @@ public class AppCaixa {
 		System.out.println("3 - Consultar dívida");
 		System.out.println("4 - Extrato detalhado da conta");
 		System.out.println("5 - Sair");
-		
+
 		menu = ler.next();
 		ler.nextLine();
-		
+
 		switch (menu) {
 
 		// Consultar saldo:
@@ -680,18 +774,18 @@ public class AppCaixa {
 			}
 		}
 			break;
-		
+
 		// Voltar
 		case "5": {
 			AppCaixa.main();
 		}
-			break;	
-			
+			break;
+
 		default: {
 			System.out.println("Erro, digite entre as opções 1 e 5!");
 			AppCaixa.main();
 		}
 		}
-		
+
 	}
 }
