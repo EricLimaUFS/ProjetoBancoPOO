@@ -5,13 +5,16 @@ package projeto.banco.poo.app;
 
 import projeto.banco.poo.appaux.AppAlterarBanco;
 import projeto.banco.poo.appaux.AppExcluirBanco;
+import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.appaux.AppInserirBanco;
 import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
+import projeto.banco.poo.core.Contas;
 import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbBanco;
 import projeto.banco.poo.db.DbGetCodigoBanco;
+import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosAgencias;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
@@ -21,6 +24,7 @@ import projeto.banco.poo.db.DbSetDadosBancos;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
@@ -153,8 +157,7 @@ public class AppBancoCentral {
 		System.out.println("2 - Exibir o montante em dinheiro aplicado numa determinada agência");
 		System.out.println("3 - Exibir saldo do cliente");
 		System.out.println("4 - Exibir extrato detalhado do cliente no banco");
-		System.out.println("5 - Exibir extrato detalhado do cliente em todos os bancos");
-		System.out.println("6 - Voltar");
+		System.out.println("5 - Voltar");
 		menu = ler.nextByte();
 		ler.nextLine();
 
@@ -215,19 +218,21 @@ public class AppBancoCentral {
 		}
 			break;
 		case 4: {
-
+			int codCliente = DbPesquisarCliente.main(codBanco);
+			ArrayList<Contas> contas = new ArrayList<Contas>();
+			contas = DbGetContasCliente.main(codBanco, codCliente);
+			
+			for (int i = 0; i < contas.size(); i++) {
+				AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
+			}
 		}
 			break;
 		case 5: {
-
-		}
-			break;
-		case 6: {
 			AppBancoCentral.main();
 		}
 			break;
 		default: {
-			System.out.println("Opção inválida! Digite apenas números de 1 a 6.");
+			System.out.println("Opção inválida! Digite apenas números de 1 a 5.");
 			menuConsultaDeDados(codBanco);
 		}
 		}

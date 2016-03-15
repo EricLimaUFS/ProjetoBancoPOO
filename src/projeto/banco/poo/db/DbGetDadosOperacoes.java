@@ -7,8 +7,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import projeto.banco.poo.core.Contas;
+import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.core.Operacoes;
 
 /**
@@ -20,28 +22,36 @@ public class DbGetDadosOperacoes {
 	/**
 	 * @param args
 	 */
-	public static Operacoes main(int codBanco, Contas conta) {
+	public static ArrayList<Operacoes> main(int codBanco, int codConta) {
 
-		Operacoes operacao = new Operacoes(0, 0, 0, codBanco, 0, 0, 0, null);
+		ArrayList<Operacoes> extrato = new ArrayList<Operacoes>();
+		
 
 		try {
 			Class.forName("org.sqlite.JDBC");
 			Connection conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			Statement statement = conexao.createStatement();
 
-			String query = "SELECT * FROM operacoes WHERE conta='" + codConta + "'";
+			String query = "SELECT * FROM operacoes WHERE conta='" + codConta + "' OR conta2='" + codConta + "'";
 
 			ResultSet resultSet = statement.executeQuery(query);
 
-			conta.setCodigo(resultSet.getInt("codigo"));
-			conta.setBanco(resultSet.getInt("banco"));
-			conta.setAgencia(resultSet.getInt("agencia"));
-			conta.setCliente(resultSet.getInt("cliente"));
-			conta.setSaldo(resultSet.getDouble("saldo"));
-			conta.setCredito(resultSet.getDouble("credito"));
-			conta.setDivida(resultSet.getDouble("divida"));
-			conta.setSenha(resultSet.getString("senha"));
-			conta.setDataCadastro(resultSet.getString("data_cadastro"));
+			while (resultSet.next()) {
+				Operacoes operacao = new Operacoes(0, 0, 0, 0, 0, 0, 0, 0, 0, null);
+				
+				operacao.setCodigo(resultSet.getInt("codigo"));
+				operacao.setTipoOperacao(resultSet.getInt("tipo_operacao"));
+				operacao.setValorOperacao(resultSet.getDouble("valor_operacao"));
+				operacao.setBanco(resultSet.getInt("banco"));
+				operacao.setAgencia(resultSet.getInt("agencia"));
+				operacao.setConta(resultSet.getInt("conta"));
+				operacao.setConta2(resultSet.getInt("conta2"));
+				operacao.setSaldoConta(resultSet.getDouble("saldo_conta"));
+				operacao.setSaldoConta2(resultSet.getDouble("saldo_conta2"));
+				operacao.setData(resultSet.getString("data"));
+				
+				extrato.add(operacao);
+			}
 
 			statement.close();
 
@@ -50,7 +60,7 @@ public class DbGetDadosOperacoes {
 			System.out.println("Conta não encontrada.");
 		}
 
-		return conta;
+		return extrato;
 	}
 
 }

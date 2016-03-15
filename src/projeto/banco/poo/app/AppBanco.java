@@ -3,15 +3,19 @@
  */
 package projeto.banco.poo.app;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import projeto.banco.poo.appaux.AppAlterarAgencia;
+import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.appaux.AppGerirAgencia;
 import projeto.banco.poo.appaux.AppInserirAgencia;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
+import projeto.banco.poo.core.Contas;
 import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbGetCodigoBanco;
+import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosAgencias;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
@@ -192,7 +196,13 @@ public class AppBanco {
 		}
 			break;
 		case 3: {
-			// extrato
+			int codCliente = DbPesquisarCliente.main(codBanco);
+			ArrayList<Contas> contas = new ArrayList<Contas>();
+			contas = DbGetContasCliente.main(codBanco, codCliente);
+			
+			for (int i = 0; i < contas.size(); i++) {
+				AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
+			}
 		}
 			break;
 		case 4: {
