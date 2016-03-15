@@ -8,6 +8,7 @@ import java.util.*;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
+import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
@@ -81,19 +82,20 @@ public class AppGerirContasEClientes {
 					menu = ler.nextByte();
 
 					if (menu == 1) {
-						System.out.println("Saldo atual: R$" + conta.getSaldo());
+						System.out.println("Saldo atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 						System.out.println("Digite o novo valor de saldo: ");
 						conta.setSaldo(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu == 2) {
-						System.out.println("Crédito atual: R$" + conta.getCredito());
+						System.out
+								.println("Crédito atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 						System.out.println("Digite o novo valor de crédito: ");
 						conta.setCredito(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu == 3) {
-						System.out.println("Dívida atual: R$" + conta.getDivida());
+						System.out.println("Dívida atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 						System.out.println("Digite o novo valor da dívida: ");
 						conta.setDivida(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
@@ -139,15 +141,17 @@ public class AppGerirContasEClientes {
 							System.out.println("CNPJ: " + cliente.getCnpj());
 							System.out.println("Nome Fantasia: " + cliente.getNomeFantasia());
 						}
-						System.out.println("Renda Mensal: R$" + cliente.getRendaMensal());
+						System.out.println(
+								"Renda Mensal: R$" + MetodosAuxiliares.formatarDinheiro(cliente.getRendaMensal()));
 						System.out.println("Cliente desde: " + cliente.getDataCadastro());
 
 						System.out.println("\n\nDados da conta\n");
 						System.out.println("Banco '" + conta.getBanco() + "' | Agência: '" + conta.getAgencia() + "' | "
 								+ "Conta: '" + conta.getCodigo() + "'");
-						System.out.println("Saldo atual: R$" + conta.getSaldo());
-						System.out.println("Crédito atual: R$" + conta.getCredito());
-						System.out.println("Dívida atual: R$" + conta.getDivida());
+						System.out.println("Saldo atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
+						System.out
+								.println("Crédito atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
+						System.out.println("Dívida atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 						System.out.println("Conta criada em: " + conta.getDataCadastro());
 						System.out.println("\nPara voltar, pressione enter.");
 
@@ -185,6 +189,7 @@ public class AppGerirContasEClientes {
 		Scanner ler = new Scanner(System.in);
 		byte menu = 0;
 		int codCliente = 0;
+		boolean volta = true;
 		System.out.println("1 - Cadastro de Clientes");
 		System.out.println("2 - Consulta de Dados");
 		System.out.println("3 - Voltar");
@@ -193,49 +198,84 @@ public class AppGerirContasEClientes {
 
 		switch (menu) {
 		case 1: {
-			System.out.println("1 - Inserir cliente");
-			System.out.println("2 - Alterar cliente");
-			System.out.println("3 - Excluir cliente");
-			System.out.println("4 - Voltar");
-			menu = ler.nextByte();
-			ler.nextLine();
+			while (volta = true) {
+				volta = false;
+				System.out.println("1 - Inserir cliente");
+				System.out.println("2 - Alterar cliente");
+				System.out.println("3 - Excluir cliente");
+				System.out.println("4 - Voltar");
+				menu = ler.nextByte();
+				ler.nextLine();
 
-			if (menu == 1) {
-				AppInserirCliente.main(codBanco);
-			} else if (menu == 2) {
-				codCliente = DbPesquisarCliente.main(codBanco);
-				AppAlterarCliente.main(codCliente, codBanco);
-			} else if (menu == 3) {
-				// AppExcluirCliente.main(codCliente, codBanco);
-			} else if (menu == 4) {
-				menuGerirClientes(codBanco, codAgencia);
-			} else {
-				System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
+				if (menu == 1) {
+					AppInserirCliente.main(codBanco);
+					volta = true;
+				} else if (menu == 2) {
+					codCliente = DbPesquisarCliente.main(codBanco);
+					AppAlterarCliente.main(codCliente, codBanco);
+					volta = true;
+				} else if (menu == 3) {
+					// AppExcluirCliente.main(codCliente, codBanco);
+					volta = true;
+				} else if (menu == 4) {
+					menuGerirClientes(codBanco, codAgencia);
+				} else {
+					System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
+					volta = true;
+				}
 			}
 		}
 			break;
 		case 2: {
+			while (volta = true) {
+				volta = false;
+				System.out.println("1 - Visualizar dados detalhados de um cliente");
+				System.out.println("2 - Visualizar extrato de um cliente");
+				System.out.println("3 - Voltar");
+				menu = ler.nextByte();
+				ler.nextLine();
 
-			System.out.println("1 - Visualizar dados detalhados de um cliente");
-			System.out.println("2 - Visualizar extrato de um cliente");
-			System.out.println("3 - Voltar");
-			menu = ler.nextByte();
-			ler.nextLine();
+				if (menu == 1) {
+					codCliente = DbPesquisarCliente.main(codBanco);
+					Clientes cliente = new Clientes(codCliente, 0, 0, null, null, null, 0, null, null, 0);
+					cliente = DbGetDadosClientes.main(codCliente, codBanco);
+					System.out.println("Dados do cliente\n");
+					if (cliente.getTipo() == 1) {
+						System.out.println("Nome: " + cliente.getNome());
+						System.out.println("CPF: " + cliente.getCpf());
+						System.out.println("Data de Nascimento: " + cliente.getDataNascimento());
+					} else {
+						System.out.println("Razão Social: " + cliente.getRazaoSocial());
+						System.out.println("CNPJ: " + cliente.getCnpj());
+						System.out.println("Nome Fantasia: " + cliente.getNomeFantasia());
+					}
+					System.out
+							.println("Renda Mensal: R$" + MetodosAuxiliares.formatarDinheiro(cliente.getRendaMensal()));
+					System.out.println("Cliente desde: " + cliente.getDataCadastro());
 
-			if (menu == 1) {
-				// visualizar dados detalhados de um cliente
-			} else if (menu == 2) {
-				codCliente = DbPesquisarCliente.main(codBanco);
-				ArrayList<Contas> contas = new ArrayList<Contas>();
-				contas = DbGetContasCliente.main(codBanco, codCliente);
+					System.out.println("\nPara voltar, pressione enter.");
+					ler.nextLine();
+					volta = true;
 
-				for (int i = 0; i < contas.size(); i++) {
-					AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
+				} else if (menu == 2) {
+					codCliente = DbPesquisarCliente.main(codBanco);
+					ArrayList<Contas> contas = new ArrayList<Contas>();
+					contas = DbGetContasCliente.main(codBanco, codCliente);
+
+					for (int i = 0; i < contas.size(); i++) {
+						AppExibirExtrato.main(contas.get(i).getCodigo(), codBanco);
+					}
+
+					System.out.println("\nPara voltar, pressione enter.");
+					ler.nextLine();
+					volta = true;
+
+				} else if (menu == 3) {
+					menuGerirClientes(codBanco, codAgencia);
+				} else {
+					System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+					volta = true;
 				}
-			} else if (menu == 3) {
-				menuGerirClientes(codBanco, codAgencia);
-			} else {
-				System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
 			}
 		}
 			break;
@@ -245,7 +285,9 @@ public class AppGerirContasEClientes {
 			break;
 		default: {
 			System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+			menuGerirClientes(codBanco, codAgencia);
 		}
 		}
+
 	}
 }

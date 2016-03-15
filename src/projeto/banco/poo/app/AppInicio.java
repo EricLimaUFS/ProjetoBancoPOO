@@ -37,9 +37,9 @@ public class AppInicio {
 			System.out.println();
 			System.out.println("Escolha uma opção para iniciar o aplicativo correspondente:");
 			System.out.println();
-			System.out.println("1 - Sou o Banco Central");
-			System.out.println("2 - Sou um Banco");
-			System.out.println("3 - Sou um cliente");
+			System.out.println("1 - Sou o Banco Central		[Cadastrar, alterar e consultar dados de bancos]\n");
+			System.out.println("2 - Sou um Banco		[Cadastrar, alterar e consultar dados de um banco]\n				[incluindo suas agências, contas e clientes]\n");
+			System.out.println("3 - Sou um cliente		[Terminal de auto atendimento]\n");
 			System.out.println("4 - Sair");
 
 			menu = ler.nextByte();
