@@ -83,7 +83,7 @@ public class AppBanco {
 		return true;
 	}
 
-	public static boolean menuConsultaDeDados(int codBanco) {
+	private static boolean menuConsultaDeDados(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
 		byte menu = 0;
@@ -186,7 +186,7 @@ public class AppBanco {
 		return true;
 	}
 
-	public static void menuCadastroDeAgencias(int codBanco) {
+	private static void menuCadastroDeAgencias(int codBanco) {
 
 		Banco banco = new Banco(0, null, null, null, null, null);
 		Scanner ler = new Scanner(System.in);

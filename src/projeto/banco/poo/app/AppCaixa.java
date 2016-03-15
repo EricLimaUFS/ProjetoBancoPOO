@@ -5,6 +5,8 @@ package projeto.banco.poo.app;
 
 import java.util.Scanner;
 import java.text.DecimalFormat;
+
+import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
@@ -47,7 +49,7 @@ public class AppCaixa {
 			retorno = true;
 		} else {
 			
-			System.out.println("Cliente, digite o número seu banco:");
+			System.out.println("Cliente, digite o número do seu banco:");
 			banco.setCodigo(ler.nextInt());
 			ler.nextLine();
 			
@@ -119,7 +121,7 @@ public class AppCaixa {
 		return retorno;
 	}
 
-	public static void menuDepositar(Contas conta) {
+	private static void menuDepositar(Contas conta) {
 
 		System.out.println("\nDEPÓSITO EM CONTA\n");
 		
@@ -190,7 +192,7 @@ public class AppCaixa {
 		}
 	}
 
-	public static void menuSacar(Contas conta) {
+	private static void menuSacar(Contas conta) {
 		Scanner ler = new Scanner(System.in);
 		DecimalFormat decimal = new DecimalFormat("0.00");
 
@@ -359,7 +361,7 @@ public class AppCaixa {
 		}
 	}
 
-	public static void menuTransferir(Contas conta, Contas conta2) {
+	private static void menuTransferir(Contas conta, Contas conta2) {
 		
 		System.out.println("\nTRANSFERÊNCIA ENTRE CONTAS\n");
 		
@@ -486,7 +488,7 @@ public class AppCaixa {
 		}
 	}
 
-	public static void menuPagar(Contas conta) {
+	private static void menuPagar(Contas conta) {
 		
 		System.out.println("\nPAGAMENTOS\n");
 		
@@ -580,7 +582,7 @@ public class AppCaixa {
 		}
 	}
 
-	public static void menuConsultar(Contas conta){
+	private static void menuConsultar(Contas conta){
 		
 		String menu = null;
 		Scanner ler = new Scanner(System.in);
@@ -671,8 +673,7 @@ public class AppCaixa {
 			ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
-				System.out.println("Extrato");
-				//AppExibirExtrato.main(codConta, codBanco);
+				AppExibirExtrato.main(conta.getCodigo(), conta.getBanco());
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
 				menuConsultar(conta);
