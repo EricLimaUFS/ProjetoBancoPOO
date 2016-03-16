@@ -12,14 +12,17 @@ import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.MetodosAuxiliares;
 
 /**
+ * Classe responsável por inserir os dados do primeiro banco.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 6 de mar de 2016
+ * @since 10 de mar de 2016
+ * @version 1.0
  */
 public class AppInserirPrimeiroBanco {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por checar se existe algum banco criado e, em seguida
+	 * recolher os dados necessários para inserir o primeiro banco e enviá-los ao banco de dados.
+	 * @return boolean - retorno */
 	public static boolean main() {
 
 		Scanner ler = new Scanner(System.in);

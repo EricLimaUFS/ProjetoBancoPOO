@@ -13,28 +13,31 @@ import projeto.banco.poo.db.DbInserirConta;
 import java.util.Scanner;
 
 /**
+ * Classe responsável por inserir os dados de um cliente.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class AppInserirCliente {
 
-	/**
-	 * @param args
-	 *
-	 */
+	/**Método principal, responsável por recolher os dados necessários para inserir no objeto cliente e enviá-los ao 
+	 * banco de dados.
+	 * @param codBanco int - código do banco que o cliente irá pertencer
+	 * @return boolean - retorno */
 	public static boolean main(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
 		Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
-		byte menu = 0;
+		String menu = null;
 		
 		System.out.println("Escolha o tipo de cliente:\n");
 		System.out.println("1 - Pessoa Física");
 		System.out.println("2 - Pessoa Jurídica");
-		menu = ler.nextByte();
+		menu = ler.next();
 		ler.nextLine();
 		
-		if (menu == 1) {
+		if (menu == "1") {
 			System.out.println("Insira os dados do cliente\n");
 			System.out.println("Nome:");
 			cliente.setNome(ler.nextLine());

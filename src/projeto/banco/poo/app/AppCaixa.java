@@ -1,5 +1,4 @@
-/**
- * 
+/** 
  */
 package projeto.banco.poo.app;
 
@@ -21,13 +20,17 @@ import projeto.banco.poo.db.DbPrimeiraConexao;
 import projeto.banco.poo.db.DbSetDadosContas;
 
 /**
+ * Classe para aplicação de operações bancárias, onde estão contidos métodos
+ * relacionados à esse objetivo.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class AppCaixa {
-	/**
-	 * @param args
-	 */
+
+	/**Método principal, responsável por chamar os métodos de operações bancárias.
+	 * @return boolean - retorno */
 	public static boolean main() {
 
 		Contas conta = new Contas(0, 0, 0, 0, 0, 0, 0, null, null);
@@ -119,6 +122,8 @@ public class AppCaixa {
 		return retorno;
 	}
 
+	/** Método para realizar o depósito de um valor em uma conta.
+	 *  @param conta Contas - número da conta favorecida */
 	private static void menuDepositar(Contas conta) {
 
 		System.out.println("\nDEPÓSITO EM CONTA\n");
@@ -191,6 +196,8 @@ public class AppCaixa {
 		}
 	}
 
+	/**Método para realizar o saque de um valor, a partir do saldo ou do crédito em uma conta.
+	 * @param conta Contas - número da conta a ser debitada*/
 	private static void menuSacar(Contas conta) {
 		Scanner ler = new Scanner(System.in);
 		DecimalFormat decimal = new DecimalFormat("0.00");
@@ -362,6 +369,9 @@ public class AppCaixa {
 		}
 	}
 
+	/** Método para realizar a transferência de um valor de uma determinada conta para uma conta2.
+	 *  @param conta Contas - número da conta a ser debitada 
+	 *  @param conta2 Contas - número da conta a ser favorecida */
 	private static void menuTransferir(Contas conta, Contas conta2) {
 
 		System.out.println("\nTRANSFERÊNCIA ENTRE CONTAS\n");
@@ -489,6 +499,8 @@ public class AppCaixa {
 		}
 	}
 
+	/** Método para realizar o pagamento de um boleto informado ou da dívida de uma conta.
+	 * @param conta Contas - número da conta a ser debitada a partir do pagamento */
 	private static void menuPagar(Contas conta) {
 
 		String menu = null;
@@ -591,14 +603,15 @@ public class AppCaixa {
 
 		case "2": {
 
-			System.out.println("O valor da dívida dessa conta é: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
+			System.out.println(
+					"O valor da dívida dessa conta é: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 
 			System.out.println("Digite o valor que deseja pagar:\n[Para sair digite 0]");
 
 			double valorPagamento = ler.nextDouble();
 			ler.nextLine();
-			
-			if (valorPagamento == 0){
+
+			if (valorPagamento == 0) {
 				System.out.println("Operação cancelada pelo usuário!");
 				AppCaixa.main();
 			}
@@ -644,10 +657,10 @@ public class AppCaixa {
 					conta.setDivida(conta.getDivida() - valorPagamento);
 					conta.setCredito(conta.getCredito() + valorPagamento);
 					DbSetDadosContas.main(conta, conta.getBanco());
-					
-					Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(), conta.getCodigo(), 
-														0, 0, 0, MetodosAuxiliares.getDataAtual());
-					
+
+					Operacoes operacao = new Operacoes(0, 4, valorPagamento, conta.getBanco(), conta.getAgencia(),
+							conta.getCodigo(), 0, 0, 0, MetodosAuxiliares.getDataAtual());
+
 					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 					operacao.setSaldoConta(conta.getSaldo());
 					DbInserirOperacao.main(operacao, conta.getBanco());
@@ -664,10 +677,10 @@ public class AppCaixa {
 				System.out.println("Opção inválida!\nTente Novamente");
 				AppCaixa.main();
 			}
-			
+
 		}
 			break;
-			
+
 		default: {
 			System.out.println("Erro, digite entre as opções 1 e 2!");
 			menuPagar(conta);
@@ -676,6 +689,8 @@ public class AppCaixa {
 
 	}
 
+	/** Método para realizar consultas de saldo, crédito, dívida ou solicitar o extrato de uma determinada conta.
+	 * @param Contas - número da conta a ser realizada as consultas */
 	private static void menuConsultar(Contas conta) {
 
 		String menu = null;

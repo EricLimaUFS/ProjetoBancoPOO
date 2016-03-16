@@ -20,18 +20,20 @@ import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbPrimeiraConexao;
 
 /**
+ * Classe para realizar o gerenciamento de bancos.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class AppBancoCentral {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por chamar os métodos de cadastrar bancos e consultar dados relacionados ao banco.
+	 * @return boolean - true */
 	public static boolean main() {
 
 		Scanner ler = new Scanner(System.in);
-		byte menu = 0;
+		String menu = null;
 		boolean retorno = false;
 		boolean volta = true;
 
@@ -48,11 +50,13 @@ public class AppBancoCentral {
 				System.out.println();
 				System.out.println("1 - Sim");
 				System.out.println("2 - Não");
-				menu = ler.nextByte();
-				if (menu == 1) {
+				menu = ler.next();
+				ler.nextLine();
+				
+				if (menu == "1") {
 					AppInserirPrimeiroBanco.main();
 					break;
-				} else if (menu == 2) {
+				} else if (menu == "2") {
 					retorno = true;
 					break;
 				} else {
@@ -68,34 +72,36 @@ public class AppBancoCentral {
 			do {
 				volta = false;
 				System.out.println();
-				System.out.println("Projeto App Banco				-			App Banco Central");
+				System.out.println("Projeto App Banco		-   	App Banco Central");
 				System.out.println();
 				System.out.println("Escolha uma opção:");
 				System.out.println();
 				System.out.println("1 - Cadastros de Bancos");
 				System.out.println("2 - Consulta de Dados");
 				System.out.println("3 - Sair");
-				menu = ler.nextByte();
+				menu = ler.next();
+				ler.nextLine();
+				
 				switch (menu) {
-				case 1: {
+				case "1": {
 					if (menuCadastroDeBancos() == true)
 						;
 					volta = true;
 				}
 					break;
-				case 2: {
+				case "2": {
 					int codBanco;
 					System.out.println("Digite o número do banco:");
 					codBanco = ler.nextInt();
 					menuConsultaDeDados(codBanco);
 				}
 					break;
-				case 3: {
+				case "3": {
 					retorno = true;
 				}
 					break;
 				default: {
-					System.out.println("Opção inválida! Tente novamente usando apenas os números 1 ou 2.");
+					System.out.println("Opção inválida! Tente novamente usando apenas os números 1 e 3.");
 					volta = true;
 				}
 				}
@@ -105,6 +111,8 @@ public class AppBancoCentral {
 
 	}
 
+	/**Método para realizar ou alterar o cadastro de bancos.
+	 * @return boolean - true */
 	public static boolean menuCadastroDeBancos() {
 
 		Scanner ler = new Scanner(System.in);
@@ -113,13 +121,14 @@ public class AppBancoCentral {
 		// System.out.println("3 - Excluir cadastro de banco"); -- não
 		// implementado
 		System.out.println("3 - Voltar");
-		byte menu = ler.nextByte();
+		String menu = ler.next();
+		ler.nextLine();
 		switch (menu) {
-		case 1: {
+		case "1": {
 			AppInserirBanco.main();
 		}
 			break;
-		case 2: {
+		case "2": {
 			AppAlterarBanco.main();
 		}
 			break;
@@ -128,8 +137,8 @@ public class AppBancoCentral {
 		 * 
 		 * }
 		 */
-		case 3: {
-			// Volta
+		case "3": {
+			AppBancoCentral.main();
 		}
 			break;
 		default: {
@@ -139,10 +148,14 @@ public class AppBancoCentral {
 		return true;
 	}
 
+	/**Método para realizar a consulta de dados de saldo de um banco, de uma agencia ou de um cliente e
+	 * exibir o extrato de um cliente do banco.
+	 * @param codBanco int - código do banco referente as informações
+	 * @return boolean - true */
 	public static boolean menuConsultaDeDados(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
-		byte menu = 0;
+		String menu = null;
 		boolean volta = true;
 
 		System.out.println("\nConsulta de Dados\n");
@@ -151,16 +164,16 @@ public class AppBancoCentral {
 		System.out.println("3 - Exibir saldo do cliente");
 		System.out.println("4 - Exibir extrato detalhado do cliente no banco");
 		System.out.println("5 - Voltar");
-		menu = ler.nextByte();
+		menu = ler.next();
 		ler.nextLine();
 
 		switch (menu) {
-		case 1: {
+		case "1": {
 			System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
 			menuConsultaDeDados(codBanco);
 		}
 			break;
-		case 2: {
+		case "2": {
 			System.out.println("Digite o código da agência:");
 			int codAgencia = ler.nextInt();
 			System.out.println(
@@ -168,7 +181,7 @@ public class AppBancoCentral {
 			menuConsultaDeDados(codBanco);
 		}
 			break;
-		case 3: {
+		case "3": {
 
 			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 			cliente.setCodigo(DbPesquisarCliente.main(codBanco));
@@ -181,8 +194,10 @@ public class AppBancoCentral {
 					System.out.println("2 - Total");
 					System.out.println("3 - Voltar");
 
-					menu = ler.nextByte();
-					if (menu == 1) {
+					menu = ler.next();
+					ler.nextLine();
+					
+					if (menu == "1") {
 						System.out.println("Digite o código da agência:");
 						int codAgencia = ler.nextInt();
 						if (DbGetDadosAgencias.main(codAgencia, codBanco).getCodigo() != 0) {
@@ -194,11 +209,11 @@ public class AppBancoCentral {
 							System.out.println("Agência não encontrada! Tente novamente.");
 							menuConsultaDeDados(codBanco);
 						}
-					} else if (menu == 2) {
+					} else if (menu == "2") {
 						System.out.println("Saldo total do cliente no banco: " + "R$"
 								+ MetodosAuxiliares.getSaldoTotalCliente(codBanco, cliente.getCodigo()));
 						menuConsultaDeDados(codBanco);
-					} else if (menu == 3) {
+					} else if (menu == "3") {
 						menuConsultaDeDados(codBanco);
 					} else {
 						System.out.println("Opção inválida!");
@@ -210,7 +225,7 @@ public class AppBancoCentral {
 			}
 		}
 			break;
-		case 4: {
+		case "4": {
 			int codCliente = DbPesquisarCliente.main(codBanco);
 			ArrayList<Contas> contas = new ArrayList<Contas>();
 			contas = DbGetContasCliente.main(codBanco, codCliente);
@@ -220,7 +235,7 @@ public class AppBancoCentral {
 			}
 		}
 			break;
-		case 5: {
+		case "5": {
 			AppBancoCentral.main();
 		}
 			break;

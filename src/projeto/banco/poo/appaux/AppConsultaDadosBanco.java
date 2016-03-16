@@ -9,19 +9,23 @@ import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetDadosBancos;
 
 /**
+ * Classe responsável por realizar a consulta dos dados de um determinado banco.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 10 de mar de 2016
+ * @version 1.0
  */
 public class AppConsultaDadosBanco {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por recolher o código do banco e em seguida exibir a informação 
+	 * solicitada a partir das opções dadas.
+	 * @param args String
+	 * @return boolean - retorno */
 	public static void main(String[] args) {
 
 		Scanner ler = new Scanner(System.in);
 		Banco banco = new Banco(0, null, null, null, null, null);
-		byte menu = 0;
+		String menu = null;
 
 		System.out.println("Digite o código do banco: ");
 		banco.setCodigo(ler.nextInt());
@@ -39,31 +43,31 @@ public class AppConsultaDadosBanco {
 			System.out.println("4 - Exibir extrato detalhado de um cliente");
 			System.out.println("5 - Exibir extrato detalhado de cliente em todos os bancos");
 			System.out.println("6 - Voltar");
-			menu = ler.nextByte();
+			menu = ler.next();
 			ler.nextLine();
 
 			switch (menu) {
-			case 1: {
+			case "1": {
 				// chamar app Db correspondente
 			}
 				break;
-			case 2: {
+			case "2": {
 				// perguntar qual agência e chamar app Db correspondente
 			}
 				break;
-			case 3: {
+			case "3": {
 				// chamar app correspondente
 			}
 				break;
-			case 4: {
+			case "4": {
 				// chamar app correspondente
 			}
 				break;
-			case 5: {
+			case "5": {
 				// chamar app correspondente
 			}
 				break;
-			case 6: {
+			case "6": {
 				// voltar
 			}
 				break;

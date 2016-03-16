@@ -14,14 +14,17 @@ import projeto.banco.poo.db.DbGetDadosContas;
 import projeto.banco.poo.db.DbGetDadosOperacoes;
 
 /**
+ * Classe responsável pela operação de exibir o extrato.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 13 de mar de 2016
+ * @version 1.0
  */
 public class AppExibirExtrato {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por recolher os dados da conta e do banco e em seguida, exibir um extrato detalhado.
+	 * @param codConta int - código da conta
+	 * @param codBanco int - código do banco */
 	public static void main(int codConta, int codBanco) {
 
 		Scanner ler = new Scanner(System.in);

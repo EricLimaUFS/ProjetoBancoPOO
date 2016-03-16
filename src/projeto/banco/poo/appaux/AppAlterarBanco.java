@@ -13,20 +13,22 @@ import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbSetDadosBancos;
 
 /**
+ * Classe responsável por alterar os dados de um determinado banco.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 8 de mar de 2016
+ * @version 1.0
  */
 public class AppAlterarBanco {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por alterar os dados do banco selecionado e enviá-los ao banco de dados.
+	 * @return boolean - retorno */
 	public static boolean main() {
 
 		boolean retorno = true;
 		Scanner ler = new Scanner(System.in);
 		Banco banco = new Banco(0, null, null, null, null, null);
-		byte menu = 0;
+		String menu = null;
 		String novosDados;
 
 		System.out.println("Digite o código do banco: ");
@@ -41,11 +43,11 @@ public class AppAlterarBanco {
 			System.out.println("2 - Nome Fantasia");
 			System.out.println("3 - Endereço");
 			System.out.println("4 - Voltar");
-			menu = ler.nextByte();
+			menu = ler.next();
 			ler.nextLine();
 
 			switch (menu) {
-			case 1: {
+			case "1": {
 				System.out.println("Razão Social atual: " + banco.getRazaoSocial());
 				System.out.println("\nDigite a nova Razão Social:\n\nPara cancelar a operação, digite 'cancelar'.");
 				novosDados = ler.nextLine();
@@ -57,7 +59,7 @@ public class AppAlterarBanco {
 				}
 			}
 				break;
-			case 2: {
+			case "2": {
 				System.out.println("Nome Fantasia atual: " + banco.getNomeFantasia());
 				System.out.println("\nDigite o novo Nome Fantasia:\n\nPara cancelar a operação, digite 'cancelar'.");
 				novosDados = ler.nextLine();
@@ -69,7 +71,7 @@ public class AppAlterarBanco {
 				}
 			}
 				break;
-			case 3: {
+			case "3": {
 				System.out.println("Endereço atual: " + banco.getEndereco());
 				System.out.println("\nDigite o novo Endereço:\n\nPara cancelar a operação, digite 'cancelar'.");
 				novosDados = ler.nextLine();
@@ -81,7 +83,7 @@ public class AppAlterarBanco {
 				}
 			}
 				break;
-			case 4: {
+			case "4": {
 				// voltar
 				retorno = false;
 			}

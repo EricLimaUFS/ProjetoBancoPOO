@@ -17,14 +17,17 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 /**
+ * Classe responsável por inserir os dados de uma agencia.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 10 de mar de 2016
+ * @version 1.0
  */
 public class AppInserirAgencia {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por recolher os dados necessários para inserir na agencia e enviá-los ao banco de dados.
+	 * @param codBanco int - código do banco que a agencia irá pertencer
+	 * @return boolean - retorno */
 	public static boolean main(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);

@@ -22,20 +22,24 @@ import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbPesquisarCliente;
 
+
 /**
+ * Classe para realizar o gerenciamento do menu do banco, cadastrar agencias e consultar dados 
+ * relacionados ao cliente e ao banco.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class AppBanco {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por chamar os métodos de gerir agencias, cadastrar agencias e consultar dados.
+	 * @return boolean - true */
 	public static boolean main() {
 
 		Scanner ler = new Scanner(System.in);
 		Banco banco = new Banco(0, null, null, null, null, null);
-		byte menu = 0;
+		String menu = null;
 
 		System.out.println("Digite o código do banco que deseja conectar-se: ");
 		banco.setCodigo(ler.nextInt());
@@ -51,24 +55,24 @@ public class AppBanco {
 			System.out.println("2 - Consulta de Dados");
 			System.out.println("3 - Gerir Agência");
 			System.out.println("4 - Sair");
-			menu = ler.nextByte();
+			menu = ler.next();
 			ler.nextLine();
 
 			switch (menu) {
 
-			case 1: {
+			case "1": {
 				menuCadastroDeAgencias(banco.getCodigo());
 			}
 				break;
-			case 2: {
+			case "2": {
 				menuConsultaDeDados(banco.getCodigo());
 			}
 				break;
-			case 3: {
+			case "3": {
 				AppGerirAgencia.main(banco);
 			}
 				break;
-			case 4: {
+			case "4": {
 				AppInicio.main(null);
 			}
 				break;
@@ -83,10 +87,13 @@ public class AppBanco {
 		return true;
 	}
 
+	/** Método para realizar a consulta de dados, como o montante de dinheiro, saldo e extrato do cliente à
+	 *  partir do código de um banco dado.
+	 *  @param codBanco int - código do banco */
 	private static boolean menuConsultaDeDados(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
-		byte menu = 0;
+		String menu = null;
 		boolean volta = true;
 
 		System.out.println("\nConsulta de Dados\n");
@@ -94,26 +101,27 @@ public class AppBanco {
 		System.out.println("2 - Exibir saldo do cliente");
 		System.out.println("3 - Exibir extrato detalhado do cliente no banco");
 		System.out.println("4 - Voltar");
-		menu = ler.nextByte();
+		menu = ler.next();
 		ler.nextLine();
 
 		switch (menu) {
-		case 1: {
+		case "1": {
 			System.out.println("1 - No banco");
 			System.out.println("2 - Numa determinada agência");
 			System.out.println("3 - Voltar");
-			menu = ler.nextByte();
+			menu = ler.next();
+			ler.nextLine();
 
-			if (menu == 1) {
+			if (menu == "1") {
 				System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
 				menuConsultaDeDados(codBanco);
-			} else if (menu == 2) {
+			} else if (menu == "2") {
 				System.out.println("Digite o código da agência:");
 				int codAgencia = ler.nextInt();
 				System.out.println("Montante aplicado na agência: R$"
 						+ MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
 				menuConsultaDeDados(codBanco);
-			} else if (menu == 3) {
+			} else if (menu == "3") {
 				menuConsultaDeDados(codBanco);
 			} else {
 				System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
@@ -121,7 +129,7 @@ public class AppBanco {
 
 		}
 			break;
-		case 2: {
+		case "2": {
 
 			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 			cliente.setCodigo(DbPesquisarCliente.main(codBanco));
@@ -134,8 +142,8 @@ public class AppBanco {
 					System.out.println("2 - Total");
 					System.out.println("3 - Voltar");
 
-					menu = ler.nextByte();
-					if (menu == 1) {
+					menu = ler.nextLine();
+					if (menu == "1") {
 						System.out.println("Digite o código da agência:");
 						int codAgencia = ler.nextInt();
 						if (DbGetDadosAgencias.main(codAgencia, codBanco).getCodigo() != 0) {
@@ -147,11 +155,11 @@ public class AppBanco {
 							System.out.println("Agência não encontrada! Tente novamente.");
 							menuConsultaDeDados(codBanco);
 						}
-					} else if (menu == 2) {
+					} else if (menu == "2") {
 						System.out.println("Saldo total do cliente no banco: " + "R$"
 								+ MetodosAuxiliares.getSaldoTotalCliente(codBanco, cliente.getCodigo()));
 						menuConsultaDeDados(codBanco);
-					} else if (menu == 3) {
+					} else if (menu == "3") {
 						menuConsultaDeDados(codBanco);
 					} else {
 						System.out.println("Opção inválida!");
@@ -163,7 +171,7 @@ public class AppBanco {
 			}
 		}
 			break;
-		case 3: {
+		case "3": {
 			int codCliente = DbPesquisarCliente.main(codBanco);
 			ArrayList<Contas> contas = new ArrayList<Contas>();
 			contas = DbGetContasCliente.main(codBanco, codCliente);
@@ -173,7 +181,7 @@ public class AppBanco {
 			}
 		}
 			break;
-		case 4: {
+		case "4": {
 			AppBanco.main();
 		}
 			break;
@@ -186,12 +194,14 @@ public class AppBanco {
 		return true;
 	}
 
+	/** Método para realizar o cadastro e alteração de agencias dentro de um determinado banco.
+	 *  @param codBanco int - código do banco */
 	private static void menuCadastroDeAgencias(int codBanco) {
 
 		Banco banco = new Banco(0, null, null, null, null, null);
 		Scanner ler = new Scanner(System.in);
 		boolean volta = true;
-		byte menu = 0;
+		String menu = null;
 
 		while (volta = true) {
 			volta = false;
@@ -200,15 +210,15 @@ public class AppBanco {
 			// System.out.println("3 - Excluir cadastro de agência"); -- não
 			// implementado
 			System.out.println("3 - Voltar");
-			menu = ler.nextByte();
+			menu = ler.next();
 			ler.nextLine();
 			switch (menu) {
-			case 1: {
+			case "1": {
 				AppInserirAgencia.main(banco.getCodigo());
 				volta = true;
 			}
 				break;
-			case 2: {
+			case "2": {
 				AppAlterarAgencia.main(banco.getCodigo());
 				volta = true;
 			}
@@ -218,7 +228,7 @@ public class AppBanco {
 			 * 
 			 * }
 			 */
-			case 3: {
+			case "3": {
 				AppBanco.main();
 			}
 				break;

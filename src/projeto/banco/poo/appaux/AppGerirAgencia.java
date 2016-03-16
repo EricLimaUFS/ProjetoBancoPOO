@@ -15,21 +15,25 @@ import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbPesquisarCliente;
 
 /**
+ * Classe responsável por gerenciar os dados de uma determinada agencia.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 11 de mar de 2016
+ * @version 1.0
  */
 public class AppGerirAgencia {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por chamar os métodos de cadastro de contas e o de fazer o 
+	 * gerenciamento de contas e clientes.
+	 * @param objBanco Banco - objeto do tipo Banco a ser referenciado para obter informações necessárias
+	 * @return boolean - retorno */
 	public static boolean main(Banco objBanco) {
 
 		Scanner ler = new Scanner(System.in);
 		Agencia agencia = new Agencia(0, objBanco.getCodigo(), null, null);
 		System.out.println("Digite o código da agência que deseja se conectar:");
 		agencia.setCodigo(ler.nextInt());
-		byte menu = 0;
+		String menu = null;
 
 		if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
 			agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
@@ -41,22 +45,22 @@ public class AppGerirAgencia {
 			System.out.println("1 - Cadastro de Contas");
 			System.out.println("2 - Gerir Contas e Clientes");
 			System.out.println("3 - Voltar");
-			menu = ler.nextByte();
+			menu = ler.next();
 			ler.nextLine();
 
 			switch (menu) {
 
-			case 1: {
+			case "1": {
 				menuCadastroContas(agencia, objBanco);
 			}
 				break;
 
-			case 2: {
+			case "2": {
 				AppGerirContasEClientes.main(agencia.getBanco(), agencia.getCodigo());
 			}
 				break;
 
-			case 3: {
+			case "3": {
 				AppBanco.main();
 			}
 				break;
@@ -75,16 +79,19 @@ public class AppGerirAgencia {
 		return true;
 	}
 
+	/**Método responsável pelo cadastro de contas.
+	 * @param codAgencia int - código da agencia que a conta pertence
+	 * @param objBanco Banco - objeto do tipo Banco a ser referenciado para obter informações necessárias */
 	public static void menuCadastroContas(Agencia agencia, Banco objBanco) {
 		System.out.println("1 - Inserir Conta");
 		System.out.println("2 - Excluir Conta");
 		System.out.println("3 - Voltar");
 
 		Scanner ler = new Scanner(System.in);
-		byte menu = ler.nextByte();
+		String menu = ler.next();
 
 		switch (menu) {
-		case 1: {
+		case "1": {
 			Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 			
 			System.out.println("Deseja vincular a conta à ser criada à um cliente, "
@@ -128,12 +135,12 @@ public class AppGerirAgencia {
 			}
 		}
 			break;
-		case 2: {
+		case "2": {
 			AppExcluirConta.main(agencia.getBanco(), agencia.getCodigo());
 			menuCadastroContas(agencia, objBanco);
 		}
 			break;
-		case 3: {
+		case "3": {
 			AppGerirAgencia.main(objBanco);
 		}
 		}
