@@ -11,13 +11,16 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Banco;
 
 /**
+ * Classe responsável acessar o código atual do banco para aplicar em outras classes.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbGetCodigoBanco {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do código do banco no banco de dados.
+	 * @param codBanco int - código do banco
 	 */
 	public static boolean main(int codBanco) {
 

@@ -4,8 +4,11 @@
 package projeto.banco.poo.db;
 
 /**
+ * Classe responsável por guardar o método construtor e os métodos acessores e modificadores de Banco no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class DbBanco {
 

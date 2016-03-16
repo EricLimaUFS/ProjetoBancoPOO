@@ -9,14 +9,17 @@ import java.sql.Statement;
 
 
 /**
+ * Classe responsável por efetuar a exclusão de um determinado cliente no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 15 de mar de 2016
+ * @version 1.0
  */
 public class DbExcluirCliente {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por recolher os dados de um determinado cliente e em seguida, excluí-lo.
+	 * @param codCliente int - código do cliente a ser referenciado
+	 * @param codBanco int - código do banco que o cliente referenciado pertence */
 	public static boolean main(int codCliente, int codBanco) {
 		
 		boolean retorno = true;

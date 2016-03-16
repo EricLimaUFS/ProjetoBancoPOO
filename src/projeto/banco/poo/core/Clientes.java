@@ -4,8 +4,11 @@
 package projeto.banco.poo.core;
 
 /**
+ * Classe responsável por guardar o método construtor e os métodos acessores e modificadores de Cliente.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 6 de mar de 2016
+ * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class Clientes {
 	
@@ -20,9 +23,17 @@ public class Clientes {
 	private String dataNascimento;
 	private int tipo; // Pessoa física ou jurídica
 	
-	/**
-	 * 
-	 */
+	/**Método construtor, responsável por inicializar os atributos de Clientes.
+	 * @param codigo int - código do cliente
+	 * @param cpf int - cpf do cliente, em caso de pessoa física
+	 * @param cnpj String - cnpj do cliente, em caso de pessoa jurídica
+	 * @param nome String - nome do cliente, em caso de pessoa física
+	 * @param razaoSocial String - nome do cliente, em caso de pessoa jurídica
+	 * @param nomeFantasia String - nome fantasia do cliente, em caso de pessoa jurídica
+	 * @param rendaMensal double - renda mensal do cliente 
+	 * @param dataCadastro String - data em que a conta foi criada 
+	 * @param dataNascimento String - data de nascimento 
+	 * @param tipo int - tipo do cliente, 1 para pessoa física e 2 para pessoa jurídica*/
 	public Clientes(int codigo, long cpf, long cnpj, String nome, String razaoSocial, String nomeFantasia,
 					double rendaMensal, String dataCadastro, String dataNascimento, int tipo) {
 
