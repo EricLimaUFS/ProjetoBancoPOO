@@ -1,5 +1,4 @@
 /**
-			Classe não implementada
  * 
  */
 package projeto.banco.poo.db;
@@ -8,18 +7,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-import projeto.banco.poo.app.AppBancoCentral;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 8 de mar de 2016
+ * @since 15 de mar de 2016
  */
-public class DbExcluirBanco {
+public class DbExcluirConta {
 
 	/**
 	 * @param args
 	 */
-	public static boolean main(int codBanco) {
+	public static boolean main(int codConta, int codBanco) {
 		
 		boolean retorno = true;
 		Connection conexao = null;
@@ -30,20 +28,12 @@ public class DbExcluirBanco {
 			conexao = DriverManager.getConnection("jdbc:sqlite:banco" + codBanco + ".db");
 			statement = conexao.createStatement();
 			
-			String drop = "DROP TABLE agencias";
-			statement.executeUpdate(drop);
-			drop = "UPDATE banco SET razao_social='Banco removido', nome_fantasia='Banco removido', endereco='Banco removido' WHERE codigo=" + codBanco;
-			statement.executeUpdate(drop);
-			drop = "DROP TABLE clientes";
-			statement.executeUpdate(drop);
-			drop = "DROP TABLE contas";
-			statement.executeUpdate(drop);
-			drop = "DROP TABLE operacoes";
+			String drop = "UPDATE contas SET codigo=null, banco=null, agencia=null, cliente=null, saldo=null, credito=null, "
+					+ "divida=null, senha=null, data_cadastro=null WHERE codigo=" + codConta;
 			statement.executeUpdate(drop);
 			
 			statement.close();
-			System.out.println("Banco excluído.");
-			AppBancoCentral.main();
+			System.out.println("Conta removida.");
 		} catch (Exception e)
 	    {
 		      System.err.println("Got an exception! ");

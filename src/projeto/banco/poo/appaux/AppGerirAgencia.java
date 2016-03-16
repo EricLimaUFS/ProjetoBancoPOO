@@ -47,7 +47,7 @@ public class AppGerirAgencia {
 			switch (menu) {
 
 			case 1: {
-				menuCadastroContas(agencia);
+				menuCadastroContas(agencia, objBanco);
 			}
 				break;
 
@@ -75,7 +75,7 @@ public class AppGerirAgencia {
 		return true;
 	}
 
-	public static void menuCadastroContas(Agencia agencia) {
+	public static void menuCadastroContas(Agencia agencia, Banco objBanco) {
 		System.out.println("1 - Inserir Conta");
 		System.out.println("2 - Excluir Conta");
 		System.out.println("3 - Voltar");
@@ -94,7 +94,8 @@ public class AppGerirAgencia {
 			System.out.println("2 - Cadastrar um novo cliente para conta");
 
 			byte opcao = ler.nextByte();
-
+			ler.nextLine();
+			
 			if (opcao == 1) {
 				cliente.setCodigo(DbPesquisarCliente.main(agencia.getBanco()));
 				if (cliente.getCodigo() != 0) {
@@ -112,9 +113,9 @@ public class AppGerirAgencia {
 					opcao = ler.nextByte();
 					if (opcao == 1) {
 						AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
-						menuCadastroContas(agencia);
+						menuCadastroContas(agencia, objBanco);
 					} else {
-						menuCadastroContas(agencia);
+						menuCadastroContas(agencia, objBanco);
 					}
 				}
 
@@ -123,14 +124,18 @@ public class AppGerirAgencia {
 				AppInserirCliente.main(agencia.getBanco());
 				cliente.setCodigo(DbGetCodigoNovoCliente.main(agencia.getBanco()));
 				AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
-				menuCadastroContas(agencia);
+				menuCadastroContas(agencia, objBanco);
 			}
 		}
 			break;
 		case 2: {
-			// AppExcluirConta();
+			AppExcluirConta.main(agencia.getBanco(), agencia.getCodigo());
+			menuCadastroContas(agencia, objBanco);
 		}
 			break;
+		case 3: {
+			AppGerirAgencia.main(objBanco);
+		}
 		}
 	}
 

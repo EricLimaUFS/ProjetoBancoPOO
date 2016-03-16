@@ -32,7 +32,7 @@ public class AppGerirContasEClientes {
 		Scanner ler = new Scanner(System.in);
 		byte menu = 0;
 		System.out.println("1 - Gerir Contas\n[Realizar consultas, alterações e operações financeiras numa conta]\n");
-		System.out.println("2 - Gerir Clientes\n[Realizar consultas e alterações num cliente]\n");
+		System.out.println("2 - Gerir Clientes\n[Cadastros, consultas e alterações num cliente]\n");
 		System.out.println("3 - Voltar");
 		menu = ler.nextByte();
 
@@ -212,10 +212,15 @@ public class AppGerirContasEClientes {
 					volta = true;
 				} else if (menu == 2) {
 					codCliente = DbPesquisarCliente.main(codBanco);
-					AppAlterarCliente.main(codCliente, codBanco);
+					if (codCliente != 0) {
+						AppAlterarCliente.main(codCliente, codBanco);
+					}
 					volta = true;
 				} else if (menu == 3) {
-					// AppExcluirCliente.main(codCliente, codBanco);
+					codCliente = DbPesquisarCliente.main(codBanco);
+					if (codCliente != 0) {
+						AppExcluirCliente.main(codCliente, codBanco);
+					}
 					volta = true;
 				} else if (menu == 4) {
 					menuGerirClientes(codBanco, codAgencia);

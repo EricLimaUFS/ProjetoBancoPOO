@@ -3,28 +3,21 @@
  */
 package projeto.banco.poo.app;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import projeto.banco.poo.appaux.AppAlterarBanco;
-import projeto.banco.poo.appaux.AppExcluirBanco;
 import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.appaux.AppInserirBanco;
 import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
-import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
 import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.db.DbBanco;
-import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosAgencias;
-import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbGetDadosClientes;
 import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbPrimeiraConexao;
-import projeto.banco.poo.db.DbSetDadosBancos;
-
-import java.sql.*;
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima

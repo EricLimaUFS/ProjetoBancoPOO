@@ -36,7 +36,7 @@ public class DbInserirCliente {
 			
 			statement.executeUpdate(sql);
 			
-			System.out.println("Cliente cadastrado com sucesso! O código da cliente é: " + cliente.getCodigo());
+			System.out.println("Cliente cadastrado com sucesso! O código do cliente é: " + cliente.getCodigo());
 			statement.close();
 			conexao.close();
 			} else {
