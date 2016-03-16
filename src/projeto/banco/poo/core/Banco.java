@@ -4,8 +4,11 @@
 package projeto.banco.poo.core;
 
 /**
+ * Classe responsável por guardar o método construtor e os métodos acessores e modificadores de Banco.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class Banco {
 
@@ -16,9 +19,13 @@ public class Banco {
 	private String endereco;
 	private String dataCadastro;
 	
-	/**
-	 * 
-	 */
+	/**Método construtor, responsável por inicializar os atributos de Banco.
+	 * @param codigo int - código do banco
+	 * @param razaoSocial String - nome do banco
+	 * @param cnpj String - cnpj do banco
+	 * @param nomeFantasia String - nome fantasia do banco
+	 * @param endereço String - endereço do banco
+	 * @param dataCadastro String - data em que o banco foi criado */
 	public Banco(int codigo, String razaoSocial, String cnpj, String nomeFantasia, String endereco, String dataCadastro) {
 		
 		this.codigo = codigo;

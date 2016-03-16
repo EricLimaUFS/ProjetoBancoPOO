@@ -4,8 +4,11 @@
 package projeto.banco.poo.core;
 
 /**
+ * Classe responsável por guardar o método construtor e os métodos acessores e modificadores de Agencia.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class Agencia {
 	
@@ -14,9 +17,11 @@ public class Agencia {
 	private String endereco;
 	private String dataCadastro;
 	
-	/**
-	 * 
-	 */
+	/**Método construtor, responsável por inicializar os atributos de Agencia.
+	 * @param codigo int - código da agencia
+	 * @param banco int - código do banco referente à agencia
+	 * @param endereço String - endereço da agencia
+	 * @param dataCadastro String - data em que a agencia foi criada */
 	public Agencia(int codigo, int banco, String endereco, String dataCadastro) {
 		
 		this.codigo = codigo;

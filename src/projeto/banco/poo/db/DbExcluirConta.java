@@ -9,14 +9,17 @@ import java.sql.Statement;
 
 
 /**
+ * Classe responsável por efetuar a exclusão de uma determinada conta no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 15 de mar de 2016
+ * @version 1.0
  */
 public class DbExcluirConta {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por recolher os dados de uma determinada conta e em seguida, excluí-la.
+	 * @param codConta int - código da conta a ser referenciada
+	 * @param codBanco int - código do banco que a conta pertence */
 	public static boolean main(int codConta, int codBanco) {
 		
 		boolean retorno = true;

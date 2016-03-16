@@ -13,8 +13,11 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 /**
+ * Classe responsável por armazenar os métodos auxiliares utilizados ao longo do projeto.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 6 de mar de 2016
+ * @since 10 de mar de 2016
+ * @version 1.0
  */
 public class MetodosAuxiliares {
 	
@@ -24,6 +27,9 @@ public class MetodosAuxiliares {
 		return dateFormat.format(date);
 	}
 	
+	/**Método responsável por formatar valores recebidos como parâmetro.
+	 * @param valorDinhero double - valor double desformatado, recebido como parametro 
+	 * @param return valorDinheiro String - valor formatado para exibição, convertido em string */
 	public static String formatarDinheiro(double valorDinheiro) {
 		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(valorDinheiro);
@@ -116,9 +122,5 @@ public class MetodosAuxiliares {
 		}
 		return soma;
 	}
-	/**
-	 * @param args
-	 */
-	
 
 }

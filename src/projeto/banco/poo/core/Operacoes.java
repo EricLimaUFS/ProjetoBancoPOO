@@ -4,8 +4,11 @@
 package projeto.banco.poo.core;
 
 /**
+ * Classe responsável por armazenar as operações realizadas a fim de exibir o extrato.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class Operacoes {
 
@@ -20,9 +23,17 @@ public class Operacoes {
 	private double saldoConta2;
 	private String data;
 
-	/**
-	 * 
-	 */
+	/**Método construtor, responsável por inicializar os atributos de Operacoes.
+	 * @param codigo int - código da conta
+	 * @param tipoOperacao int - código referente ao tipo de operação
+	 * @param valorOperacao double - valor da operação realizada
+	 * @param banco int - banco referente a operação
+	 * @param agencia int - agencia referente a operação
+	 * @param conta int - conta referente a operação
+	 * @param conta2 int - segunda conta referente a operação
+	 * @param saldoConta double - saldo da conta após a operação
+	 * @param saldoConta2 double - saldo da segunda conta após a operação
+	 * @param data String - data da operação */
 	public Operacoes(int codigo, int tipoOperacao, double valorOperacao, int banco, int agencia, int conta, int conta2,
 			double saldoConta, double saldoConta2, String data) {
 

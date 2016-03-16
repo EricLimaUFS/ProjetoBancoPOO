@@ -6,8 +6,11 @@ package projeto.banco.poo.core;
 import projeto.banco.poo.db.DbGetDadosClientes;
 
 /**
+ * Classe responsável por guardar o método construtor e os métodos acessores e modificadores de Contas.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class Contas {
 	
@@ -21,9 +24,16 @@ public class Contas {
 	private String senha;
 	private String dataCadastro;
 	
-	/**
-	 * 
-	 */
+	/**Método construtor, responsável por inicializar os atributos de Contas.
+	 * @param codigo int - código da conta
+	 * @param banco int - banco da conta referente
+	 * @param agencia int - agencia da conta referente
+	 * @param cliente int - codigo do cliente da conta referente
+	 * @param saldo double - saldo da conta
+	 * @param credito double - credito da conta
+	 * @param divida double - divida da conta
+	 * @param senha String - senha da conta
+	 * @param dataCadastro String - data em que a conta foi criada */
 	public Contas(int codigo, int banco, int agencia, int cliente, double saldo, double credito, double divida,
 					String senha, String dataCadastro) {
 
