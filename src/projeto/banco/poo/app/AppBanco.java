@@ -196,7 +196,7 @@ public class AppBanco {
 
 	/** Método para realizar o cadastro e alteração de agencias dentro de um determinado banco.
 	 *  @param codBanco int - código do banco */
-	private static void menuCadastroDeAgencias(int codBanco) {
+	public static void menuCadastroDeAgencias(int codBanco) {
 
 		Banco banco = new Banco(0, null, null, null, null, null);
 		Scanner ler = new Scanner(System.in);
