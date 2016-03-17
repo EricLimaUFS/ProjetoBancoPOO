@@ -87,29 +87,28 @@ public class AppGerirContasEClientes {
 					System.out.println("2 - Alterar crédito");
 					System.out.println("3 - Alterar dívida");
 					System.out.println("4 - Voltar");
-					menu = ler.next();
-					ler.nextLine();
+					menu = ler.nextLine();
 
-					if (menu == "1") {
+					if (menu.equals("1")) {
 						System.out.println("Saldo atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 						System.out.println("Digite o novo valor de saldo: ");
 						conta.setSaldo(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
-					} else if (menu == "2") {
+					} else if (menu.equals("2")) {
 						System.out
 								.println("Crédito atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 						System.out.println("Digite o novo valor de crédito: ");
 						conta.setCredito(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
-					} else if (menu == "3") {
+					} else if (menu.equals("3")) {
 						System.out.println("Dívida atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 						System.out.println("Digite o novo valor da dívida: ");
 						conta.setDivida(ler.nextDouble());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
-					} else if (menu == "4") {
+					} else if (menu.equals("4")) {
 						menuGerirContas(codBanco, codAgencia);
 					} else {
 						System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
@@ -126,18 +125,18 @@ public class AppGerirContasEClientes {
 					System.out.println("2 - Visualizar extrato");
 					System.out.println("3 - Visualizar dados detalhados");
 					System.out.println("4 - Voltar");
-					menu = ler.next();
-					ler.nextLine();
+					menu = ler.nextLine();
+					
 
-					if (menu == "1") {
+					if (menu.equals("1")) {
 						System.out.println("Digite a nova senha: ");
 						conta.setSenha(ler.nextLine());
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
-					} else if (menu == "2") {
+					} else if (menu.equals("2")) {
 						AppExibirExtrato.main(codConta, codBanco);
 						volta = true;
-					} else if (menu == "3") {
+					} else if (menu.equals("3")) {
 						Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
 						cliente = DbGetDadosClientes.main(conta.getCliente(), codBanco);
 						System.out.println("Dados do cliente vinculado\n");
@@ -167,7 +166,7 @@ public class AppGerirContasEClientes {
 						ler.nextLine();
 						volta = true;
 
-					} else if (menu == "4") {
+					} else if (menu.equals("4")) {
 						menuGerirContas(codBanco, codAgencia);
 					} else {
 						System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
@@ -216,25 +215,24 @@ public class AppGerirContasEClientes {
 				System.out.println("2 - Alterar cliente");
 				System.out.println("3 - Excluir cliente");
 				System.out.println("4 - Voltar");
-				menu = ler.next();
-				ler.nextLine();
+				menu = ler.nextLine();
 
-				if (menu == "1") {
+				if (menu.equals("1")) {
 					AppInserirCliente.main(codBanco);
 					volta = true;
-				} else if (menu == "2") {
+				} else if (menu.equals("2")) {
 					codCliente = DbPesquisarCliente.main(codBanco);
 					if (codCliente != 0) {
 						AppAlterarCliente.main(codCliente, codBanco);
 					}
 					volta = true;
-				} else if (menu == "3") {
+				} else if (menu.equals("3")) {
 					codCliente = DbPesquisarCliente.main(codBanco);
 					if (codCliente != 0) {
 						AppExcluirCliente.main(codCliente, codBanco);
 					}
 					volta = true;
-				} else if (menu == "4") {
+				} else if (menu.equals("4")) {
 					menuGerirClientes(codBanco, codAgencia);
 				} else {
 					System.out.println("Opção inválida! Digite apenas números de 1 a 4.");
@@ -249,10 +247,9 @@ public class AppGerirContasEClientes {
 				System.out.println("1 - Visualizar dados detalhados de um cliente");
 				System.out.println("2 - Visualizar extrato de um cliente");
 				System.out.println("3 - Voltar");
-				menu = ler.next();
-				ler.nextLine();
+				menu = ler.nextLine();
 
-				if (menu == "1") {
+				if (menu.equals("1")) {
 					codCliente = DbPesquisarCliente.main(codBanco);
 					Clientes cliente = new Clientes(codCliente, 0, 0, null, null, null, 0, null, null, 0);
 					cliente = DbGetDadosClientes.main(codCliente, codBanco);
@@ -274,7 +271,7 @@ public class AppGerirContasEClientes {
 					ler.nextLine();
 					volta = true;
 
-				} else if (menu == "2") {
+				} else if (menu.equals("2")) {
 					codCliente = DbPesquisarCliente.main(codBanco);
 					ArrayList<Contas> contas = new ArrayList<Contas>();
 					contas = DbGetContasCliente.main(codBanco, codCliente);
@@ -287,7 +284,7 @@ public class AppGerirContasEClientes {
 					ler.nextLine();
 					volta = true;
 
-				} else if (menu == "3") {
+				} else if (menu.equals("3")) {
 					menuGerirClientes(codBanco, codAgencia);
 				} else {
 					System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
