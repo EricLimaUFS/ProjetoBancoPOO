@@ -10,13 +10,18 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Agencia;
 
 /**
+ * Classe responsável por modificar os dados da agencia a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 11 de mar de 2016
+ * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbSetDadosAgencias {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por modificar as informações de um objeto do tipo Agencia no banco de dados e retornar suas informações.
+	 * @param novoObjetoAgencia Agencia - objeto do tipo Agencia
+	 * @param codBanco int - código do banco referente a agencia
+	 * @return retorno boolean
 	 */
 	public static boolean main(Agencia novoObjetoAgencia, int codBanco) {
 

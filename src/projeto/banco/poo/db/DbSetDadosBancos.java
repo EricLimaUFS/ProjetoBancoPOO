@@ -10,13 +10,18 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Banco;
 
 /**
+ * Classe responsável por modificar os dados de um banco a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 8 de mar de 2016
+ * @version 1.0
  */
 public class DbSetDadosBancos {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por modificar as informações de um objeto do tipo Banco no banco de dados e 
+	 * retornar suas informações.
+	 * @param novoObjetoBanco Banco - objeto do tipo Banco
+	 * @return retorno boolean
 	 */
 	public static boolean main(Banco novoObjetoBanco) {
 

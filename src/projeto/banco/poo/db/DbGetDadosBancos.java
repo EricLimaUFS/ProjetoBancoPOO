@@ -11,13 +11,16 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Banco;
 
 /**
+ * Classe responsável por acessar os dados do banco a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 8 de mar de 2016
+ * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbGetDadosBancos {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do banco no banco de dados e retornar suas informações.
+	 * @param codBanco int - código do banco 
 	 */
 	public static Banco main(int codBanco) {
 		

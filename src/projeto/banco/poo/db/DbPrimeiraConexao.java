@@ -9,14 +9,16 @@ import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
 import projeto.banco.poo.core.Banco;
 
 /**
+ * Classe responsável por realizar a primeira conexão com o banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class DbPrimeiraConexao {
 
-	/**
-	 * @param args
-	 * 
+	/**Método principal, responsável por realizar a conexão com o banco de dados e checar a existência do banco de dados
+	 * @return retorno boolean
 	 */
 	public static boolean main() {
 

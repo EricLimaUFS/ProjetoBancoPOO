@@ -11,13 +11,18 @@ import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Operacoes;
 
 /**
+ * Classe responsável por inserir uma nova operação no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 13 de mar de 2016
+ * @version 1.0
  */
 public class DbInserirOperacao {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por passar as informações do objeto operação para o banco de dados.
+	 * @param operacao Operacões - objeto do tipo Operações
+	 * @param codBanco int - codigo do banco
+	 * @return boolean - true
 	 */
 	public static boolean main(Operacoes operacao, int codBanco) {
 

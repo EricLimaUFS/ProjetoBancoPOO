@@ -11,13 +11,17 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Contas;
 
 /**
+ * Classe responsável por acessar os dados das contas a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbGetDadosContas {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca da conta no banco de dados e retornar suas informações.
+	 * @param codConta int - código da conta
+	 * @param codBanco int - código do banco referente a conta
 	 */
 	public static Contas main(int codConta, int codBanco) {
 

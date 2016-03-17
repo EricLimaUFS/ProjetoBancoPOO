@@ -14,13 +14,17 @@ import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.core.Operacoes;
 
 /**
+ * Classe responsável por acessar os dados das operações a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbGetDadosOperacoes {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a consulta das operações no banco de dados e retornar suas informações para serem utilizadas no extrato.
+	 * @param codConta int - código da conta
+	 * @param codBanco int - código do banco referente a operação
 	 */
 	public static ArrayList<Operacoes> main(int codBanco, int codConta) {
 

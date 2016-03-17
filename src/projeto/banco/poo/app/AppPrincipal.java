@@ -25,14 +25,16 @@ import projeto.banco.poo.db.DbGetDadosContas;
 import projeto.banco.poo.db.DbPesquisarCliente;
 
 /**
+ * Classe para exibição do menu início
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 15 de mar de 2016
+ * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class AppPrincipal {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por exibir o menu e chamar a classe correspondente a opção selecionada.
+	 * @param args */
 	public static void main(String[] args) {
 
 		Scanner ler = new Scanner(System.in);
@@ -75,6 +77,7 @@ public class AppPrincipal {
 
 	}
 
+	/**Método de cadastro, responsável por cadastrar bancos, agencias, clientes e contas.*/
 	private static void menuCadastros() {
 
 		Scanner ler = new Scanner(System.in);
@@ -180,6 +183,7 @@ public class AppPrincipal {
 		}
 	}
 
+	/**Método de operações, responsável pela consulta de dados e por realizar operações financeiras.*/
 	private static void menuOperacoes() {
 		Scanner ler = new Scanner(System.in);
 		String menu = null;

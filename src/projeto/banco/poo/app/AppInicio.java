@@ -7,14 +7,17 @@ import java.util.Scanner;
 
 
 /**
+ * Classe para aplicação do menu interativo, onde estão disponíveis as opções para o funcionário do 
+ * banco central, ciente e para o funcionário de um banco 
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class AppInicio {
 
-	/**
-	 * @param args
-	 */
+	/**Método principal, responsável por exibir o menu e chamar a classe correspondente a opção selecionada.
+	 * @param args */
 	public static void main(String[] args) {
 
 		Scanner ler = new Scanner(System.in);
@@ -40,7 +43,7 @@ public class AppInicio {
 			System.out.println("1 - Sou o Banco Central		[Cadastrar, alterar e consultar dados de bancos]\n");
 			System.out.println("2 - Sou um Banco		[Cadastrar, alterar e consultar dados de um banco]\n				[incluindo suas agências, contas e clientes]\n");
 			System.out.println("3 - Sou um cliente		[Terminal de auto atendimento]\n");
-			System.out.println("4 - Sair");
+			System.out.println("4 - Voltar");
 
 			menu = ler.nextByte();
 			
@@ -61,7 +64,7 @@ public class AppInicio {
 			}
 				break;
 			case 4: {
-				System.exit(1);
+				AppPrincipal.main(null);
 			}
 				break;
 			default: {

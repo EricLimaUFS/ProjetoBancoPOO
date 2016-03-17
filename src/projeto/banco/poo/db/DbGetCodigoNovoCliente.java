@@ -10,13 +10,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
+ * Classe responsável por acessar o código do novo cliente para aplicar em outras classes.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbGetCodigoNovoCliente {
 	
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do código do cliente no banco de dados.
+	 * @param codBanco int - código do banco referente ao cliente
 	 */
 	public static int main(int codBanco) {
 

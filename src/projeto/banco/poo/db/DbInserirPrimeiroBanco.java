@@ -6,14 +6,16 @@ package projeto.banco.poo.db;
 import java.sql.*;
 
 /**
+ * Classe responsável por inserir o primeiro banco no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class DbInserirPrimeiroBanco {
 
-	/**
-	 * @param args
-	 * 
+	/**Método principal, responsável por realizar a conexão com o banco de dados e checar a existência de bancos
+	 * e em seguida, caso não haja nenhum, a classe criará um banco no banco de dados.
 	 */
 	public static void main() {
 

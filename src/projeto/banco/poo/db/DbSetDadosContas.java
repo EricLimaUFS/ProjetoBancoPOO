@@ -11,13 +11,19 @@ import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
 
 /**
+ * Classe responsável por modificar os dados da conta a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 12 de mar de 2016
+ * @since 17 de mar de 2016
+ * @version 1.0
  */
 public class DbSetDadosContas {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por modificar as informações de um objeto do tipo Contas no banco de 
+	 * dados e retornar suas informações.
+	 * @param novoObjetoConta Conttas - objeto do tipo Contas
+	 * @param codBanco int - código do banco referente a conta
+	 * @return retorno boolean
 	 */
 	public static boolean main(Contas novoObjetoConta, int codBanco) {
 

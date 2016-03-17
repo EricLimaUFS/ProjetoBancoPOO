@@ -11,13 +11,17 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Agencia;
 
 /**
+ * Classe responsável por acessar os dados da agencia a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 11 de mar de 2016
+ * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbGetDadosAgencias {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca da agencia no banco de dados e retornar suas informações.
+	 * @param codBanco int - código do banco referente a agencia
+	 * @param codAgencia int - código da agencia
 	 */
 	public static Agencia main(int codAgencia, int codBanco) {
 		

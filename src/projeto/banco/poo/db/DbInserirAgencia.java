@@ -10,13 +10,17 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Agencia;
 
 /**
+ * Classe responsável por inserir uma nova agencia no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 10 de mar de 2016
+ * @version 1.0
  */
 public class DbInserirAgencia {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por passar as informações do objeto agencia para o banco de dados.
+	 * @param agencia Agencia - objeto do tipo Agencia
+	 * @return boolean - true
 	 */
 	public static boolean main(Agencia agencia) {
 		

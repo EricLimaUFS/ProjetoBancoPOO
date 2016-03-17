@@ -6,14 +6,17 @@ package projeto.banco.poo.db;
 import java.sql.*;
 
 /**
+ * Classe responsável por inserir um novo banco no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 5 de mar de 2016
+ * @version 1.0
  */
 public class DbInserirBanco {
 
-	/**
-	 * @param args
-	 * 
+	/**Método principal, responsável por passar as informações do banco para o banco de dados.
+	 * @param codBanco int - codigo do banco
+	 * @return boolean - true
 	 */
 	public static boolean main(int codBanco) {
 		

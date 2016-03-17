@@ -11,7 +11,7 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Banco;
 
 /**
- * Classe responsável acessar o código atual do banco para aplicar em outras classes.
+ * Classe responsável por acessar o código atual do banco para aplicar em outras classes.
  * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016

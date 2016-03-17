@@ -10,13 +10,19 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Clientes;
 
 /**
+ * Classe responsável por modificar os dados de um cliente a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 12 de mar de 2016
+ * @since 8 de mar de 2016
+ * @version 1.0
  */
 public class DbSetDadosClientes {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por modificar as informações de um objeto do tipo Clientes no banco de dados e 
+	 * retornar suas informações.
+	 * @param novoObjetoCliente Clientes - objeto do tipo Banco
+	 * @param codBanco int - código do banco referente ao cliente
+	 * @return retorno boolean
 	 */
 	public static boolean main(Clientes novoObjetoCliente, int codBanco) {
 

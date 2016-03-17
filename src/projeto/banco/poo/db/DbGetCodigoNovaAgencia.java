@@ -11,13 +11,16 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Banco;
 
 /**
+ * Classe responsável por acessar o código da nova agencia para aplicar em outras classes.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbGetCodigoNovaAgencia {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do código da agencia no banco de dados.
+	 * @param codBanco int - código do banco referente a agencia
 	 */
 	public static int main(int codBanco) {
 

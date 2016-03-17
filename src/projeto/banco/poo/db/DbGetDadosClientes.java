@@ -11,13 +11,17 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Clientes;
 
 /**
+ * Classe responsável por acessar os dados do cliente a partir do banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbGetDadosClientes {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do cliente no banco de dados e retornar suas informações.
+	 * @param codCliente int - código do cliente
+	 * @param codBanco int - código do banco referente ao cliente
 	 */
 	public static Clientes main(int codCliente, int codBanco) {
 

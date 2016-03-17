@@ -10,13 +10,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
+ * Classe responsável por acessar o código da nova conta para aplicar em outras classes.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 6 de mar de 2016
+ * @version 1.0
  */
 public class DbGetCodigoNovaConta {
 	
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do código da conta no banco de dados.
+	 * @param codBanco int - código do banco referente a conta
 	 */
 	public static int main(int codBanco) {
 

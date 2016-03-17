@@ -12,13 +12,17 @@ import java.util.ArrayList;
 import projeto.banco.poo.core.Contas;
 
 /**
+ * Classe responsável por acessar a conta do cliente selecionado e receber do banco de dados as informações pedidas.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 15 de mar de 2016
+ * @version 1.0
  */
 public class DbGetContasCliente {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por locializar o cliente e, caso ele seja encontrado, buscar no banco de dados suas informações.
+	 * @param codBanco int - código do banco referente a conta
+	 * @param codCliente int - código do cliente referente a conta
 	 */
 	public static ArrayList<Contas> main(int codBanco, int codCliente) {
 

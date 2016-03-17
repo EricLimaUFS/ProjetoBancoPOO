@@ -10,13 +10,16 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 /**
+ * Classe responsável por acessar o código da nova operação para aplicar em outras classes.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
- * @since 13 de mar de 2016
+ * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbGetCodigoNovaOperacao {
 	
-	/**
-	 * @param args
+	/**Método principal, responsável por realizar a busca do código da operação no banco de dados.
+	 * @param codBanco int - código do banco referente a operação
 	 */
 	public static int main(int codBanco) {
 

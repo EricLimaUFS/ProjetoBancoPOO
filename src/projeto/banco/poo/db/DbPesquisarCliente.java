@@ -9,15 +9,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Scanner;
 
-
 /**
+ * Classe responsável por realizar a pesquisa de um determinado cliente no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbPesquisarCliente {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por passar as informações de um cliente para o banco de dados e retornar para 
+	 * o projeto as informações desse cliente.
+	 * @param codBanco int - codigo do banco
+	 * @return codCliente int - código do cliente
 	 */
 	public static int main(int codBanco) {
 		

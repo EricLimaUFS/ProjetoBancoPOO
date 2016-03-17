@@ -10,13 +10,18 @@ import java.sql.Statement;
 import projeto.banco.poo.core.Clientes;
 
 /**
+ * Classe responsável por inserir um novo cliente no banco de dados.
+ * 
  * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
  * @since 12 de mar de 2016
+ * @version 1.0
  */
 public class DbInserirCliente {
 
-	/**
-	 * @param args
+	/**Método principal, responsável por passar as informações do objeto cliente para o banco de dados.
+	 * @param cliente Clientes - objeto do tipo Clientes
+	 * @param codBanco int - codigo do banco
+	 * @return boolean - true
 	 */
 	public static boolean main(Clientes cliente, int codBanco) {
 		
