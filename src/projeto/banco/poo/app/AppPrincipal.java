@@ -211,7 +211,7 @@ public class AppPrincipal {
 				if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 					banco = DbGetDadosBancos.main(banco.getCodigo());
 					System.out.println(
-							"Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(banco.getCodigo()));
+							"Montante aplicado no banco: R$" + MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares.getMontanteBanco(banco.getCodigo())));
 				}
 
 			} else if (menu.equals("2")) {
@@ -231,7 +231,7 @@ public class AppPrincipal {
 					if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
 						agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 						System.out.println("Montante aplicado na agência: R$"
-								+ MetodosAuxiliares.getMontanteAgencia(banco.getCodigo(), agencia.getCodigo()));
+								+ MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares.getMontanteAgencia(banco.getCodigo(), agencia.getCodigo())));
 					} else {
 						System.out.println("Agência não encontrada");
 					}
@@ -257,13 +257,12 @@ public class AppPrincipal {
 						agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 
 						Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
-						cliente.setCodigo(DbPesquisarCliente.main(banco.getCodigo()));
+						cliente = DbGetDadosClientes.main(DbPesquisarCliente.main(banco.getCodigo()), banco.getCodigo());
 
 						if (cliente.getDataCadastro() != null) {
-							cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
 							System.out.println("Saldo total do cliente na agência '" + agencia.getCodigo() + "': "
-									+ "R$" + MetodosAuxiliares.getSaldoTotalClienteAg(banco.getCodigo(),
-											agencia.getCodigo(), cliente.getCodigo()));
+									+ "R$" + MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares.getSaldoTotalClienteAg(banco.getCodigo(),
+											agencia.getCodigo(), cliente.getCodigo())));
 						} else {
 							System.out.println("Cliente não encontrado");
 						}
@@ -283,29 +282,17 @@ public class AppPrincipal {
 				if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 					banco = DbGetDadosBancos.main(banco.getCodigo());
 
-					Agencia agencia = new Agencia(0, banco.getCodigo(), null, null);
-					System.out.println("Digite o código da agência que deseja conectar-se:");
-					agencia.setCodigo(ler.nextInt());
-					ler.nextLine();
-
-					if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
-						agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
-
 						Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
-						cliente.setCodigo(DbPesquisarCliente.main(banco.getCodigo()));
+						cliente = DbGetDadosClientes.main(DbPesquisarCliente.main(banco.getCodigo()), banco.getCodigo());
 
 						if (cliente.getDataCadastro() != null) {
-							cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
 							System.out.println("Saldo total do cliente no banco: " + "R$"
-									+ MetodosAuxiliares.getSaldoTotalCliente(banco.getCodigo(), cliente.getCodigo()));
+									+ MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares.getSaldoTotalCliente(banco.getCodigo(), cliente.getCodigo())));
 						} else {
 							System.out.println("Cliente não encontrado");
 						}
 
 					} else {
-						System.out.println("Agência não encontrada");
-					}
-				} else {
 					System.out.println("Banco não encontrado.");
 				}
 			} else if (menu.equals("5")) {
