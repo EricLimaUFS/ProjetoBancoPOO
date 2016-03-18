@@ -5,8 +5,22 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * Classe responsável por verificar se um cliente já existe no banco de dados através do cpf ou cnpj.
+ * 
+ * @author Bruno Rodrigues dos Santos, Eric Fonseca Lima
+ * @since 18 de mar de 2016
+ * @version 1.0
+ */
+
 public class DbVerificarCliente {
 
+	/**
+	 * 
+	 * @param codBanco int - Código do banco para conexão do banco de dados
+	 * @param cpfCnpj long - CPF ou CNPJ para verificação de existência no banco de dados
+	 * @return retorno long - retorna o CPF ou CNPJ
+	 */
 	public static long main(int codBanco, long cpfCnpj) {
 
 		long retorno;
@@ -26,7 +40,6 @@ public class DbVerificarCliente {
 
 		} catch (Exception ex) {
 			ex.getMessage();
-			//System.out.println("Cliente não encontrado.");
 			retorno = 0;
 		}
 

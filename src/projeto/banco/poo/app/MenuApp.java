@@ -50,9 +50,11 @@ public class MenuApp {
 
 		System.out.println("Digite o número da agência: ");
 		int codAgencia = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da conta:");
 		conta.setCodigo(ler.nextInt());
+		ler.nextLine();
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 		Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
@@ -70,8 +72,8 @@ public class MenuApp {
 		double valorDeposito = ler.nextDouble();
 		ler.nextLine();
 
-		if (valorDeposito == 0) {
-			System.out.println("O valor precisa ser diferente de R$0,00\nTente Novamente!");
+		if (valorDeposito <= 0) {
+			System.out.println("O valor deve ser maior que R$0,00\nTente Novamente!");
 			AppCaixa.main();
 		}
 
@@ -102,6 +104,7 @@ public class MenuApp {
 			operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 			operacao.setSaldoConta(conta.getSaldo());
 			DbInserirOperacao.main(operacao, conta.getBanco());
+			AppCaixa.main();
 		}
 		if (opcao.equals("2")) {
 			System.out.println("Operação cancelada pelo usuário!");
@@ -126,10 +129,12 @@ public class MenuApp {
 
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da conta que deseja efetuar o saque: ");
 		conta.setCodigo(ler.nextInt());
-
+		ler.nextLine();
+		
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 
 		if (conta.getCliente() == 0) {
@@ -145,9 +150,8 @@ public class MenuApp {
 				+ decimal.format(conta.getSaldo()) + "]\n");
 		System.out.println("2 - Sacar a partir do crédito disponível da conta\n[CRÉDITO DISPONÍVEL: R$"
 				+ decimal.format(conta.getCredito()) + "]\n");
-		System.out.println("3 - Sair");
-		String opcao = ler.next();
-		ler.nextLine();
+		System.out.println("3 - Voltar");
+		String opcao = ler.nextLine();
 
 		if (opcao.equals("1")) {
 
@@ -158,8 +162,8 @@ public class MenuApp {
 			double valorSaque = ler.nextDouble();
 			ler.nextLine();
 
-			if (valorSaque == 0) {
-				System.out.println("O valor precisa ser diferente de R$0,00\nTente Novamente!");
+			if (valorSaque <= 0) {
+				System.out.println("O valor precisa maior que R$0,00\nTente Novamente!");
 				AppCaixa.main();
 			}
 
@@ -187,8 +191,7 @@ public class MenuApp {
 			if (opcao.equals("1")) {
 
 				System.out.println("Digite a senha da conta: ");
-				String senha = ler.next();
-				ler.nextLine();
+				String senha = ler.nextLine();
 
 				if (conta.getSenha().equals(senha)) {
 					if (conta.getSaldo() >= valorSaque) {
@@ -201,6 +204,7 @@ public class MenuApp {
 						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 						operacao.setSaldoConta(conta.getSaldo());
 						DbInserirOperacao.main(operacao, conta.getBanco());
+						AppCaixa.main();
 					} else {
 						System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
 						AppCaixa.main();
@@ -227,6 +231,11 @@ public class MenuApp {
 			System.out.println("Digite o valor do saque: ");
 			double valorSaque = ler.nextDouble();
 			ler.nextLine();
+			
+			if (valorSaque <= 0) {
+				System.out.println("O valor precisa ser maior que R$0,00!\nTente novamente.");
+				AppCaixa.main();
+			}
 
 			System.out.println("Informações da conta:");
 			if (cliente.getTipo() == 1) {
@@ -253,8 +262,7 @@ public class MenuApp {
 			if (opcao.equals("1")) {
 
 				System.out.println("Digite a senha da conta: ");
-				String senha = ler.next();
-				ler.nextLine();
+				String senha = ler.nextLine();
 
 				if (conta.getSenha().equals(senha)) {
 
@@ -262,6 +270,7 @@ public class MenuApp {
 						conta.setCredito(conta.getCredito() - valorSaque);
 						conta.setDivida(conta.getDivida() + valorSaque);
 						DbSetDadosContas.main(conta, conta.getBanco());
+						AppCaixa.main();
 					} else {
 						System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
 						AppCaixa.main();
@@ -307,9 +316,11 @@ public class MenuApp {
 
 		System.out.println("Digite o número da sua agência:");
 		int codAgencia = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da sua conta: ");
 		conta.setCodigo(ler.nextInt());
+		ler.nextLine();
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 
@@ -323,9 +334,11 @@ public class MenuApp {
 
 		System.out.println("Digite o número da agência da conta favorecida:");
 		int codAgencia2 = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da conta do favorecido: ");
 		conta2.setCodigo(ler.nextInt());
+		ler.nextLine();
 
 		conta2 = DbGetDadosContas.main(conta2.getCodigo(), conta2.getBanco());
 
@@ -350,7 +363,7 @@ public class MenuApp {
 		double valorTransferencia = ler.nextDouble();
 		ler.nextLine();
 
-		if (valorTransferencia == 0) {
+		if (valorTransferencia <= 0) {
 			System.out.println("Digite um valor maior que R$0,00\nTente Novamente!");
 			AppCaixa.main();
 		}
@@ -392,7 +405,7 @@ public class MenuApp {
 
 		if (opcao.equals("1")) {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
+			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
 				if (conta.getSaldo() >= valorTransferencia) {
@@ -408,6 +421,7 @@ public class MenuApp {
 					operacao.setSaldoConta(conta.getSaldo());
 					operacao.setSaldoConta2(conta2.getSaldo());
 					DbInserirOperacao.main(operacao, conta.getBanco());
+					AppCaixa.main();
 				} else {
 					System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
 					AppCaixa.main();
@@ -448,9 +462,11 @@ public class MenuApp {
 
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da conta que deseja utilizar para efetuar o pagamento: ");
 		conta.setCodigo(ler.nextInt());
+		ler.nextLine();
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 
@@ -499,8 +515,7 @@ public class MenuApp {
 
 			if (opcao.equals("1")) {
 				System.out.println("Digite a senha da conta: ");
-				String senha = ler.next();
-				ler.nextLine();
+				String senha = ler.nextLine();
 
 				if (conta.getSenha().equals(senha)) {
 					if (conta.getSaldo() >= valorPagamento) {
@@ -513,6 +528,7 @@ public class MenuApp {
 						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 						operacao.setSaldoConta(conta.getSaldo());
 						DbInserirOperacao.main(operacao, conta.getBanco());
+						AppCaixa.main();
 
 					} else {
 						System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
@@ -532,7 +548,7 @@ public class MenuApp {
 				AppCaixa.main();
 			}
 			} else if (codBoleto > 99999){
-				System.out.println("Erro: O código do boleto deve ter apenas 5 dígitos\nTente Novamente!");
+				System.out.println("Erro: O código do boleto deve ter até 5 dígitos\nTente Novamente!");
 				menuPagar(conta);
 			}
 		}
@@ -582,13 +598,10 @@ public class MenuApp {
 			System.out.println("1 - Sim");
 			System.out.println("2 - Não");
 			String opcao = ler.nextLine();
-			ler.nextLine();
-			ler.nextLine();
 
 			if (opcao.equals("1")) {
 				System.out.println("Digite a senha da conta: ");
-				String senha = ler.next();
-				ler.nextLine();
+				String senha = ler.nextLine();
 
 				if (conta.getSenha().equals(senha)) {
 					conta.setSaldo(conta.getSaldo() - valorPagamento);
@@ -602,6 +615,7 @@ public class MenuApp {
 					operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
 					operacao.setSaldoConta(conta.getSaldo());
 					DbInserirOperacao.main(operacao, conta.getBanco());
+					AppCaixa.main();
 				} else {
 					System.out.println("Erro: Senha incorreta!\nTente Novamente!");
 					AppCaixa.main();
@@ -641,9 +655,11 @@ public class MenuApp {
 
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
+		ler.nextLine();
 
 		System.out.println("Digite o número da conta que deseja efetuar a consulta: ");
 		conta.setCodigo(ler.nextInt());
+		ler.nextLine();
 
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 
@@ -663,16 +679,14 @@ public class MenuApp {
 		System.out.println("3 - Consultar dívida");
 		System.out.println("4 - Extrato detalhado da conta");
 		System.out.println("5 - Sair");
-		menu = ler.next();
-		ler.nextLine();
+		menu = ler.nextLine();
 
 		switch (menu) {
 
 		// Consultar saldo:
 		case "1": {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
-			ler.nextLine();
+			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
 				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
@@ -687,8 +701,7 @@ public class MenuApp {
 		// Consultar Credito:
 		case "2": {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
-			ler.nextLine();
+			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
 				System.out.println("Credito disponível: R$" + decimal.format(conta.getCredito()));
@@ -703,8 +716,7 @@ public class MenuApp {
 		// Consultar Divida:
 		case "3": {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
-			ler.nextLine();
+			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
 				System.out.println("Divida da conta: R$" + decimal.format(conta.getDivida()));
@@ -719,11 +731,11 @@ public class MenuApp {
 		// Extrato:
 		case "4": {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.next();
-			ler.nextLine();
+			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
 				AppExibirExtrato.main(conta.getCodigo(), conta.getBanco());
+				AppCaixa.main();
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
 				menuConsultar(conta);
@@ -763,15 +775,13 @@ public class MenuApp {
 		System.out.println("3 - Exibir extrato detalhado do cliente no banco");
 		System.out.println("4 - Voltar");
 		menu = ler.nextLine();
-		ler.nextLine();
 
 		switch (menu) {
 		case "1": {
 			System.out.println("1 - No banco");
 			System.out.println("2 - Numa determinada agência");
 			System.out.println("3 - Voltar");
-			menu = ler.next();
-			ler.nextLine();
+			menu = ler.nextLine();
 
 			if (menu == "1") {
 				System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares.getMontanteBanco(codBanco));
@@ -779,6 +789,7 @@ public class MenuApp {
 			} else if (menu == "2") {
 				System.out.println("Digite o código da agência:");
 				int codAgencia = ler.nextInt();
+				ler.nextLine();
 				System.out.println("Montante aplicado na agência: R$"
 						+ MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia));
 				menuConsultaDeDados(codBanco);
@@ -807,6 +818,7 @@ public class MenuApp {
 					if (menu.equals("1")) {
 						System.out.println("Digite o código da agência:");
 						int codAgencia = ler.nextInt();
+						ler.nextLine();
 						if (DbGetDadosAgencias.main(codAgencia, codBanco).getCodigo() != 0) {
 							System.out.println("Saldo total do cliente na agência '" + codAgencia + "': " + "R$"
 									+ MetodosAuxiliares.getSaldoTotalClienteAg(codBanco, codAgencia,
@@ -875,7 +887,6 @@ public class MenuApp {
 		System.out.println("4 - Exibir extrato detalhado do cliente no banco");
 		System.out.println("5 - Voltar");
 		menu = ler.nextLine();
-		ler.nextLine();
 
 		switch (menu) {
 		case "1": {
@@ -887,6 +898,7 @@ public class MenuApp {
 		case "2": {
 			System.out.println("Digite o código da agência:");
 			int codAgencia = ler.nextInt();
+			ler.nextLine();
 			System.out.println("Montante aplicado na agência: R$"
 					+ MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares.getMontanteAgencia(codBanco, codAgencia)));
 			menuConsultaDeDados(codBanco);
@@ -905,12 +917,12 @@ public class MenuApp {
 					System.out.println("2 - Total");
 					System.out.println("3 - Voltar");
 
-					menu = ler.next();
-					ler.nextLine();
+					menu = ler.nextLine();
 
 					if (menu.equals("1")) {
 						System.out.println("Digite o código da agência:");
 						int codAgencia = ler.nextInt();
+						ler.nextLine();
 						if (DbGetDadosAgencias.main(codAgencia, codBanco).getCodigo() != 0) {
 							System.out.println("Saldo total do cliente na agência '" + codAgencia + "': " + "R$"
 									+ MetodosAuxiliares.getSaldoTotalClienteAg(codBanco, codAgencia,
@@ -978,8 +990,7 @@ public class MenuApp {
 			System.out.println("1 - Inserir cadastro de agência");
 			System.out.println("2 - Alterar cadastro de agência");
 			System.out.println("3 - Voltar");
-			menu = ler.next();
-			ler.nextLine();
+			menu = ler.nextLine();
 			switch (menu) {
 			case "1": {
 				AppInserirAgencia.main(banco.getCodigo());
@@ -1014,8 +1025,7 @@ public class MenuApp {
 		System.out.println("1 - Inserir cadastro de banco");
 		System.out.println("2 - Alterar cadastro de banco");
 		System.out.println("3 - Voltar");
-		String menu = ler.next();
-		ler.nextLine();
+		String menu = ler.nextLine();
 		switch (menu) {
 		case "1": {
 			AppInserirBanco.main();
@@ -1370,7 +1380,7 @@ public class MenuApp {
 		System.out.println("3 - Voltar");
 
 		Scanner ler = new Scanner(System.in);
-		String menu = ler.next();
+		String menu = ler.nextLine();
 
 		switch (menu) {
 		case "1": {
@@ -1383,7 +1393,6 @@ public class MenuApp {
 			System.out.println("2 - Cadastrar um novo cliente para conta");
 
 			String opcao = ler.nextLine();
-			ler.nextLine();
 
 			if (menu.equals("1")) {
 				cliente.setCodigo(DbPesquisarCliente.main(agencia.getBanco()));
@@ -1444,14 +1453,14 @@ public class MenuApp {
 
 		System.out.println("Digite o número da conta:");
 		codConta = ler.nextInt();
+		ler.nextLine();
 
 		conta = DbGetDadosContas.main(codConta, codBanco);
 		if (conta.getDataCadastro() != null) {
 			System.out.println("1 - Realizar alterações financeiras");
 			System.out.println("2 - Consultar ou alterar dados da conta");
 			System.out.println("3 - Voltar");
-			menu = ler.next();
-			ler.nextLine();
+			menu = ler.nextLine();
 
 			switch (menu) {
 			case "1": {
@@ -1467,6 +1476,7 @@ public class MenuApp {
 						System.out.println("Saldo atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 						System.out.println("Digite o novo valor de saldo: ");
 						conta.setSaldo(ler.nextDouble());
+						ler.nextLine();
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu.equals("2")) {
@@ -1474,12 +1484,14 @@ public class MenuApp {
 								.println("Crédito atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 						System.out.println("Digite o novo valor de crédito: ");
 						conta.setCredito(ler.nextDouble());
+						ler.nextLine();
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu.equals("3")) {
 						System.out.println("Dívida atual: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 						System.out.println("Digite o novo valor da dívida: ");
 						conta.setDivida(ler.nextDouble());
+						ler.nextLine();
 						DbSetDadosContas.main(conta, codBanco);
 						volta = true;
 					} else if (menu.equals("4")) {
@@ -1581,8 +1593,7 @@ public class MenuApp {
 		System.out.println("1 - Cadastro de Clientes");
 		System.out.println("2 - Consulta de Dados");
 		System.out.println("3 - Voltar");
-		menu = ler.next();
-		ler.nextLine();
+		menu = ler.nextLine();
 
 		switch (menu) {
 		case "1": {

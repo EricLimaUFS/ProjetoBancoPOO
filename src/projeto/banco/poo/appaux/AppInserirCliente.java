@@ -35,6 +35,7 @@ public class AppInserirCliente {
 		Scanner ler = new Scanner(System.in);
 		Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 		String menu = null;
+		boolean volta = true;
 
 		System.out.println("Escolha o tipo de cliente:\n");
 		System.out.println("1 - Pessoa Física");
@@ -45,10 +46,10 @@ public class AppInserirCliente {
 			System.out.println("Insira os dados do cliente\n");
 			System.out.println("Nome:");
 			cliente.setNome(ler.nextLine());
-			boolean volta = true;
 			while (volta = true){
 				System.out.println("CPF (apenas números):");
 				cliente.setCpf(ler.nextLong());
+				ler.nextLine();
 				if (DbVerificarCliente.main(codBanco, cliente.getCpf()) == 0) {
 
 					System.out.println("Renda Mensal:");
@@ -67,23 +68,34 @@ public class AppInserirCliente {
 					System.out.println("Cliente já existente!\nTente novamente.");
 				}
 			}
-		} else {
+		} else if (menu.equals("2")) {
 			System.out.println("Insira os dados do cliente\n");
 			System.out.println("Razão Social:");
 			cliente.setRazaoSocial(ler.nextLine());
-			System.out.println("CNPJ (apenas números):");
-			cliente.setCnpj(ler.nextLong());
-			System.out.println("Renda Mensal:");
-			cliente.setRendaMensal(ler.nextDouble());
-			ler.nextLine();
-			System.out.println("Nome Fantasia:");
-			cliente.setNomeFantasia(ler.nextLine());
+			while (volta = true){
+				System.out.println("CNPJ (apenas números):");
+				cliente.setCpf(ler.nextLong());
+				ler.nextLine();
+				if (DbVerificarCliente.main(codBanco, cliente.getCpf()) == 0) {
+					System.out.println("Renda Mensal:");
+					cliente.setRendaMensal(ler.nextDouble());
+					ler.nextLine();
+					System.out.println("Nome Fantasia:");
+					cliente.setNomeFantasia(ler.nextLine());
 
-			cliente.setTipo(2);
-			cliente.setDataCadastro(MetodosAuxiliares.getDataAtual());
-			cliente.setCodigo(DbGetCodigoNovaConta.main(codBanco) + 1);
+					cliente.setTipo(2);
+					cliente.setDataCadastro(MetodosAuxiliares.getDataAtual());
+					cliente.setCodigo(DbGetCodigoNovaConta.main(codBanco) + 1);
 
-			DbInserirCliente.main(cliente, codBanco);
+					DbInserirCliente.main(cliente, codBanco);
+					break;
+				} else {
+					System.out.println("Cliente já existente!\nTente novamente.");
+				}
+			}
+			
+		} else {
+			System.out.println("Opção inválida! Digite apenas os números 1 ou 2.");
 		}
 
 		return true;
