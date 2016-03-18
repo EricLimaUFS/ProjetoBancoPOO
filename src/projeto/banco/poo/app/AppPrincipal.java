@@ -31,7 +31,7 @@ public class AppPrincipal {
 			System.out.println("Discentes: Bruno Rodrigues dos Santos  -  Eric Fonseca Lima\n\n");
 			System.out.println("1 - Cadastros");
 			System.out.println("2 - Operações");
-			System.out.println("3 - Menu Interativo (opcional)");
+			System.out.println("3 - Menu Interativo (opcional)	[menu descontinuado]");
 			System.out.println("4 - Sair");
 			menu = ler.nextLine();
 

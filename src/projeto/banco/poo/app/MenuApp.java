@@ -38,7 +38,8 @@ public class MenuApp {
 	/**
 	 * Método para realizar o depósito de um valor em uma conta.
 	 * 
-	 * @param conta Contas - número da conta favorecida
+	 * @param conta
+	 *            Contas - número da conta favorecida
 	 */
 	protected static void menuDepositar(Contas conta) {
 
@@ -119,11 +120,11 @@ public class MenuApp {
 	 * Método para realizar o saque de um valor, a partir do saldo ou do crédito
 	 * em uma conta.
 	 * 
-	 * @param conta Contas - número da conta a ser debitada
+	 * @param conta
+	 *            Contas - número da conta a ser debitada
 	 */
 	protected static void menuSacar(Contas conta) {
 		Scanner ler = new Scanner(System.in);
-		DecimalFormat decimal = new DecimalFormat("0.00");
 
 		System.out.println("\nSAQUE\n");
 
@@ -134,7 +135,7 @@ public class MenuApp {
 		System.out.println("Digite o número da conta que deseja efetuar o saque: ");
 		conta.setCodigo(ler.nextInt());
 		ler.nextLine();
-		
+
 		conta = DbGetDadosContas.main(conta.getCodigo(), conta.getBanco());
 
 		if (conta.getCliente() == 0) {
@@ -147,9 +148,9 @@ public class MenuApp {
 
 		System.out.println("Selecione o tipo de saque: \n");
 		System.out.println("1 - Sacar a partir do saldo da conta\n[SALDO DISPONÍVEL: R$"
-				+ decimal.format(conta.getSaldo()) + "]\n");
+				+ MetodosAuxiliares.formatarDinheiro(conta.getSaldo()) + "]\n");
 		System.out.println("2 - Sacar a partir do crédito disponível da conta\n[CRÉDITO DISPONÍVEL: R$"
-				+ decimal.format(conta.getCredito()) + "]\n");
+				+ MetodosAuxiliares.formatarDinheiro(conta.getCredito()) + "]\n");
 		System.out.println("3 - Voltar");
 		String opcao = ler.nextLine();
 
@@ -172,13 +173,13 @@ public class MenuApp {
 				System.out.println("Nome: " + cliente.getNome());
 				System.out.println("CPF: " + cliente.getCpf());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
+				System.out.println("Saldo disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			} else {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
+				System.out.println("Saldo disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			}
 			System.out.println();
@@ -231,7 +232,7 @@ public class MenuApp {
 			System.out.println("Digite o valor do saque: ");
 			double valorSaque = ler.nextDouble();
 			ler.nextLine();
-			
+
 			if (valorSaque <= 0) {
 				System.out.println("O valor precisa ser maior que R$0,00!\nTente novamente.");
 				AppCaixa.main();
@@ -242,13 +243,13 @@ public class MenuApp {
 				System.out.println("Nome: " + cliente.getNome());
 				System.out.println("CPF: " + cliente.getCpf());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Crédito disponível: R$" + decimal.format(conta.getCredito()));
+				System.out.println("Crédito disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			} else {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
 				System.out.println("Conta: " + conta.getCodigo() + " | Agencia: " + conta.getAgencia());
-				System.out.println("Crédito disponível: R$" + decimal.format(conta.getCredito()));
+				System.out.println("Crédito disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 				System.out.println("Valor a ser sacado: R$" + MetodosAuxiliares.formatarDinheiro(valorSaque));
 			}
 			System.out.println();
@@ -305,20 +306,23 @@ public class MenuApp {
 	 * Método para realizar a transferência de um valor de uma determinada conta
 	 * para uma conta2.
 	 * 
-	 * @param conta Contas - número da conta a ser debitada
-	 * @param conta2 Contas - número da conta a ser favorecida
+	 * @param conta
+	 *            Contas - número da conta a ser debitada
+	 * @param conta2
+	 *            Contas - número da conta a ser favorecida
 	 */
 	protected static void menuTransferir(Contas conta, Contas conta2) {
 
 		System.out.println("\nTRANSFERÊNCIA ENTRE CONTAS\n");
 
 		Scanner ler = new Scanner(System.in);
-
-		System.out.println("Digite o número da sua agência:");
+		
+		System.out.println("DADOS DO DEBITADO:\n");
+		System.out.println("Digite o número da agência: ");
 		int codAgencia = ler.nextInt();
 		ler.nextLine();
 
-		System.out.println("Digite o número da sua conta: ");
+		System.out.println("Digite o número da conta: ");
 		conta.setCodigo(ler.nextInt());
 		ler.nextLine();
 
@@ -332,11 +336,12 @@ public class MenuApp {
 			AppCaixa.main();
 		}
 
-		System.out.println("Digite o número da agência da conta favorecida:");
+		System.out.println("\nDADOS DO FAVORECIDO:\n");
+		System.out.println("Digite o número da agência: ");
 		int codAgencia2 = ler.nextInt();
 		ler.nextLine();
 
-		System.out.println("Digite o número da conta do favorecido: ");
+		System.out.println("Digite o número da conta: ");
 		conta2.setCodigo(ler.nextInt());
 		ler.nextLine();
 
@@ -445,7 +450,8 @@ public class MenuApp {
 	 * Método para realizar o pagamento de um boleto informado ou da dívida de
 	 * uma conta.
 	 * 
-	 * @param conta Contas - número da conta a ser debitada a partir do pagamento
+	 * @param conta
+	 *            Contas - número da conta a ser debitada a partir do pagamento
 	 */
 	protected static void menuPagar(Contas conta) {
 
@@ -485,69 +491,70 @@ public class MenuApp {
 			System.out.println("Digite o código de barras do boleto: (Até 5 dígitos)");
 			int codBoleto = ler.nextInt();
 			ler.nextLine();
-			
-			if (codBoleto <= 99999){
-			System.out.println("Digite o valor do boleto:\n[Para sair digite 0]");
-			double valorPagamento = ler.nextDouble();
-			ler.nextLine();
 
-			if (valorPagamento == 0) {
-				System.out.println("Operação cancelada pelo usuário!");
-				AppCaixa.main();
-			}
-			if (valorPagamento < 0) {
-				System.out.println("Erro: Digite um valor maior que 0!");
-				AppCaixa.main();
-			}
+			if (codBoleto <= 99999) {
+				System.out.println("Digite o valor do boleto:\n[Para sair digite 0]");
+				double valorPagamento = ler.nextDouble();
+				ler.nextLine();
 
-			Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
-			cliente = DbGetDadosClientes.main(cliente.getCodigo(), conta.getBanco());
-
-			System.out.println("Informações do boleto:");
-			System.out.println("Código do boleto: " + codBoleto);
-			System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
-			System.out.println();
-			System.out.println("Deseja confirmar o pagamento?");
-			System.out.println();
-			System.out.println("1 - Sim");
-			System.out.println("2 - Não");
-			String opcao = ler.nextLine();
-
-			if (opcao.equals("1")) {
-				System.out.println("Digite a senha da conta: ");
-				String senha = ler.nextLine();
-
-				if (conta.getSenha().equals(senha)) {
-					if (conta.getSaldo() >= valorPagamento) {
-						conta.setSaldo(conta.getSaldo() - valorPagamento);
-						DbSetDadosContas.main(conta, conta.getBanco());
-
-						Operacoes operacao = new Operacoes(0, 5, valorPagamento, conta.getBanco(), conta.getAgencia(),
-								conta.getCodigo(), codBoleto, 0, 0, MetodosAuxiliares.getDataAtual());
-
-						operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
-						operacao.setSaldoConta(conta.getSaldo());
-						DbInserirOperacao.main(operacao, conta.getBanco());
-						AppCaixa.main();
-
-					} else {
-						System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
-						AppCaixa.main();
-					}
-				} else {
-					System.out.println("Erro: Senha incorreta!\nTente Novamente!");
+				if (valorPagamento == 0) {
+					System.out.println("Operação cancelada pelo usuário!");
+					AppCaixa.main();
+				}
+				if (valorPagamento < 0) {
+					System.out.println("Erro: Digite um valor maior que 0!");
 					AppCaixa.main();
 				}
 
-			}
-			if (opcao.equals("2")) {
-				System.out.println("Operação cancelada pelo usuário!");
-				AppCaixa.main();
-			} else if (!opcao.equals("1") && !opcao.equals("2")) {
-				System.out.println("Opção inválida!\nTente Novamente");
-				AppCaixa.main();
-			}
-			} else if (codBoleto > 99999){
+				Clientes cliente = new Clientes(conta.getCliente(), 0, 0, null, null, null, 0, null, null, 0);
+				cliente = DbGetDadosClientes.main(cliente.getCodigo(), conta.getBanco());
+
+				System.out.println("Informações do boleto:");
+				System.out.println("Código do boleto: " + codBoleto);
+				System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
+				System.out.println();
+				System.out.println("Deseja confirmar o pagamento?");
+				System.out.println();
+				System.out.println("1 - Sim");
+				System.out.println("2 - Não");
+				String opcao = ler.nextLine();
+
+				if (opcao.equals("1")) {
+					System.out.println("Digite a senha da conta: ");
+					String senha = ler.nextLine();
+
+					if (conta.getSenha().equals(senha)) {
+						if (conta.getSaldo() >= valorPagamento) {
+							conta.setSaldo(conta.getSaldo() - valorPagamento);
+							DbSetDadosContas.main(conta, conta.getBanco());
+
+							Operacoes operacao = new Operacoes(0, 5, valorPagamento, conta.getBanco(),
+									conta.getAgencia(), conta.getCodigo(), codBoleto, 0, 0,
+									MetodosAuxiliares.getDataAtual());
+
+							operacao.setCodigo(DbGetCodigoNovaOperacao.main(conta.getBanco()) + 1);
+							operacao.setSaldoConta(conta.getSaldo());
+							DbInserirOperacao.main(operacao, conta.getBanco());
+							AppCaixa.main();
+
+						} else {
+							System.out.println("Erro: O valor solicitado é maior que o disponível!\nTente Novamente!");
+							AppCaixa.main();
+						}
+					} else {
+						System.out.println("Erro: Senha incorreta!\nTente Novamente!");
+						AppCaixa.main();
+					}
+
+				}
+				if (opcao.equals("2")) {
+					System.out.println("Operação cancelada pelo usuário!");
+					AppCaixa.main();
+				} else if (!opcao.equals("1") && !opcao.equals("2")) {
+					System.out.println("Opção inválida!\nTente Novamente");
+					AppCaixa.main();
+				}
+			} else if (codBoleto > 99999) {
 				System.out.println("Erro: O código do boleto deve ter até 5 dígitos\nTente Novamente!");
 				menuPagar(conta);
 			}
@@ -584,12 +591,12 @@ public class MenuApp {
 			if (cliente.getTipo() == 1) {
 				System.out.println("Nome: " + cliente.getNome());
 				System.out.println("CPF: " + cliente.getCpf());
-				System.out.println("O valor da dívida: R$" + conta.getDivida());
+				System.out.println("O valor da dívida: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 				System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
 			} else {
 				System.out.println("Razão Social: " + cliente.getRazaoSocial());
 				System.out.println("CNPJ: " + cliente.getCnpj());
-				System.out.println("O valor da dívida: R$" + conta.getDivida());
+				System.out.println("O valor da dívida: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 				System.out.println("Valor a pagar: R$" + MetodosAuxiliares.formatarDinheiro(valorPagamento));
 			}
 			System.out.println();
@@ -645,13 +652,13 @@ public class MenuApp {
 	 * Método para realizar consultas de saldo, crédito, dívida ou solicitar o
 	 * extrato de uma determinada conta.
 	 * 
-	 * @param conta Contas - número da conta a ser realizada as consultas
+	 * @param conta
+	 *            Contas - número da conta a ser realizada as consultas
 	 */
 	protected static void menuConsultar(Contas conta) {
 
 		String menu = null;
 		Scanner ler = new Scanner(System.in);
-		DecimalFormat decimal = new DecimalFormat("0.00");
 
 		System.out.println("Digite o número da agência da conta:");
 		int codAgencia = ler.nextInt();
@@ -689,7 +696,7 @@ public class MenuApp {
 			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
-				System.out.println("Saldo disponível: R$" + decimal.format(conta.getSaldo()));
+				System.out.println("Saldo disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getSaldo()));
 				AppCaixa.main();
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
@@ -704,7 +711,7 @@ public class MenuApp {
 			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
-				System.out.println("Credito disponível: R$" + decimal.format(conta.getCredito()));
+				System.out.println("Credito disponível: R$" + MetodosAuxiliares.formatarDinheiro(conta.getCredito()));
 				AppCaixa.main();
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
@@ -719,7 +726,7 @@ public class MenuApp {
 			String senha = ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
-				System.out.println("Divida da conta: R$" + decimal.format(conta.getDivida()));
+				System.out.println("Divida da conta: R$" + MetodosAuxiliares.formatarDinheiro(conta.getDivida()));
 				AppCaixa.main();
 			} else {
 				System.out.println("Erro: Senha incorreta!\nTente Novamente!");
@@ -761,7 +768,8 @@ public class MenuApp {
 	 * Método para realizar a consulta de dados, como o montante de dinheiro,
 	 * saldo e extrato do cliente à partir do código de um banco dado.
 	 * 
-	 * @param codBanco int - código do banco
+	 * @param codBanco
+	 *            int - código do banco
 	 */
 	protected static boolean menuConsultaDeDados(int codBanco) {
 
@@ -871,7 +879,8 @@ public class MenuApp {
 	 * Método para realizar a consulta de dados de saldo de um banco, de uma
 	 * agencia ou de um cliente e exibir o extrato de um cliente do banco.
 	 * 
-	 * @param codBanco int - código do banco referente as informações
+	 * @param codBanco
+	 *            int - código do banco referente as informações
 	 * @return boolean - true
 	 */
 	protected static boolean menuConsultaDeDadosBanco(int codBanco) {
@@ -976,7 +985,8 @@ public class MenuApp {
 	 * Método para realizar o cadastro e alteração de agencias dentro de um
 	 * determinado banco.
 	 * 
-	 * @param codBanco int - código do banco
+	 * @param codBanco
+	 *            int - código do banco
 	 */
 	protected static void menuCadastroDeAgencias(int codBanco) {
 
@@ -1134,11 +1144,11 @@ public class MenuApp {
 				banco = DbGetDadosBancos.main(banco.getCodigo());
 
 				Agencia agencia = new Agencia(0, banco.getCodigo(), null, null);
-				
+
 				System.out.println("Digite o código da agência que deseja conectar-se:");
 				agencia.setCodigo(ler.nextInt());
 				ler.nextLine();
-				
+
 				if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()) != null) {
 					agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 					MenuApp.menuCadastroContas(agencia, banco);
@@ -1196,6 +1206,7 @@ public class MenuApp {
 					banco = DbGetDadosBancos.main(banco.getCodigo());
 					System.out.println("Montante aplicado no banco: R$" + MetodosAuxiliares
 							.formatarDinheiro(MetodosAuxiliares.getMontanteBanco(banco.getCodigo())));
+					menuOperacoes();
 				}
 
 			} else if (menu.equals("2")) {
@@ -1216,11 +1227,14 @@ public class MenuApp {
 						agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
 						System.out.println("Montante aplicado na agência: R$" + MetodosAuxiliares.formatarDinheiro(
 								MetodosAuxiliares.getMontanteAgencia(banco.getCodigo(), agencia.getCodigo())));
+						menuOperacoes();
 					} else {
 						System.out.println("Agência não encontrada");
+						menuOperacoes();
 					}
 				} else {
 					System.out.println("Banco não encontrado.");
+					menuOperacoes();
 				}
 
 			} else if (menu.equals("3")) {
@@ -1250,15 +1264,19 @@ public class MenuApp {
 											+ MetodosAuxiliares.formatarDinheiro(
 													MetodosAuxiliares.getSaldoTotalClienteAg(banco.getCodigo(),
 															agencia.getCodigo(), cliente.getCodigo())));
+							menuOperacoes();
 						} else {
 							System.out.println("Cliente não encontrado");
+							menuOperacoes();
 						}
 
 					} else {
 						System.out.println("Agência não encontrada");
+						menuOperacoes();
 					}
 				} else {
 					System.out.println("Banco não encontrado.");
+					menuOperacoes();
 				}
 			} else if (menu.equals("4")) {
 				Banco banco = new Banco(0, null, null, null, null, null);
@@ -1276,12 +1294,15 @@ public class MenuApp {
 						System.out.println("Saldo total do cliente no banco: " + "R$"
 								+ MetodosAuxiliares.formatarDinheiro(MetodosAuxiliares
 										.getSaldoTotalCliente(banco.getCodigo(), cliente.getCodigo())));
+						menuOperacoes();
 					} else {
 						System.out.println("Cliente não encontrado");
+						menuOperacoes();
 					}
 
 				} else {
 					System.out.println("Banco não encontrado.");
+					menuOperacoes();
 				}
 			} else if (menu.equals("5")) {
 
@@ -1308,15 +1329,19 @@ public class MenuApp {
 
 						if (conta.getDataCadastro() != null) {
 							AppExibirExtrato.main(conta.getCodigo(), banco.getCodigo());
+							menuOperacoes();
 						} else {
 							System.out.println("Conta não encontrada.");
+							menuOperacoes();
 						}
 
 					} else {
 						System.out.println("Agência não encontrada");
+						menuOperacoes();
 					}
 				} else {
 					System.out.println("Banco não encontrado.");
+					menuOperacoes();
 				}
 			} else if (menu.equals("6")) {
 				Banco banco = new Banco(0, null, null, null, null, null);
@@ -1327,29 +1352,33 @@ public class MenuApp {
 				if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 					banco = DbGetDadosBancos.main(banco.getCodigo());
 
-						Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
-						cliente.setCodigo(DbPesquisarCliente.main(banco.getCodigo()));
-						cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
-						
-						if (cliente.getDataCadastro() != null) {
-							
-							ArrayList<Contas> contas = new ArrayList<Contas>();
-							contas = DbGetContasCliente.main(banco.getCodigo(), cliente.getCodigo());
+					Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
+					cliente.setCodigo(DbPesquisarCliente.main(banco.getCodigo()));
+					cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
 
-							for (int i = 0; i < contas.size(); i++) {
-								AppExibirExtrato.main(contas.get(i).getCodigo(), banco.getCodigo());
-							}
-						} else {
-							System.out.println("Cliente não encontrado");
+					if (cliente.getDataCadastro() != null) {
+
+						ArrayList<Contas> contas = new ArrayList<Contas>();
+						contas = DbGetContasCliente.main(banco.getCodigo(), cliente.getCodigo());
+
+						for (int i = 0; i < contas.size(); i++) {
+							AppExibirExtrato.main(contas.get(i).getCodigo(), banco.getCodigo());
+							menuOperacoes();
 						}
+					} else {
+						System.out.println("Cliente não encontrado");
+						menuOperacoes();
+					}
 				} else {
 					System.out.println("Banco não encontrado.");
+					menuOperacoes();
 				}
 
 			} else if (menu.equals("7")) {
-				// voltar
+				menuOperacoes();
 			} else {
 				System.out.println("Opção inválida! Digite apenas números de 1 a 7.");
+				menuOperacoes();
 			}
 		}
 			break;
@@ -1363,6 +1392,7 @@ public class MenuApp {
 			break;
 		default: {
 			System.out.println("Opção inválida! Digite apenas números de 1 a 3.");
+			menuOperacoes();
 		}
 		}
 
@@ -1371,8 +1401,11 @@ public class MenuApp {
 	/**
 	 * Método responsável pelo cadastro de contas.
 	 * 
-	 * @param agencia Agencia - código da agencia que a conta pertence
-	 * @param objBanco Banco - objeto do tipo Banco a ser referenciado para obter informações necessárias
+	 * @param agencia
+	 *            Agencia - código da agencia que a conta pertence
+	 * @param objBanco
+	 *            Banco - objeto do tipo Banco a ser referenciado para obter
+	 *            informações necessárias
 	 */
 	public static void menuCadastroContas(Agencia agencia, Banco objBanco) {
 		System.out.println("1 - Inserir Conta");
@@ -1389,12 +1422,12 @@ public class MenuApp {
 			System.out.println("Deseja vincular a conta à ser criada à um cliente, "
 					+ "ou deseja cadastrar um novo cliente para conta? ");
 
-			System.out.println("1 - Vincular à um cliente");
+			System.out.println("1 - Vincular a um cliente");
 			System.out.println("2 - Cadastrar um novo cliente para conta");
 
 			String opcao = ler.nextLine();
 
-			if (menu.equals("1")) {
+			if (opcao.equals("1")) {
 				cliente.setCodigo(DbPesquisarCliente.main(agencia.getBanco()));
 				if (cliente.getCodigo() != 0) {
 					cliente = DbGetDadosClientes.main(cliente.getCodigo(), agencia.getBanco());
@@ -1418,7 +1451,7 @@ public class MenuApp {
 				}
 
 			}
-			if (menu.equals("2")) {
+			if (opcao.equals("2")) {
 				AppInserirCliente.main(agencia.getBanco());
 				cliente.setCodigo(DbGetCodigoNovoCliente.main(agencia.getBanco()));
 				AppInserirConta.main(agencia.getCodigo(), agencia.getBanco(), cliente.getCodigo());
@@ -1441,8 +1474,12 @@ public class MenuApp {
 	 * Método responsável por gerenciar contas de um determinado banco ou
 	 * agencia.
 	 * 
-	 * @param codAgencia  int - código da agencia que a conta pertence ou o cliente pertencem
-	 * @param codBanco int - código do banco que a conta, o cliente ou a agencia pertencem
+	 * @param codAgencia
+	 *            int - código da agencia que a conta pertence ou o cliente
+	 *            pertencem
+	 * @param codBanco
+	 *            int - código do banco que a conta, o cliente ou a agencia
+	 *            pertencem
 	 */
 	public static void menuGerirContas(int codBanco, int codAgencia) {
 		Scanner ler = new Scanner(System.in);
@@ -1581,8 +1618,12 @@ public class MenuApp {
 	 * Método responsável por gerenciar os clientes de um determinado banco ou
 	 * agencia.
 	 * 
-	 * @param codAgencia  int - código da agencia que a conta pertence ou o cliente pertencem
-	 * @param codBanco int - código do banco que a conta, o cliente ou a agencia pertencem
+	 * @param codAgencia
+	 *            int - código da agencia que a conta pertence ou o cliente
+	 *            pertencem
+	 * @param codBanco
+	 *            int - código do banco que a conta, o cliente ou a agencia
+	 *            pertencem
 	 */
 	public static void menuGerirClientes(int codBanco, int codAgencia) {
 

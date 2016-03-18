@@ -40,7 +40,7 @@ public class AppCaixa {
 			retorno = true;
 		} else {
 
-			System.out.println("Por favor, digite o número do banco correspondente a operação:");
+			System.out.println("Digite o número do banco para conectar-se:");
 			banco.setCodigo(ler.nextInt());
 			ler.nextLine();
 

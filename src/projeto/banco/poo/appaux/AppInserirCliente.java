@@ -35,6 +35,7 @@ public class AppInserirCliente {
 		Scanner ler = new Scanner(System.in);
 		Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 		String menu = null;
+		long cpfCnpj = 0;
 		boolean volta = true;
 
 		System.out.println("Escolha o tipo de cliente:\n");
@@ -48,10 +49,10 @@ public class AppInserirCliente {
 			cliente.setNome(ler.nextLine());
 			while (volta = true){
 				System.out.println("CPF (apenas números):");
-				cliente.setCpf(ler.nextLong());
+				cpfCnpj = ler.nextLong();
 				ler.nextLine();
-				if (DbVerificarCliente.main(codBanco, cliente.getCpf()) == 0) {
-
+				if (DbVerificarCliente.main(codBanco, cpfCnpj) == false) {
+					cliente.setCpf(cpfCnpj);
 					System.out.println("Renda Mensal:");
 					cliente.setRendaMensal(ler.nextDouble());
 					ler.nextLine();
@@ -74,9 +75,10 @@ public class AppInserirCliente {
 			cliente.setRazaoSocial(ler.nextLine());
 			while (volta = true){
 				System.out.println("CNPJ (apenas números):");
-				cliente.setCpf(ler.nextLong());
+				cpfCnpj = ler.nextLong();
 				ler.nextLine();
-				if (DbVerificarCliente.main(codBanco, cliente.getCpf()) == 0) {
+				if (DbVerificarCliente.main(codBanco, cpfCnpj) == false) {
+					cliente.setCnpj(cpfCnpj);
 					System.out.println("Renda Mensal:");
 					cliente.setRendaMensal(ler.nextDouble());
 					ler.nextLine();

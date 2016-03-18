@@ -21,9 +21,10 @@ public class DbVerificarCliente {
 	 * @param cpfCnpj long - CPF ou CNPJ para verificação de existência no banco de dados
 	 * @return retorno long - retorna o CPF ou CNPJ
 	 */
-	public static long main(int codBanco, long cpfCnpj) {
+	public static boolean main(int codBanco, long cpfCnpj) {
 
-		long retorno;
+		long retornoDb;
+		boolean retorno = false;
 		
 		try {
 			Class.forName("org.sqlite.JDBC");
@@ -34,13 +35,16 @@ public class DbVerificarCliente {
 
 			ResultSet resultSet = statement.executeQuery(query);
 
-			retorno = resultSet.getLong("cpf_cnpj");
+			retornoDb = resultSet.getLong("cpf_cnpj");
 
 			statement.close();
+			
+			if (retornoDb == cpfCnpj) {
+				retorno = true;
+			}
 
 		} catch (Exception ex) {
 			ex.getMessage();
-			retorno = 0;
 		}
 
 		return retorno;
