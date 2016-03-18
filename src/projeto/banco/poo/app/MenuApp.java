@@ -40,7 +40,7 @@ public class MenuApp {
 	 * 
 	 * @param conta Contas - número da conta favorecida
 	 */
-	static void menuDepositar(Contas conta) {
+	protected static void menuDepositar(Contas conta) {
 
 		System.out.println("\nDEPÓSITO EM CONTA\n");
 
@@ -118,7 +118,7 @@ public class MenuApp {
 	 * 
 	 * @param conta Contas - número da conta a ser debitada
 	 */
-	static void menuSacar(Contas conta) {
+	protected static void menuSacar(Contas conta) {
 		Scanner ler = new Scanner(System.in);
 		DecimalFormat decimal = new DecimalFormat("0.00");
 
@@ -299,7 +299,7 @@ public class MenuApp {
 	 * @param conta Contas - número da conta a ser debitada
 	 * @param conta2 Contas - número da conta a ser favorecida
 	 */
-	static void menuTransferir(Contas conta, Contas conta2) {
+	protected static void menuTransferir(Contas conta, Contas conta2) {
 
 		System.out.println("\nTRANSFERÊNCIA ENTRE CONTAS\n");
 
@@ -433,7 +433,7 @@ public class MenuApp {
 	 * 
 	 * @param conta Contas - número da conta a ser debitada a partir do pagamento
 	 */
-	static void menuPagar(Contas conta) {
+	protected static void menuPagar(Contas conta) {
 
 		String menu = null;
 		Scanner ler = new Scanner(System.in);
@@ -633,7 +633,7 @@ public class MenuApp {
 	 * 
 	 * @param conta Contas - número da conta a ser realizada as consultas
 	 */
-	static void menuConsultar(Contas conta) {
+	protected static void menuConsultar(Contas conta) {
 
 		String menu = null;
 		Scanner ler = new Scanner(System.in);
@@ -751,7 +751,7 @@ public class MenuApp {
 	 * 
 	 * @param codBanco int - código do banco
 	 */
-	static boolean menuConsultaDeDados(int codBanco) {
+	protected static boolean menuConsultaDeDados(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
 		String menu = null;
@@ -862,7 +862,7 @@ public class MenuApp {
 	 * @param codBanco int - código do banco referente as informações
 	 * @return boolean - true
 	 */
-	static boolean menuConsultaDeDadosBanco(int codBanco) {
+	protected static boolean menuConsultaDeDadosBanco(int codBanco) {
 
 		Scanner ler = new Scanner(System.in);
 		String menu = null;
@@ -966,7 +966,7 @@ public class MenuApp {
 	 * 
 	 * @param codBanco int - código do banco
 	 */
-	static void menuCadastroDeAgencias(int codBanco) {
+	protected static void menuCadastroDeAgencias(int codBanco) {
 
 		Banco banco = new Banco(0, null, null, null, null, null);
 		Scanner ler = new Scanner(System.in);
@@ -1008,7 +1008,7 @@ public class MenuApp {
 	 * 
 	 * @return boolean - true
 	 */
-	static boolean menuCadastroDeBancos() {
+	protected static boolean menuCadastroDeBancos() {
 
 		Scanner ler = new Scanner(System.in);
 		System.out.println("1 - Inserir cadastro de banco");
@@ -1041,7 +1041,7 @@ public class MenuApp {
 	 * Método de cadastro, responsável por cadastrar bancos, agencias, clientes
 	 * e contas.
 	 */
-	static void menuCadastros() {
+	protected static void menuCadastros() {
 
 		Scanner ler = new Scanner(System.in);
 		String menu = null;
@@ -1154,7 +1154,7 @@ public class MenuApp {
 	 * Método de operações, responsável pela consulta de dados e por realizar
 	 * operações financeiras.
 	 */
-	static void menuOperacoes() {
+	protected static void menuOperacoes() {
 		Scanner ler = new Scanner(System.in);
 		String menu = null;
 
