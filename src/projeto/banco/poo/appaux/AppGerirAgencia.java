@@ -6,7 +6,7 @@ package projeto.banco.poo.appaux;
 import java.util.*;
 
 import projeto.banco.poo.app.AppBanco;
-import projeto.banco.poo.app.menuApp;
+import projeto.banco.poo.app.MenuApp;
 import projeto.banco.poo.core.Agencia;
 import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.Clientes;
@@ -52,7 +52,7 @@ public class AppGerirAgencia {
 			switch (menu) {
 
 			case "1": {
-				menuApp.menuCadastroContas(agencia, objBanco);
+				MenuApp.menuCadastroContas(agencia, objBanco);
 			}
 				break;
 

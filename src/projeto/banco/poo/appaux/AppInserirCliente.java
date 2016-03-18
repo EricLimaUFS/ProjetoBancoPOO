@@ -4,11 +4,9 @@
 package projeto.banco.poo.appaux;
 
 import projeto.banco.poo.core.Clientes;
-import projeto.banco.poo.core.Contas;
 import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbGetCodigoNovaConta;
 import projeto.banco.poo.db.DbInserirCliente;
-import projeto.banco.poo.db.DbInserirConta;
 
 import java.util.Scanner;
 

@@ -4,16 +4,10 @@
 package projeto.banco.poo.appaux;
 
 import projeto.banco.poo.core.Agencia;
-import projeto.banco.poo.core.Banco;
 import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetCodigoNovaAgencia;
 import projeto.banco.poo.db.DbInserirAgencia;
-import projeto.banco.poo.db.DbInserirBanco;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
 import java.util.Scanner;
 
 /**

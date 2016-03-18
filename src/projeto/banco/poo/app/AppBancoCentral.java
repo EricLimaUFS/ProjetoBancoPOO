@@ -3,20 +3,9 @@
  */
 package projeto.banco.poo.app;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import projeto.banco.poo.appaux.AppAlterarBanco;
-import projeto.banco.poo.appaux.AppExibirExtrato;
-import projeto.banco.poo.appaux.AppInserirBanco;
 import projeto.banco.poo.appaux.AppInserirPrimeiroBanco;
-import projeto.banco.poo.core.Clientes;
-import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.db.DbGetContasCliente;
-import projeto.banco.poo.db.DbGetDadosAgencias;
-import projeto.banco.poo.db.DbGetDadosClientes;
-import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbPrimeiraConexao;
 
 /**
@@ -82,7 +71,7 @@ public class AppBancoCentral {
 				
 				switch (menu) {
 				case "1": {
-					if (menuApp.menuCadastroDeBancos() == true)
+					if (MenuApp.menuCadastroDeBancos() == true)
 						;
 					volta = true;
 				}
@@ -91,7 +80,7 @@ public class AppBancoCentral {
 					int codBanco;
 					System.out.println("Digite o número do banco:");
 					codBanco = ler.nextInt();
-					menuApp.menuConsultaDeDadosBanco(codBanco);
+					MenuApp.menuConsultaDeDadosBanco(codBanco);
 				}
 					break;
 				case "3": {

@@ -118,7 +118,7 @@ public class AppExibirExtrato {
 			} else if (extrato.get(i).getTipoOperacao() == 5) {
 
 				System.out.print("|  " + extrato.get(i).getData() + "	|");
-				System.out.print("	Débito ref. Pagamento boleto nº " + extrato.get(i).getConta2() + "						|");
+				System.out.print("	Débito ref. Pagamento boleto nº " + extrato.get(i).getConta2() + "				|");
 				System.out.print("- R$" + MetodosAuxiliares.formatarDinheiro(extrato.get(i).getValorOperacao()) + "	|");
 				System.out.println(" R$" + MetodosAuxiliares.formatarDinheiro(extrato.get(i).getSaldoConta()) + "	|");
 

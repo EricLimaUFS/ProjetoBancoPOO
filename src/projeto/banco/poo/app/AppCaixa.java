@@ -3,21 +3,11 @@
 package projeto.banco.poo.app;
 
 import java.util.Scanner;
-import java.text.DecimalFormat;
-import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.core.Banco;
-import projeto.banco.poo.core.Clientes;
 import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.core.Operacoes;
 import projeto.banco.poo.db.DbGetCodigoBanco;
-import projeto.banco.poo.db.DbGetCodigoNovaOperacao;
 import projeto.banco.poo.db.DbGetDadosBancos;
-import projeto.banco.poo.db.DbGetDadosClientes;
-import projeto.banco.poo.db.DbGetDadosContas;
-import projeto.banco.poo.db.DbInserirOperacao;
 import projeto.banco.poo.db.DbPrimeiraConexao;
-import projeto.banco.poo.db.DbSetDadosContas;
 
 /**
  * Classe para aplicação de operações bancárias, onde estão contidos métodos
@@ -75,31 +65,31 @@ public class AppCaixa {
 
 				// Depositar:
 				case "1": {
-					menuApp.menuDepositar(conta);
+					MenuApp.menuDepositar(conta);
 				}
 					break;
 
 				// Sacar:
 				case "2": {
-					menuApp.menuSacar(conta);
+					MenuApp.menuSacar(conta);
 				}
 					break;
 
 				// Transferir:
 				case "3": {
-					menuApp.menuTransferir(conta, conta2);
+					MenuApp.menuTransferir(conta, conta2);
 				}
 					break;
 
 				// Pagar
 				case "4": {
-					menuApp.menuPagar(conta);
+					MenuApp.menuPagar(conta);
 				}
 					break;
 
 				// Consultar
 				case "5": {
-					menuApp.menuConsultar(conta);
+					MenuApp.menuConsultar(conta);
 				}
 					break;
 

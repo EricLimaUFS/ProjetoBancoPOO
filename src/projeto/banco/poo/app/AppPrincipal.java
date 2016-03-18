@@ -3,26 +3,8 @@
  */
 package projeto.banco.poo.app;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import projeto.banco.poo.appaux.AppAlterarCliente;
-import projeto.banco.poo.appaux.AppExcluirCliente;
-import projeto.banco.poo.appaux.AppExibirExtrato;
-import projeto.banco.poo.appaux.AppGerirAgencia;
-import projeto.banco.poo.appaux.AppInserirCliente;
-import projeto.banco.poo.core.Agencia;
-import projeto.banco.poo.core.Banco;
-import projeto.banco.poo.core.Clientes;
-import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.db.DbGetCodigoBanco;
-import projeto.banco.poo.db.DbGetContasCliente;
-import projeto.banco.poo.db.DbGetDadosAgencias;
-import projeto.banco.poo.db.DbGetDadosBancos;
-import projeto.banco.poo.db.DbGetDadosClientes;
-import projeto.banco.poo.db.DbGetDadosContas;
-import projeto.banco.poo.db.DbPesquisarCliente;
 
 /**
  * Classe para exibição do menu início
@@ -55,11 +37,11 @@ public class AppPrincipal {
 
 			switch (menu) {
 			case "1": {
-				menuApp.menuCadastros();
+				MenuApp.menuCadastros();
 			}
 				break;
 			case "2": {
-				menuApp.menuOperacoes();
+				MenuApp.menuOperacoes();
 			}
 				break;
 			case "3": {

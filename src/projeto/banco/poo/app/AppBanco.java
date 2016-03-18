@@ -3,24 +3,12 @@
  */
 package projeto.banco.poo.app;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import projeto.banco.poo.appaux.AppAlterarAgencia;
-import projeto.banco.poo.appaux.AppExibirExtrato;
 import projeto.banco.poo.appaux.AppGerirAgencia;
-import projeto.banco.poo.appaux.AppInserirAgencia;
 import projeto.banco.poo.core.Banco;
-import projeto.banco.poo.core.Clientes;
-import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
 import projeto.banco.poo.db.DbGetCodigoBanco;
-import projeto.banco.poo.db.DbGetContasCliente;
-import projeto.banco.poo.db.DbGetDadosAgencias;
 import projeto.banco.poo.db.DbGetDadosBancos;
-import projeto.banco.poo.db.DbGetDadosClientes;
-import projeto.banco.poo.db.DbPesquisarCliente;
 
 
 /**
@@ -61,11 +49,11 @@ public class AppBanco {
 			switch (menu) {
 
 			case "1": {
-				menuApp.menuCadastroDeAgencias(banco.getCodigo());
+				MenuApp.menuCadastroDeAgencias(banco.getCodigo());
 			}
 				break;
 			case "2": {
-				menuApp.menuConsultaDeDados(banco.getCodigo());
+				MenuApp.menuConsultaDeDados(banco.getCodigo());
 			}
 				break;
 			case "3": {

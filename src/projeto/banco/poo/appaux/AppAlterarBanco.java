@@ -3,11 +3,9 @@
  */
 package projeto.banco.poo.appaux;
 
-import java.sql.*;
 import java.util.*;
 
 import projeto.banco.poo.core.Banco;
-import projeto.banco.poo.db.DbDadosBancos;
 import projeto.banco.poo.db.DbGetCodigoBanco;
 import projeto.banco.poo.db.DbGetDadosBancos;
 import projeto.banco.poo.db.DbSetDadosBancos;

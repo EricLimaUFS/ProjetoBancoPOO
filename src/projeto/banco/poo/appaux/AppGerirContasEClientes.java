@@ -5,17 +5,9 @@ package projeto.banco.poo.appaux;
 
 import java.util.*;
 
-import projeto.banco.poo.app.menuApp;
+import projeto.banco.poo.app.MenuApp;
 import projeto.banco.poo.core.Banco;
-import projeto.banco.poo.core.Clientes;
-import projeto.banco.poo.core.Contas;
-import projeto.banco.poo.core.MetodosAuxiliares;
-import projeto.banco.poo.db.DbGetContasCliente;
 import projeto.banco.poo.db.DbGetDadosBancos;
-import projeto.banco.poo.db.DbGetDadosClientes;
-import projeto.banco.poo.db.DbGetDadosContas;
-import projeto.banco.poo.db.DbPesquisarCliente;
-import projeto.banco.poo.db.DbSetDadosContas;
 
 /**
  * Classe responsável por gerenciar os dados de contas e clientes.
@@ -43,11 +35,11 @@ public class AppGerirContasEClientes {
 
 		switch (menu) {
 		case "1": {
-			menuApp.menuGerirContas(codBanco, codAgencia);
+			MenuApp.menuGerirContas(codBanco, codAgencia);
 		}
 			break;
 		case "2": {
-			menuApp.menuGerirClientes(codBanco, codAgencia);
+			MenuApp.menuGerirClientes(codBanco, codAgencia);
 		}
 			break;
 		case "3": {

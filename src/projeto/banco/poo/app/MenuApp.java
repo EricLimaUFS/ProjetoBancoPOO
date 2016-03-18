@@ -10,7 +10,6 @@ import projeto.banco.poo.appaux.AppAlterarCliente;
 import projeto.banco.poo.appaux.AppExcluirCliente;
 import projeto.banco.poo.appaux.AppExcluirConta;
 import projeto.banco.poo.appaux.AppExibirExtrato;
-import projeto.banco.poo.appaux.AppGerirAgencia;
 import projeto.banco.poo.appaux.AppGerirContasEClientes;
 import projeto.banco.poo.appaux.AppInserirAgencia;
 import projeto.banco.poo.appaux.AppInserirBanco;
@@ -34,7 +33,7 @@ import projeto.banco.poo.db.DbInserirOperacao;
 import projeto.banco.poo.db.DbPesquisarCliente;
 import projeto.banco.poo.db.DbSetDadosContas;
 
-public class menuApp {
+public class MenuApp {
 
 	/**
 	 * Método para realizar o depósito de um valor em uma conta.
@@ -467,10 +466,11 @@ public class menuApp {
 
 		case "1": {
 
-			System.out.println("Digite o código de barras do boleto: ");
+			System.out.println("Digite o código de barras do boleto: (Até 5 dígitos)");
 			int codBoleto = ler.nextInt();
 			ler.nextLine();
-
+			
+			if (codBoleto <= 99999){
 			System.out.println("Digite o valor do boleto:\n[Para sair digite 0]");
 			double valorPagamento = ler.nextDouble();
 			ler.nextLine();
@@ -496,7 +496,6 @@ public class menuApp {
 			System.out.println("1 - Sim");
 			System.out.println("2 - Não");
 			String opcao = ler.nextLine();
-			ler.nextLine();
 
 			if (opcao.equals("1")) {
 				System.out.println("Digite a senha da conta: ");
@@ -531,6 +530,10 @@ public class menuApp {
 			} else if (!opcao.equals("1") && !opcao.equals("2")) {
 				System.out.println("Opção inválida!\nTente Novamente");
 				AppCaixa.main();
+			}
+			} else if (codBoleto > 99999){
+				System.out.println("Erro: O código do boleto deve ter apenas 5 dígitos\nTente Novamente!");
+				menuPagar(conta);
 			}
 		}
 			break;
@@ -649,7 +652,7 @@ public class menuApp {
 			AppCaixa.main();
 		} else if (codAgencia != conta.getAgencia()) {
 			System.out.println("Agência inexistente.\nTente Novamente!");
-			AppCaixa.main();
+			menuConsultar(conta);
 		}
 
 		System.out.println();
@@ -660,8 +663,7 @@ public class menuApp {
 		System.out.println("3 - Consultar dívida");
 		System.out.println("4 - Extrato detalhado da conta");
 		System.out.println("5 - Sair");
-
-		menu = ler.nextLine();
+		menu = ler.next();
 		ler.nextLine();
 
 		switch (menu) {
@@ -717,7 +719,7 @@ public class menuApp {
 		// Extrato:
 		case "4": {
 			System.out.println("Digite a senha da conta: ");
-			String senha = ler.nextLine();
+			String senha = ler.next();
 			ler.nextLine();
 
 			if (conta.getSenha().equals(senha)) {
@@ -1055,7 +1057,7 @@ public class menuApp {
 
 		switch (menu) {
 		case "1": {
-			menuApp.menuCadastroDeBancos();
+			MenuApp.menuCadastroDeBancos();
 		}
 			break;
 		case "2": {
@@ -1067,7 +1069,7 @@ public class menuApp {
 
 			if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 				banco = DbGetDadosBancos.main(banco.getCodigo());
-				menuApp.menuCadastroDeAgencias(banco.getCodigo());
+				MenuApp.menuCadastroDeAgencias(banco.getCodigo());
 			}
 		}
 			break;
@@ -1122,13 +1124,14 @@ public class menuApp {
 				banco = DbGetDadosBancos.main(banco.getCodigo());
 
 				Agencia agencia = new Agencia(0, banco.getCodigo(), null, null);
+				
 				System.out.println("Digite o código da agência que deseja conectar-se:");
 				agencia.setCodigo(ler.nextInt());
 				ler.nextLine();
-
-				if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
+				
+				if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()) != null) {
 					agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
-					menuApp.menuCadastroContas(agencia, banco);
+					MenuApp.menuCadastroContas(agencia, banco);
 				} else {
 					System.out.println("Agência não encontrada");
 				}
