@@ -20,6 +20,7 @@ public class DbGetCodigoNovaConta {
 	
 	/**Método principal, responsável por realizar a busca do código da conta no banco de dados.
 	 * @param codBanco int - código do banco referente a conta
+	 * @return retorno int - retorna o código da última conta criada
 	 */
 	public static int main(int codBanco) {
 

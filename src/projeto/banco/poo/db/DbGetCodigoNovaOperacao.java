@@ -20,6 +20,7 @@ public class DbGetCodigoNovaOperacao {
 	
 	/**Método principal, responsável por realizar a busca do código da operação no banco de dados.
 	 * @param codBanco int - código do banco referente a operação
+	 * @return retorno int - retorna o código da última operação gravada no banco de dados
 	 */
 	public static int main(int codBanco) {
 

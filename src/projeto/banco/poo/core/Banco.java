@@ -24,7 +24,7 @@ public class Banco {
 	 * @param razaoSocial String - nome do banco
 	 * @param cnpj String - cnpj do banco
 	 * @param nomeFantasia String - nome fantasia do banco
-	 * @param endereço String - endereço do banco
+	 * @param endereco String - endereço do banco
 	 * @param dataCadastro String - data em que o banco foi criado */
 	public Banco(int codigo, String razaoSocial, String cnpj, String nomeFantasia, String endereco, String dataCadastro) {
 		
@@ -85,12 +85,5 @@ public class Banco {
 		this.dataCadastro = dataCadastro;
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		
-
-	}
 
 }

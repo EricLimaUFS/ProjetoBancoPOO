@@ -348,6 +348,7 @@ public class MenuApp {
 
 		System.out.println("Digite o valor que deseja transferir: ");
 		double valorTransferencia = ler.nextDouble();
+		ler.nextLine();
 
 		if (valorTransferencia == 0) {
 			System.out.println("Digite um valor maior que R$0,00\nTente Novamente!");
@@ -388,7 +389,6 @@ public class MenuApp {
 		System.out.println("1 - Sim");
 		System.out.println("2 - Não");
 		String opcao = ler.nextLine();
-		ler.nextLine();
 
 		if (opcao.equals("1")) {
 			System.out.println("Digite a senha da conta: ");
@@ -1317,19 +1317,12 @@ public class MenuApp {
 				if (DbGetCodigoBanco.main(banco.getCodigo()) == false) {
 					banco = DbGetDadosBancos.main(banco.getCodigo());
 
-					Agencia agencia = new Agencia(0, banco.getCodigo(), null, null);
-					System.out.println("Digite o código da agência que deseja conectar-se:");
-					agencia.setCodigo(ler.nextInt());
-					ler.nextLine();
-
-					if (DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco()).getDataCadastro() != null) {
-						agencia = DbGetDadosAgencias.main(agencia.getCodigo(), agencia.getBanco());
-
 						Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 						cliente.setCodigo(DbPesquisarCliente.main(banco.getCodigo()));
-
+						cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
+						
 						if (cliente.getDataCadastro() != null) {
-							cliente = DbGetDadosClientes.main(cliente.getCodigo(), banco.getCodigo());
+							
 							ArrayList<Contas> contas = new ArrayList<Contas>();
 							contas = DbGetContasCliente.main(banco.getCodigo(), cliente.getCodigo());
 
@@ -1339,10 +1332,6 @@ public class MenuApp {
 						} else {
 							System.out.println("Cliente não encontrado");
 						}
-
-					} else {
-						System.out.println("Agência não encontrada");
-					}
 				} else {
 					System.out.println("Banco não encontrado.");
 				}
@@ -1372,7 +1361,7 @@ public class MenuApp {
 	/**
 	 * Método responsável pelo cadastro de contas.
 	 * 
-	 * @param codAgencia int - código da agencia que a conta pertence
+	 * @param agencia Agencia - código da agencia que a conta pertence
 	 * @param objBanco Banco - objeto do tipo Banco a ser referenciado para obter informações necessárias
 	 */
 	public static void menuCadastroContas(Agencia agencia, Banco objBanco) {

@@ -20,6 +20,7 @@ public class DbGetCodigoNovoCliente {
 	
 	/**Método principal, responsável por realizar a busca do código do cliente no banco de dados.
 	 * @param codBanco int - código do banco referente ao cliente
+	 * @return retorno int - retorna o código do último cliente cadastrado
 	 */
 	public static int main(int codBanco) {
 

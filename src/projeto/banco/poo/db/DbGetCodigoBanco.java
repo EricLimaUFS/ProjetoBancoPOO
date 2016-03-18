@@ -21,6 +21,7 @@ public class DbGetCodigoBanco {
 
 	/**Método principal, responsável por realizar a busca do código do banco no banco de dados.
 	 * @param codBanco int - código do banco
+	 * @return retorno boolean - retorna verdadeiro ou falso se o banco foi encontrado ou não
 	 */
 	public static boolean main(int codBanco) {
 

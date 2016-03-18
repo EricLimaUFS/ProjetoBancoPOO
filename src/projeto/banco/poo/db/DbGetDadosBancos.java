@@ -21,6 +21,7 @@ public class DbGetDadosBancos {
 
 	/**Método principal, responsável por realizar a busca do banco no banco de dados e retornar suas informações.
 	 * @param codBanco int - código do banco 
+	 * @return banco Banco - retorna o objeto banco contendo todos os dados do mesmo, obtidos do banco de dados
 	 */
 	public static Banco main(int codBanco) {
 		

@@ -23,6 +23,7 @@ public class DbGetContasCliente {
 	/**Método principal, responsável por locializar o cliente e, caso ele seja encontrado, buscar no banco de dados suas informações.
 	 * @param codBanco int - código do banco referente a conta
 	 * @param codCliente int - código do cliente referente a conta
+	 * @return contas ArrayList - retorna um ArrayList com todas as contas de um cliente
 	 */
 	public static ArrayList<Contas> main(int codBanco, int codCliente) {
 

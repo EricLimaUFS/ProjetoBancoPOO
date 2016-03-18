@@ -22,6 +22,7 @@ public class DbGetDadosContas {
 	/**Método principal, responsável por realizar a busca da conta no banco de dados e retornar suas informações.
 	 * @param codConta int - código da conta
 	 * @param codBanco int - código do banco referente a conta
+	 * @return conta Contas - retorna o objeto conta contendo todos os dados da mesma, obtidos do banco de dados
 	 */
 	public static Contas main(int codConta, int codBanco) {
 

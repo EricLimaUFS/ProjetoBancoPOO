@@ -25,6 +25,7 @@ public class DbGetDadosOperacoes {
 	/**Método principal, responsável por realizar a consulta das operações no banco de dados e retornar suas informações para serem utilizadas no extrato.
 	 * @param codConta int - código da conta
 	 * @param codBanco int - código do banco referente a operação
+	 * @return extrato ArrayList - retorna um ArrayList contendo todas as operações de uma conta, gravadas no banco de dados
 	 */
 	public static ArrayList<Operacoes> main(int codBanco, int codConta) {
 

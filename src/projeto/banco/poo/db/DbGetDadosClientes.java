@@ -22,6 +22,7 @@ public class DbGetDadosClientes {
 	/**Método principal, responsável por realizar a busca do cliente no banco de dados e retornar suas informações.
 	 * @param codCliente int - código do cliente
 	 * @param codBanco int - código do banco referente ao cliente
+	 * @return cliente Clientes - retorna o objeto cliente contendo todos os dados do mesmo, obtidos do banco de dados
 	 */
 	public static Clientes main(int codCliente, int codBanco) {
 

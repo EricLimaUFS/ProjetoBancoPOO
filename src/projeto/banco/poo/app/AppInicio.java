@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class AppInicio {
 
 	/**Método principal, responsável por exibir o menu e chamar a classe correspondente a opção selecionada.
-	 * @param args */
+	 * @param args - Argumento do método main*/
 	public static void main(String[] args) {
 
 		Scanner ler = new Scanner(System.in);

@@ -20,7 +20,7 @@ public class AppConsultaDadosBanco {
 	/**Método principal, responsável por recolher o código do banco e em seguida exibir a informação 
 	 * solicitada a partir das opções dadas.
 	 * @param args String
-	 * @return boolean - retorno */
+	 */
 	public static void main(String[] args) {
 
 		Scanner ler = new Scanner(System.in);

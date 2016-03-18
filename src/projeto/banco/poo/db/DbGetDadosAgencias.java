@@ -22,6 +22,7 @@ public class DbGetDadosAgencias {
 	/**Método principal, responsável por realizar a busca da agencia no banco de dados e retornar suas informações.
 	 * @param codBanco int - código do banco referente a agencia
 	 * @param codAgencia int - código da agencia
+	 * @return agencia Agencia - retorna o objeto agência contendo todos os dados da mesma, obtidos do banco de dados
 	 */
 	public static Agencia main(int codAgencia, int codBanco) {
 		

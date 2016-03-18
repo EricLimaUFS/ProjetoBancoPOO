@@ -20,7 +20,7 @@ public class Agencia {
 	/**Método construtor, responsável por inicializar os atributos de Agencia.
 	 * @param codigo int - código da agencia
 	 * @param banco int - código do banco referente à agencia
-	 * @param endereço String - endereço da agencia
+	 * @param endereco String - endereço da agencia
 	 * @param dataCadastro String - data em que a agencia foi criada */
 	public Agencia(int codigo, int banco, String endereco, String dataCadastro) {
 		

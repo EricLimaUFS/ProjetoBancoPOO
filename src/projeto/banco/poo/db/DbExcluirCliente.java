@@ -19,7 +19,8 @@ public class DbExcluirCliente {
 
 	/**Método principal, responsável por recolher os dados de um determinado cliente e em seguida, excluí-lo.
 	 * @param codCliente int - código do cliente a ser referenciado
-	 * @param codBanco int - código do banco que o cliente referenciado pertence */
+	 * @param codBanco int - código do banco que o cliente referenciado pertence
+	 * @return retorno boolean - retorna verdade ou falso para a classe que a chamou */
 	public static boolean main(int codCliente, int codBanco) {
 		
 		boolean retorno = true;

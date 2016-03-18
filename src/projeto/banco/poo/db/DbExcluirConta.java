@@ -19,7 +19,8 @@ public class DbExcluirConta {
 
 	/**Método principal, responsável por recolher os dados de uma determinada conta e em seguida, excluí-la.
 	 * @param codConta int - código da conta a ser referenciada
-	 * @param codBanco int - código do banco que a conta pertence */
+	 * @param codBanco int - código do banco que a conta pertence
+	 * @return retorno boolean - retorna verdade ou falso para a classe que a chamou */
 	public static boolean main(int codConta, int codBanco) {
 		
 		boolean retorno = true;

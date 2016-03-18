@@ -21,6 +21,7 @@ public class DbGetCodigoNovaAgencia {
 
 	/**Método principal, responsável por realizar a busca do código da agencia no banco de dados.
 	 * @param codBanco int - código do banco referente a agencia
+	 * @return retorno int - retorna o código da última agência criada
 	 */
 	public static int main(int codBanco) {
 

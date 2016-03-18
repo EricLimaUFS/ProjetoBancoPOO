@@ -28,8 +28,8 @@ public class MetodosAuxiliares {
 	}
 	
 	/**Método responsável por formatar valores recebidos como parâmetro.
-	 * @param valorDinhero double - valor double desformatado, recebido como parametro 
-	 * @param return valorDinheiro String - valor formatado para exibição, convertido em string */
+	 * @param valorDinheiro double - valor double desformatado, recebido como parametro 
+	 * @return valorDinheiro String - valor formatado para exibição, convertido em string */
 	public static String formatarDinheiro(double valorDinheiro) {
 		DecimalFormat df = new DecimalFormat("#.00");
 		return df.format(valorDinheiro);
