@@ -31,13 +31,13 @@ public class AppInserirCliente {
 		Clientes cliente = new Clientes(0, 0, 0, null, null, null, 0, null, null, 0);
 		String menu = null;
 		
+		
 		System.out.println("Escolha o tipo de cliente:\n");
 		System.out.println("1 - Pessoa Física");
 		System.out.println("2 - Pessoa Jurídica");
-		menu = ler.next();
-		ler.nextLine();
+		menu = ler.nextLine();
 		
-		if (menu == "1") {
+		if (menu.equals("1")) {
 			System.out.println("Insira os dados do cliente\n");
 			System.out.println("Nome:");
 			cliente.setNome(ler.nextLine());
